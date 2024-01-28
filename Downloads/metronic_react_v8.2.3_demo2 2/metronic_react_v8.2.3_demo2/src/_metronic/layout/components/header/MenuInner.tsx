@@ -1,0 +1,140 @@
+import { MenuItem } from './MenuItem';
+import { MenuInnerWithSub } from './MenuInnerWithSub';
+import { MegaMenu } from './MegaMenu';
+import { useIntl } from 'react-intl';
+import { KTIcon, toAbsoluteUrl } from '../../../helpers';
+export function MenuInner() {
+  const intl = useIntl();
+  return (
+    <>
+      {/* Menu item have to change here */}
+      <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
+      <MenuItem title='Leads' to='/leads' />
+      <MenuItem title='Listings' to='/listings' />
+      <MenuItem title='Packages' to='/packages' />
+      <MenuItem title='More' to='/more' />
+      <div className='d-flex'>
+        <a
+          className='btn bg-body btn-active-color-primary'
+          id='kt_toolbar_primary_button'
+          data-bs-theme='light'
+          // onClick={() => setShowCreateAppModal(true)}
+        >
+          <KTIcon iconName='plus' className='text-primary' />
+          Add Property
+        </a>
+      </div>
+
+      {/* <MenuInnerWithSub
+        title='Leads'
+        to='/crafted'
+        menuPlacement='bottom-start'
+        menuTrigger='click'
+      >
+        <MenuInnerWithSub
+          title='Pages'
+          to='/crafted/pages'
+          icon='element-plus'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuInnerWithSub
+            title='Profile'
+            to='/crafted/pages/profile'
+            hasArrow={true}
+            hasBullet={true}
+            menuPlacement='right-start'
+            menuTrigger={`{default:'click', lg: 'hover'}`}
+          >
+            <MenuItem to='/crafted/pages/profile/overview' title='Overview' hasBullet={true} />
+            <MenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true} />
+            <MenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true} />
+            <MenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true} />
+            <MenuItem
+              to='/crafted/pages/profile/connections'
+              title='Connections'
+              hasBullet={true}
+            />
+          </MenuInnerWithSub>
+          <MenuInnerWithSub
+            title='Wizards'
+            to='/crafted/pages/wizards'
+            hasArrow={true}
+            hasBullet={true}
+            menuPlacement='right-start'
+            menuTrigger={`{default:'click', lg: 'hover'}`}
+          >
+            <MenuItem to='/crafted/pages/wizards/horizontal' title='Horizontal' hasBullet={true} />
+            <MenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
+          </MenuInnerWithSub>
+        </MenuInnerWithSub>
+
+        <MenuInnerWithSub
+          title='Accounts'
+          to='/crafted/accounts'
+          icon='profile-circle'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
+          <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
+        </MenuInnerWithSub>
+
+        <MenuInnerWithSub
+          title='Errors'
+          to='/error'
+          icon='fingerprint-scanning'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/error/404' title='Error 404' hasBullet={true} />
+          <MenuItem to='/error/500' title='Error 500' hasBullet={true} />
+        </MenuInnerWithSub>
+
+        <MenuInnerWithSub
+          title='Widgets'
+          to='/crafted/widgets'
+          icon='element-11'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/crafted/widgets/lists' title='Lists' hasBullet={true} />
+          <MenuItem to='/crafted/widgets/statistics' title='Statistics' hasBullet={true} />
+          <MenuItem to='/crafted/widgets/charts' title='Charts' hasBullet={true} />
+          <MenuItem to='/crafted/widgets/mixed' title='Mixed' hasBullet={true} />
+          <MenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
+          <MenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
+        </MenuInnerWithSub>
+      </MenuInnerWithSub>
+
+      <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
+        <MenuInnerWithSub
+          title='Chat'
+          to='/apps/chat'
+          icon='message-text-2'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
+          <MenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
+          <MenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
+        </MenuInnerWithSub>
+        <MenuItem icon='shield-tick' to='/apps/user-management/users' title='User management' />
+      </MenuInnerWithSub>
+      <MenuInnerWithSub
+        isMega={true}
+        title='Mega menu'
+        to='/mega-menu'
+        menuPlacement='bottom-start'
+        menuTrigger='click'
+      >
+        <MegaMenu />
+      </MenuInnerWithSub> */}
+    </>
+  );
+}
