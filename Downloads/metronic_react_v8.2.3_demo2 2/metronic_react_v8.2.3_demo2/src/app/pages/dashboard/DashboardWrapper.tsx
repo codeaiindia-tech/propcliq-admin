@@ -41,7 +41,7 @@ const DashboardPage = () => (
         </div>
       </div>
       <div className='row g-5 g-xl-8  mb-5'>
-        <div className='col-xl-8'>
+        <div className='col-xl-6'>
           <TilesWidget6 className='card-xl-stretch' />
         </div>
         <div className='col-xl-4'>
@@ -49,15 +49,15 @@ const DashboardPage = () => (
         </div>
       </div>
       <div className='row g-5 g-xl-8  mb-5'>
-        <div className='col'>
+        <div className='col-xl-10'>
           <TilesWidget8 className='card-xl-stretch' />
         </div>
       </div>
       <div className='row g-5 g-xl-8  mb-5'>
-        <div className='col-xl-5'>
+        <div className='col-xl-4'>
           <TilesWidget9 className='card-xl-stretch' />
         </div>
-        <div className='col-xl-7'>
+        <div className='col-xl-6'>
           <TilesWidget10 className='card-xl-stretch' />
         </div>
       </div>

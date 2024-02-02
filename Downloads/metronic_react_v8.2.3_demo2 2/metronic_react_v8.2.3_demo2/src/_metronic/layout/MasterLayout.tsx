@@ -1,30 +1,39 @@
-import {FC, useEffect} from 'react'
-import {Outlet, useLocation} from 'react-router-dom'
-import {Footer} from './components/Footer'
-import {HeaderWrapper} from './components/header/HeaderWrapper'
-import {ScrollTop} from './components/ScrollTop'
-import {PageDataProvider, useLayout} from './core'
-import {ActivityDrawer, DrawerMessenger, InviteUsers, RightToolbar, UpgradePlan} from '../partials'
-import {themeModeSwitchHelper, useThemeMode} from '../partials/layout/theme-mode/ThemeModeProvider'
-import {MenuComponent} from '../assets/ts/components'
-import clsx from 'clsx'
-import {WithChildren} from '../helpers'
-import { AsideDefault } from './components/aside/AsideDefault'
+import { FC, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Footer } from './components/Footer';
+import { HeaderWrapper } from './components/header/HeaderWrapper';
+import { ScrollTop } from './components/ScrollTop';
+import { PageDataProvider, useLayout } from './core';
+import {
+  ActivityDrawer,
+  DrawerMessenger,
+  InviteUsers,
+  RightToolbar,
+  UpgradePlan,
+} from '../partials';
+import {
+  themeModeSwitchHelper,
+  useThemeMode,
+} from '../partials/layout/theme-mode/ThemeModeProvider';
+import { MenuComponent } from '../assets/ts/components';
+import clsx from 'clsx';
+import { WithChildren } from '../helpers';
+import { AsideDefault } from './components/aside/AsideDefault';
 
-const MasterLayout: FC<WithChildren> = ({children}) => {
-  const {classes} = useLayout()
-  const {mode} = useThemeMode()
-  const location = useLocation()
+const MasterLayout: FC<WithChildren> = ({ children }) => {
+  const { classes } = useLayout();
+  const { mode } = useThemeMode();
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
-      MenuComponent.reinitialization()
-    }, 500)
-  }, [location.key])
+      MenuComponent.reinitialization();
+    }, 500);
+  }, [location.key]);
 
   useEffect(() => {
-    themeModeSwitchHelper(mode)
-  }, [mode])
+    themeModeSwitchHelper(mode);
+  }, [mode]);
 
   return (
     <PageDataProvider>
@@ -39,7 +48,7 @@ const MasterLayout: FC<WithChildren> = ({children}) => {
 
       {/* begin:: Drawers */}
       <ActivityDrawer />
-      <RightToolbar />
+      {/* <RightToolbar /> */}
       <DrawerMessenger />
       {/* end:: Drawers */}
 
@@ -49,7 +58,7 @@ const MasterLayout: FC<WithChildren> = ({children}) => {
       {/* end:: Modals */}
       <ScrollTop />
     </PageDataProvider>
-  )
-}
+  );
+};
 
-export {MasterLayout}
+export { MasterLayout };

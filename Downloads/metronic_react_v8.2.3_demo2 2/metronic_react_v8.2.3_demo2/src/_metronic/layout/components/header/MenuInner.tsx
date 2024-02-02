@@ -3,6 +3,7 @@ import { MenuInnerWithSub } from './MenuInnerWithSub';
 import { MegaMenu } from './MegaMenu';
 import { useIntl } from 'react-intl';
 import { KTIcon, toAbsoluteUrl } from '../../../helpers';
+import { Link } from 'react-router-dom';
 export function MenuInner() {
   const intl = useIntl();
   return (
@@ -13,17 +14,19 @@ export function MenuInner() {
       <MenuItem title='Listings' to='/listings' />
       <MenuItem title='Packages' to='/packages' />
       <MenuItem title='More' to='/more' />
-      <div className='d-flex'>
-        <a
-          className='btn bg-body btn-active-color-primary'
-          id='kt_toolbar_primary_button'
-          data-bs-theme='light'
-          // onClick={() => setShowCreateAppModal(true)}
-        >
-          <KTIcon iconName='plus' className='text-primary' />
-          Add Property
-        </a>
-      </div>
+      <Link to='/addproperty'>
+        <div className='d-flex'>
+          <a
+            className='btn bg-body btn-active-color-primary fs-6'
+            id='kt_toolbar_primary_button'
+            data-bs-theme='light'
+            // onClick={() => setShowCreateAppModal(true)}
+          >
+            <KTIcon iconName='plus' className='text-primary' />
+            Add Property
+          </a>
+        </div>
+      </Link>
 
       {/* <MenuInnerWithSub
         title='Leads'

@@ -16,22 +16,36 @@ const TilesWidget7 = (props: Props) => {
     <a href='#' className={clsx('card', className)}>
       <div className='card-body d-flex flex-column justify-content-between'>
         <div>
-          <div className='d-flex justify-content-between'>
+          <div className='d-flex justify-content-between mb-2'>
             <h2 className='fw-600'>Listings Summary</h2>
           </div>
-          <div className='d-flex justify-content-between'>
-            <div className='col bg-light-warning px-6 py-8 rounded-2 me-7 mb-7'>
-              <strong>20</strong>
-              <KTIcon iconName='text-circle' className='fs-3x text-warning d-block my-2' />
-              <a href='#' className='text-warning fw-semibold fs-6'>
-                Residential
-              </a>
+          <div
+            style={{
+              borderRadius: '10px',
+              padding: '12px',
+              cursor: 'pointer',
+            }}
+            className='d-flex align-items-center justify-content-between border border-secondary h-74 mt-6'
+          >
+            <div className='d-flex'>
+              <div>
+                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>0</strong>
+                <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Residential</div>
+              </div>
+              <div>
+                {' '}
+                <KTIcon iconName='text-circle' className='fs-3x text-warning' />
+              </div>
             </div>
-            <div className='col bg-light-primary px-6 py-8 rounded-2 mb-7'>
-              <KTIcon iconName='plus' className='fs-3x text-primary d-block my-2' />
-              <a href='#' className='text-primary fw-semibold fs-6'>
-                Commercial
-              </a>
+            <div className='d-flex'>
+              <div>
+                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>0</strong>
+                <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Commercial</div>
+              </div>
+              <div>
+                {' '}
+                <KTIcon iconName='text-circle' className='fs-3x text-warning' />
+              </div>
             </div>
           </div>
         </div>

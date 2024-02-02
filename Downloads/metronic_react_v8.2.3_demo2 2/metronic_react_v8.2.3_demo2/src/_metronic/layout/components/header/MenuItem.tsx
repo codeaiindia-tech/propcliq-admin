@@ -1,17 +1,17 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {useLocation} from 'react-router'
-import clsx from 'clsx'
-import {checkIsActive, KTIcon} from '../../../helpers'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import clsx from 'clsx';
+import { checkIsActive, KTIcon } from '../../../helpers';
 
 type Props = {
-  to: string
-  title: string
-  icon?: string
-  fontIcon?: string
-  hasArrow?: boolean
-  hasBullet?: boolean
-}
+  to: string;
+  title: string;
+  icon?: string;
+  fontIcon?: string;
+  hasArrow?: boolean;
+  hasBullet?: boolean;
+};
 
 const MenuItem: React.FC<Props> = ({
   to,
@@ -21,7 +21,7 @@ const MenuItem: React.FC<Props> = ({
   hasArrow = false,
   hasBullet = false,
 }) => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <div className='menu-item me-lg-1'>
@@ -49,12 +49,12 @@ const MenuItem: React.FC<Props> = ({
           </span>
         )}
 
-        <span className='menu-title'>{title}</span>
+        <span className='menu-title fs-6'>{title}</span>
 
         {hasArrow && <span className='menu-arrow'></span>}
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export {MenuItem}
+export { MenuItem };

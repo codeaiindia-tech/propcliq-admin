@@ -14,9 +14,12 @@ const TilesWidget10 = (props: Props) => {
   const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
   return (
     <a href='#' className={clsx('card', className)}>
-      <div className='card-body d-flex flex-column justify-content-between'>
+      <div
+        className='card-body d-flex flex-column justify-content-between'
+        style={{ height: '222px' }}
+      >
         <div className='bg-white'>
-          <h2>Looking for Help or Support ?</h2>
+          <h2 style={{ margin: '24px 0' }}>Looking for Help or Support ?</h2>
           <a
             href='#'
             className='btn btn-primary fw-semibold'
