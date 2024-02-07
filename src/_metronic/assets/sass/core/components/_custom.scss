@@ -1,0 +1,197 @@
+.user_profile-container {
+  display: flex;
+  margin-bottom: 16px;
+  height: 80px;
+  border-radius: 10px;
+  width: 70%;
+  h3 {
+    color: white;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 28px;
+  }
+  span {
+    color: white;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+  }
+}
+.self_verify-container {
+  background-color: white;
+  border: 1px solid rgb(225, 226, 231);
+  margin-bottom: 16px;
+  border-radius: 10px;
+  // height: 201px;
+  .self_verify-card p {
+    overflow-wrap: break-word;
+    padding-top: 5%;
+    padding-right: 12%;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .self_verify-card div {
+    overflow-wrap: break-word;
+    padding-right: 12%;
+  }
+}
+
+.question_card-container {
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  p {
+    padding: 20px 10px;
+    text-align: center;
+  }
+}
+.verify_card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  // background: linear-gradient(rgb(192, 225, 255) 0%, rgb(255, 255, 255) 100%);
+  margin-left: 30px;
+  height: 100%;
+  background: linear-gradient(rgb(228, 255, 231) 0%, rgb(255, 255, 255) 100%);
+
+  p {
+    color: var(--status-tags-success, #62d883);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    margin-top: 5%;
+  }
+  div {
+    color: var(--text-colors-grey-900, #222);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+  }
+  .verify_card-container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: relative;
+    background-color: rgb(226, 226, 230);
+    .verify_card-circle1 {
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      border-radius: 50%;
+      top: 0px;
+      left: 0px;
+      clip: rect(0px, 70px, 70px, 35px);
+    }
+    .verify_card-circle2 {
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      border-radius: 50%;
+      top: 0px;
+      left: 0px;
+      clip: rect(0px, 70px, 70px, 35px);
+    }
+    .verify_card-circle3 {
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      border-radius: 50%;
+      top: 0px;
+      left: 0px;
+      clip: rect(0px, 70px, 70px, 35px);
+    }
+    .verify_card-circle4 {
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      border-radius: 50%;
+      top: 0px;
+      left: 0px;
+      clip: rect(0px, 35px, 70px, 0px);
+      background-color: var(--status-tags-success, #62d883);
+    }
+    .verify_card-circle5 {
+      width: 52.5px;
+      height: 52.5px;
+      margin: 8.75px;
+      border-radius: 50%;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      background: linear-gradient(rgb(228, 255, 231) 0%, rgb(255, 255, 255) 100%);
+    }
+    .verify_card-circle6 {
+      font-weight: 500;
+      font-size: 11px;
+      color: rgb(34, 34, 34);
+      height: 12px;
+    }
+    .verify_card-circle7 {
+      font-size: 8.75px;
+      color: rgb(153, 153, 153);
+      height: 35%;
+    }
+  }
+}
+
+// Radio Button Box CSS
+.radio_btn-container {
+  width: fit-content;
+  padding: 0px 19px;
+  height: 48px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 8px;
+  margin: 12px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  .radio_btn {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(34, 34, 34);
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+.radio_btn-container_active {
+  background: #e9f3ff;
+
+  .radio_btn_active {
+    color: #1b84ff;
+  }
+}
+.label_for_label {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  color: rgb(118, 118, 118);
+}
+.mandatoryMarker {
+  color: red;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 0 3px;
+}
+.add_property-group {
+  margin: 10px 0;
+}
+.age_property {
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgb(191, 192, 198);
+  margin-top: 40px;
+}
