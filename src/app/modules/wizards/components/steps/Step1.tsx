@@ -6,6 +6,9 @@ import { FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Box } from
 import RadioButtonBox from '../RadioBox/RadioBox';
 import TextField from '@mui/material/TextField';
 import DatePicker from './DatePicker';
+import BasicForm from './BasicForm';
+import { string } from 'yup';
+import InputAdornment from '@mui/material/InputAdornment';
 const Step1: FC = () => {
   const propertyTypes = ['Residential', 'Commercial'];
   const lookingIntoMenuItems = ['Rent', 'Sell', 'PG/Co-living'];
@@ -28,29 +31,60 @@ const Step1: FC = () => {
   const securityDeposit = ['None', '1 month', '2 month', 'Custom'];
   const lockInPeriod = ['None', '1 month', '2 month', 'Custom'];
   const broKerage = ['None', '1 month', '2 month', 'Custom'];
+  // Property Type
   const [propertyTypeMenu, setPropertyTypeMenu] = useState(propertyTypes);
   const [propertyTypeActive, setPropertyTypeActive] = useState('');
+  const [propertyTypeError, setPropertyTypeError] = useState('');
+  // Looking Into Menu
   const [lookingIntoMenu, setLookingInto] = useState(lookingIntoMenuItems);
   const [lookingIntoActive, setLookingIntoActive] = useState('');
+  const [lookingIntoError, setLookingIntoError] = useState('');
+  // PropertyTypeGroup Menu
   const [propertyTypeGroupMenu, setPropertyTypeGroupMenu] = useState(propertyTypeGroupMenuItems);
   const [propertyTypeGroupActive, setPropertyTypeGroupActive] = useState('');
+  const [propertyTypeGroupError, setPropertyTypeGroupError] = useState('');
+  // BHK Menu
   const [bhkMenu, setBhkMenu] = useState(bhkMenuItems);
   const [bhkActive, setBhkActive] = useState('');
+  const [bhkError, setBhkError] = useState('');
+  //  BathRoom Menu
   const [bathRoomMenu, setBathRoomMenu] = useState(bathRoomMenuItems);
   const [bathRoomActive, setBathRoomActive] = useState('');
+  const [bathRoomError, setBathRoomError] = useState('');
+  // Balcony Menu
   const [balconyMenu, setBalconyMenu] = useState(balconyMenuItems);
   const [balconyActive, setBalconyActive] = useState('');
+  const [balconyError, setBalconyError] = useState('');
+  //  Furnish Type Menu
   const [furnishTypeMenu, setFurnishTypeMenu] = useState(furnishTypeMenuItems);
   const [furnishTypeActive, setFurnishTypeActive] = useState('');
+  const [furnishTypeError, setFurnishTypeError] = useState('');
+  // Covered Parking Menu
   const [coveredParkingMenu, setCoveredParkingMenu] = useState(coveredParkingMenuItems);
   const [coveredParkingActive, setCoveredParkingActive] = useState('');
+  const [coveredParkingError, setCoveredParkingeError] = useState('');
+  // Open Parking Menu
   const [openParkingMenu, setOpenParkingMenuMenu] = useState(openParkingMenuItems);
   const [openParkingMenuActive, setOpenParkingMenuActive] = useState('');
+  const [openParkingError, setOpenParkingError] = useState('');
+  //  Tenant Type
   const [tenantTypeActive, settenantTypeActive] = useState('');
+  const [tenantTypeError, setTenantTypeError] = useState('');
+  // Maintenance Type
   const [mainTenanceActive, setMainTenanceActive] = useState('');
+  const [mainTenanceError, setMainTenanceError] = useState('');
+  // Security Deposit Type
   const [securityDepositActive, setSecurityDepositActive] = useState('');
+  const [securityDepositError, setSecurityDepositError] = useState('');
+  // Lock In Period Type
   const [lockInPeriodActive, setLockInPeriodActive] = useState('');
+  const [lockInPeriodError, setLockInPeriodError] = useState('');
+  // Brokerrage Active Type
   const [broKerageActive, setBroKerageActive] = useState('');
+  const [broKerageError, setBroKerageError] = useState('');
+  // Built Up Area
+  const [builtUpArea, setBuiltUpArea] = useState('');
+  const [builtUpError, setBuiltUpError] = useState('');
 
   useEffect(() => {
     let look =
@@ -171,6 +205,86 @@ const Step1: FC = () => {
     setBalconyMenu(balconys);
   };
 
+  // const handleSubmitFirstStep = () => {
+  //   if (!propertyTypeActive) {
+  //     setPropertyTypeError('Please select the category');
+  //   }
+  //   if (!lookingIntoActive) {
+  //     setLookingIntoError('Please select the purpose');
+  //   }
+  //   if (!propertyTypeGroupActive) {
+  //     setPropertyTypeGroupError('Please select the property type');
+  //   }
+  //   if (!bhkActive) {
+  //     setBhkError('Please select the BHK');
+  //   }
+  //   if (!bathRoomActive) {
+  //     setBathRoomError('Please select the bathroom count');
+  //   }
+  //   if (!balconyActive) {
+  //     setBalconyError('Please select the balcony count');
+  //   }
+  //   if (!furnishTypeActive) {
+  //     setFurnishTypeError('Please select the furnish type');
+  //   }
+  //   if (!coveredParkingActive) {
+  //     setCoveredParkingeError('Please select the covered parking');
+  //   }
+  //   if (!openParkingMenuActive) {
+  //     setOpenParkingError('Please select the open  parking');
+  //   }
+  //   if (!tenantTypeActive) {
+  //     setTenantTypeError('Please select the select tenant type');
+  //   }
+
+  //   return;
+  // };
+
+  const handleSubmitFirstStep = () => {
+    const errors = {
+      propertyTypeActive: !propertyTypeActive ? 'Please select the category' : '',
+      lookingIntoActive: !lookingIntoActive ? 'Please select the purpose' : '',
+      propertyTypeGroupActive: !propertyTypeGroupActive ? 'Please select the property type' : '',
+      bhkActive: !bhkActive ? 'Please select the BHK' : '',
+      bathRoomActive: !bathRoomActive ? 'Please select the bathroom count' : '',
+      balconyActive: !balconyActive ? 'Please select the balcony count' : '',
+      furnishTypeActive: !furnishTypeActive ? 'Please select the furnish type' : '',
+      coveredParkingActive: !coveredParkingActive ? 'Please select the covered parking' : '',
+      openParkingMenuActive: !openParkingMenuActive ? 'Please select the open parking' : '',
+      tenantTypeActive: !tenantTypeActive ? 'Please select the select tenant type' : '',
+      mainTenanceActive: !mainTenanceActive ? 'Please select the maintenance' : '',
+      securityDepositActive: !securityDepositActive ? 'Please select the security deposit' : '',
+      lockInPeriodActive: !lockInPeriodActive ? 'Please select the lock-in period' : '',
+      broKerageActive: !broKerageActive ? 'Please select the brokerage' : '',
+      builtUpArea: !builtUpArea ? 'Saleable area should be between 150 and 1500' : '',
+    };
+
+    // Update state with errors
+    setPropertyTypeError(errors.propertyTypeActive);
+    setLookingIntoError(errors.lookingIntoActive);
+    setPropertyTypeGroupError(errors.propertyTypeGroupActive);
+    setBhkError(errors.bhkActive);
+    setBathRoomError(errors.bathRoomActive);
+    setBalconyError(errors.balconyActive);
+    setFurnishTypeError(errors.furnishTypeActive);
+    setCoveredParkingeError(errors.coveredParkingActive);
+    setOpenParkingError(errors.openParkingMenuActive);
+    setTenantTypeError(errors.tenantTypeActive);
+    setMainTenanceError(errors.mainTenanceActive);
+    setSecurityDepositError(errors.securityDepositActive);
+    setLockInPeriodError(errors.lockInPeriodActive);
+    setBroKerageError(errors.broKerageActive);
+    setBuiltUpError(errors.builtUpArea);
+    // Check if any error exists
+    for (const error in errors) {
+      if (errors[error]) {
+        return;
+      }
+    }
+
+    // Proceed with form submission or other actions
+  };
+
   return (
     <div style={{ padding: '0px 50px' }}>
       <h2 className='fw-bolder d-flex align-items-center text-gray-900'>Add Property Details</h2>
@@ -187,12 +301,16 @@ const Step1: FC = () => {
                     label={val}
                     handleClick={() => {
                       setPropertyTypeActive(val);
+                      setPropertyTypeError('');
                     }}
                     active={val === propertyTypeActive}
                   />
                 );
               })}
             </div>
+            {propertyTypeError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{propertyTypeError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -207,11 +325,15 @@ const Step1: FC = () => {
                     active={val === lookingIntoActive}
                     handleClick={() => {
                       setLookingIntoActive(val);
+                      setLookingIntoError('');
                     }}
                   />
                 );
               })}
             </div>
+            {lookingIntoError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{lookingIntoError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -226,11 +348,15 @@ const Step1: FC = () => {
                     active={val === propertyTypeGroupActive}
                     handleClick={() => {
                       setPropertyTypeGroupActive(val);
+                      setPropertyTypeGroupError('');
                     }}
                   />
                 );
               })}
             </div>
+            {propertyTypeGroupError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{propertyTypeGroupError}</div>
+            )}
           </div>
           {lookingIntoActive === 'Rent' && (
             <div className='add_property-group' style={{ marginTop: '30px' }}>
@@ -261,6 +387,7 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {bhkError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{bhkError}</div>}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -281,6 +408,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {bathRoomError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{bathRoomError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -300,6 +430,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {balconyError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{balconyError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -319,6 +452,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {furnishTypeError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{furnishTypeError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -340,6 +476,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {coveredParkingError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{coveredParkingError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -361,6 +500,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {openParkingError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{openParkingError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -372,14 +514,17 @@ const Step1: FC = () => {
                   <RadioButtonBox
                     key={index}
                     label={val}
-                    active={val === openParkingMenuActive}
+                    active={val === tenantTypeActive}
                     handleClick={() => {
-                      setOpenParkingMenuActive(val);
+                      settenantTypeActive(val);
                     }}
                   />
                 );
               })}
             </div>
+            {tenantTypeError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{tenantTypeError}</div>
+            )}
           </div>
           {/* <DatePicker /> */}
           {lookingIntoActive === 'Rent' && (
@@ -411,6 +556,10 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+
+            {mainTenanceError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{mainTenanceError}</div>
+            )}
           </div>
           {mainTenanceActive === 'Separate' && (
             <div className='add_property-group' style={{ marginTop: '30px' }}>
@@ -441,6 +590,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {securityDepositError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{securityDepositError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -460,6 +612,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {lockInPeriodError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{lockInPeriodError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
@@ -479,6 +634,9 @@ const Step1: FC = () => {
                 );
               })}
             </div>
+            {broKerageError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{broKerageError}</div>
+            )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <TextField
@@ -487,6 +645,25 @@ const Step1: FC = () => {
               label='Built Up Area'
               variant='standard'
               className='age_property'
+              value={builtUpArea}
+              onChange={(e) => {
+                setBuiltUpArea(e.target.value);
+                setBuiltUpError('');
+              }}
+              error={builtUpError ? true : false}
+              helperText={builtUpError}
+              InputProps={{
+                endAdornment: <InputAdornment position='end'>Sq. ft.</InputAdornment>,
+              }}
+              InputLabelProps={{
+                style: {
+                  width: '100%',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  lineHeight: '20px',
+                  color: 'rgb(191, 192, 198)',
+                }, // Add your styles here
+              }}
             />
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
@@ -508,6 +685,7 @@ const Step1: FC = () => {
               padding: '0px',
             }}>
             <button
+              onClick={handleSubmitFirstStep}
               style={{
                 background: '#1B84FF',
                 borderRadius: '8px',

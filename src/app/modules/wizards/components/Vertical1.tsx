@@ -31,23 +31,26 @@ const Vertical1 = () => {
     setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
   };
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
-    if (!stepper) {
-      return;
-    }
+  // const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  //   if (!stepper) {
+  //     return;
+  //   }
 
-    if (stepper.currentStepIndex !== stepper.totalStepsNumber) {
-      stepper.goNext();
-    } else {
-      stepper.goto(1);
-      actions.resetForm();
-    }
+  //   if (stepper.currentStepIndex !== stepper.totalStepsNumber) {
+  //     stepper.goNext();
+  //   } else {
+  //     stepper.goto(1);
+  //     actions.resetForm();
+  //   }
 
-    console.log(values);
+  //   console.log(values);
 
-    setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
+  //   setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
+  // };
+
+  const submitStepForm = () => {
+    console.log('hitting');
   };
-
   useEffect(() => {
     if (!stepperRef.current) {
       return;
@@ -209,7 +212,7 @@ const Vertical1 = () => {
             <Formik
               validationSchema={currentSchema}
               initialValues={initValues}
-              onSubmit={submitStep}>
+              onSubmit={submitStepForm}>
               {() => (
                 <Form
                   className='py-20  px-9'
