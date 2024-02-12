@@ -5,11 +5,13 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Box } from '@mui/material';
 import RadioButtonBox from '../RadioBox/RadioBox';
 import TextField from '@mui/material/TextField';
-import DatePicker from './DatePicker';
+import DatePickerInput from './DatePicker';
 import BasicForm from './BasicForm';
 import { string } from 'yup';
 import InputAdornment from '@mui/material/InputAdornment';
-const Step1: FC = () => {
+import { IconButton } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+const Step1: FC = (props: any) => {
   const propertyTypes = ['Residential', 'Commercial'];
   const lookingIntoMenuItems = ['Rent', 'Sell', 'PG/Co-living'];
   const propertyTypeGroupMenuItems = [
@@ -85,6 +87,8 @@ const Step1: FC = () => {
   // Built Up Area
   const [builtUpArea, setBuiltUpArea] = useState('');
   const [builtUpError, setBuiltUpError] = useState('');
+  // Calender Menu
+  const [showCalender, setShowCalender] = useState(false);
 
   useEffect(() => {
     let look =
@@ -281,7 +285,7 @@ const Step1: FC = () => {
         return;
       }
     }
-
+    props.handleSubmitStep1();
     // Proceed with form submission or other actions
   };
 
@@ -361,11 +365,30 @@ const Step1: FC = () => {
           {lookingIntoActive === 'Rent' && (
             <div className='add_property-group' style={{ marginTop: '30px' }}>
               <TextField
-                required
-                id='standard-basic'
                 label='Age of Property (in years)'
                 variant='standard'
+                fullWidth
+                required
                 className='age_property'
+                inputProps={{ maxLength: 2 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton aria-label='info' edge='end'>
+                        <InfoOutlinedIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  style: {
+                    width: '100%',
+                    fontWeight: 400,
+                    fontSize: '18px',
+                    lineHeight: '20px',
+                    color: 'rgb(191, 192, 198)',
+                  },
+                }}
               />
             </div>
           )}
@@ -526,7 +549,10 @@ const Step1: FC = () => {
               <div style={{ color: '#e02727', padding: '10px 0px' }}>{tenantTypeError}</div>
             )}
           </div>
-          {/* <DatePicker /> */}
+          <div className='add_property-group' style={{ marginTop: '30px' }}>
+            <DatePickerInput />
+          </div>
+
           {lookingIntoActive === 'Rent' && (
             <div className='add_property-group' style={{ marginTop: '30px' }}>
               <TextField
@@ -535,6 +561,16 @@ const Step1: FC = () => {
                 label='Monthly Rent'
                 variant='standard'
                 className='age_property'
+                inputProps={{ maxLength: 2 }}
+                InputLabelProps={{
+                  style: {
+                    width: '100%',
+                    fontWeight: 400,
+                    fontSize: '18px',
+                    lineHeight: '20px',
+                    color: 'rgb(191, 192, 198)',
+                  },
+                }}
               />
             </div>
           )}
@@ -673,6 +709,18 @@ const Step1: FC = () => {
               label='Carpet Area'
               variant='standard'
               className='age_property'
+              InputProps={{
+                endAdornment: <InputAdornment position='end'>Sq. ft.</InputAdornment>,
+              }}
+              InputLabelProps={{
+                style: {
+                  width: '100%',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  lineHeight: '20px',
+                  color: 'rgb(191, 192, 198)',
+                }, // Add your styles here
+              }}
             />
           </div>
           <div
