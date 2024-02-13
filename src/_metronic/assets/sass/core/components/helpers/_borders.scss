@@ -13,10 +13,10 @@
 
 // Gray border colors
 @each $name, $value in $grays {
-	// Initial
-	.border-gray-#{$name} {
-		border-color: var(--#{$prefix}gray-#{$name}) !important;
-	}
+    // Initial
+    .border-gray-#{$name} {
+        border-color: var(--#{$prefix}gray-#{$name}) !important;
+    }
 }
 
 // Hover border colors
@@ -24,14 +24,14 @@
     .border-#{$name}-clarity {
         border-color: var(--#{$prefix}#{$name}-clarity) !important;
     }
-        
+
     .border-hover-#{$name}:hover {
         border-color: var(--#{$prefix}#{$name}) !important;
     }
 
     .border-active-#{$name}.active {
         border-color: var(--#{$prefix}#{$name}) !important;
-    }   
+    }
 }
 
 .border-hover-primary-clarity:hover,

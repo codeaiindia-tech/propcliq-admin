@@ -13,27 +13,26 @@
     $border-color-active,
     $bg-color-active
 ) {
-
-    @if ( $color != null ) {
+    @if ($color != null) {
         color: $color;
     }
 
-    @if ( $icon-color != null ) {
+    @if ($icon-color != null) {
         i,
         .svg-icon {
-    		color: $icon-color;
-    	}
+            color: $icon-color;
+        }
 
         &.dropdown-toggle:after {
             color: $icon-color;
         }
     }
 
-    @if ( $border-color != null ) {
+    @if ($border-color != null) {
         border-color: $border-color;
     }
 
-    @if ( $bg-color != null ) {
+    @if ($bg-color != null) {
         background-color: $bg-color;
     }
 
@@ -45,32 +44,32 @@
     &.active,
     &.show,
     .show > & {
-        @if ( $color-active != null ) {
+        @if ($color-active != null) {
             color: $color-active;
         }
 
-        @if ( $icon-color-active != null ) {
+        @if ($icon-color-active != null) {
             i,
             .svg-icon {
-        		color: $icon-color-active;
-        	}
+                color: $icon-color-active;
+            }
 
             &.dropdown-toggle:after {
                 color: $icon-color-active;
             }
         }
 
-        @if ( $border-color-active != null ) {
+        @if ($border-color-active != null) {
             border-color: $border-color-active;
         }
 
-        @if ( $bg-color-active != null ) {
+        @if ($bg-color-active != null) {
             background-color: $bg-color-active !important;
         }
     }
 }
 
-@mixin button-active-state() {    
+@mixin button-active-state() {
     .btn-check:checked + &,
     .btn-check:active + &,
     &:focus:not(.btn-active),

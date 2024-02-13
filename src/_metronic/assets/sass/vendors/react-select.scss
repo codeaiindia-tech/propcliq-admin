@@ -10,9 +10,9 @@ $react-select-dropdown-option-margin: 0 0;
         color: $input-solid-color;
 
         &--is-disabled {
-            background-color: $form-select-disabled-bg;	
+            background-color: $form-select-disabled-bg;
             border-color: $form-select-disabled-border-color;
-    
+
             .react-select__placeholder {
                 color: $form-select-disabled-color;
             }
@@ -65,7 +65,7 @@ $react-select-dropdown-option-margin: 0 0;
 
     &__value-container {
         padding-top: 0.825rem;
-        padding-bottom: .825rem;
+        padding-bottom: 0.825rem;
         padding-left: 1.5rem;
     }
 }
@@ -73,39 +73,41 @@ $react-select-dropdown-option-margin: 0 0;
 // default styles
 .react-select-styled .react-select {
     &__control {
-      --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2378829D' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-      border-color: var(--bs-gray-400);
-      width: 100% ;
-      font-size: 1.1rem ;
-      font-weight: 500 ;
-      font-family: inherit;
-      line-height: 1.5 ;
-      color: var(--bs-gray-700) ;
-      appearance: none ;
-      background-color: var(--bs-body-bg) ;
-      background-image: var(--bs-form-select-bg-img),var(--bs-form-select-bg-icon,none) ;
-      background-repeat: no-repeat ;
-      background-position: right 1rem center ;
-      background-size: 16px 12px ;
-      border: 1px solid var(--bs-gray-300) ;
-      border-radius: 0.475rem ;
-      box-shadow: none;
-      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-      border: 0;
-      box-shadow: 'none';
+        --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2378829D' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        border-color: var(--bs-gray-400);
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 500;
+        font-family: inherit;
+        line-height: 1.5;
+        color: var(--bs-gray-700);
+        appearance: none;
+        background-color: var(--bs-body-bg);
+        background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 16px 12px;
+        border: 1px solid var(--bs-gray-300);
+        border-radius: 0.475rem;
+        box-shadow: none;
+        transition:
+            border-color 0.15s ease-in-out,
+            box-shadow 0.15s ease-in-out;
+        border: 0;
+        box-shadow: 'none';
 
-      &--is-disabled {
-        background-color: $form-select-disabled-bg;	
-		border-color: $form-select-disabled-border-color;
+        &--is-disabled {
+            background-color: $form-select-disabled-bg;
+            border-color: $form-select-disabled-border-color;
 
-        .react-select__placeholder {
-            color: $form-select-disabled-color;
+            .react-select__placeholder {
+                color: $form-select-disabled-color;
+            }
         }
-      }
 
-      &--is-focused {
-        background-color: var(--#{$prefix}gray-200);
-    }
+        &--is-focused {
+            background-color: var(--#{$prefix}gray-200);
+        }
     }
 
     &__single-value {
@@ -116,9 +118,9 @@ $react-select-dropdown-option-margin: 0 0;
     &__placeholder {
         color: var(--#{$prefix}gray-500);
     }
-  
+
     &__indicator-separator {
-      display: none;
+        display: none;
     }
 
     &__indicator {
@@ -130,21 +132,21 @@ $react-select-dropdown-option-margin: 0 0;
     &__dropdown-indicator {
         display: none;
     }
-  
+
     &__value-container {
-      padding: 0.775rem 3rem 0.775rem 1rem ;
-      cursor: pointer;
+        padding: 0.775rem 3rem 0.775rem 1rem;
+        cursor: pointer;
     }
-  
+
     &__input-container {
-      padding: 0;
-      margin: 0;
+        padding: 0;
+        margin: 0;
     }
 
     &__input-container::after {
-      content: "";    
+        content: '';
     }
-  
+
     &__menu {
         border: 0;
         border-radius: $dropdown-border-radius;
@@ -152,7 +154,7 @@ $react-select-dropdown-option-margin: 0 0;
         background-color: var(--#{$prefix}dropdown-bg);
         box-shadow: var(--#{$prefix}dropdown-box-shadow);
     }
-  
+
     &__option {
         cursor: pointer;
         color: var(--#{$prefix}gray-700);
@@ -160,32 +162,32 @@ $react-select-dropdown-option-margin: 0 0;
         padding: $react-select-dropdown-option-padding;
         margin: $react-select-dropdown-option-margin;
 
-      &--is-selected {
-        background-color: var(--#{$prefix}component-hover-bg);
-        color: var(--#{$prefix}component-hover-color);
-        transition: $transition-link;
-        position: relative;
+        &--is-selected {
+            background-color: var(--#{$prefix}component-hover-bg);
+            color: var(--#{$prefix}component-hover-color);
+            transition: $transition-link;
+            position: relative;
 
-        &:after {
-            top: 50%;
-            display: block;
-            position: absolute;
-            transform: translateY(-50%);
-            height: 0.75rem;
-            width: 0.75rem;
-            content: "";
-            @include svg-bg-icon(check, var(--#{$prefix}component-hover-color));
-            mask-position: center;					
-            right: 1.25rem;
+            &:after {
+                top: 50%;
+                display: block;
+                position: absolute;
+                transform: translateY(-50%);
+                height: 0.75rem;
+                width: 0.75rem;
+                content: '';
+                @include svg-bg-icon(check, var(--#{$prefix}component-hover-color));
+                mask-position: center;
+                right: 1.25rem;
+            }
         }
-    }
 
-    &--is-focused:not(&--is-selected) {
-        background-color: var(--#{$prefix}component-hover-bg);
-        color: var(--#{$prefix}component-hover-color);
-        transition: $transition-link;
-        position: relative;
-      }
+        &--is-focused:not(&--is-selected) {
+            background-color: var(--#{$prefix}component-hover-bg);
+            color: var(--#{$prefix}component-hover-color);
+            transition: $transition-link;
+            position: relative;
+        }
     }
 
     &__multi-value {

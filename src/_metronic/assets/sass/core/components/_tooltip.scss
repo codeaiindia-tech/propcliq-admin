@@ -2,7 +2,6 @@
 //  Tooltip
 //
 
-
 // Base
 .tooltip {
     .tooltip-inner {
@@ -10,9 +9,9 @@
     }
 
     &.tooltop-auto-width {
-       	.tooltip-inner {
-       		white-space: nowrap;
-  			max-width: none;
+        .tooltip-inner {
+            white-space: nowrap;
+            max-width: none;
         }
     }
 

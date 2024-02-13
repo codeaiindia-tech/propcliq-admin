@@ -17,12 +17,12 @@
 ////////////////////////////////////////////////////////////////
 
 // Initialize
-@import "init";
+@import 'init';
 
 // Plugins
-@import "./core/vendors/plugins/plugins";
-@import "vendors/react-select.scss";
+@import './core/vendors/plugins/plugins';
+@import 'vendors/react-select.scss';
 
 #root {
-  display: contents;
+    display: contents;
 }

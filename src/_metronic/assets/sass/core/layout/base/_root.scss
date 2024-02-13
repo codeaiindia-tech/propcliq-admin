@@ -5,7 +5,7 @@
 @include color-mode(light) {
     // Layouts
     @include property(--#{$prefix}app-bg-color, $app-bg-color);
-    @include property(--#{$prefix}app-blank-bg-color, $app-blank-bg-color);    
+    @include property(--#{$prefix}app-blank-bg-color, $app-blank-bg-color);
 
     // Header base
     @include property(--#{$prefix}app-header-base-bg-color, $app-header-base-bg-color);
@@ -56,7 +56,7 @@
     @include property(--#{$prefix}app-header-secondary-sticky-border-bottom, $app-header-secondary-sticky-border-bottom);
 
     // Header tertiary base
-    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color);     
+    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color);
     @include property(--#{$prefix}app-header-tertiary-base-box-shadow, $app-header-tertiary-base-box-shadow);
     @include property(--#{$prefix}app-header-tertiary-base-border-top, $app-header-tertiary-base-border-top);
     @include property(--#{$prefix}app-header-tertiary-base-border-bottom, $app-header-tertiary-base-border-bottom);
@@ -157,7 +157,7 @@
     // Sidebar panel minimize
     @include property(--#{$prefix}app-sidebar-panel-minimize-bg-color, $app-sidebar-panel-minimize-bg-color);
     @include property(--#{$prefix}app-sidebar-panel-minimize-box-shadow, $app-sidebar-panel-minimize-box-shadow);
-    @include property(--#{$prefix}app-sidebar-panel-minimize-hover-box-shadow, $app-sidebar-panel-minimize-hover-box-shadow);   
+    @include property(--#{$prefix}app-sidebar-panel-minimize-hover-box-shadow, $app-sidebar-panel-minimize-hover-box-shadow);
     @include property(--#{$prefix}app-sidebar-panel-minimize-border-start, $app-sidebar-panel-minimize-border-start);
     @include property(--#{$prefix}app-sidebar-panel-minimize-border-end, $app-sidebar-panel-minimize-border-end);
 
@@ -240,7 +240,7 @@
     @include property(--#{$prefix}app-header-secondary-sticky-border-bottom, $app-header-secondary-sticky-border-bottom-dark);
 
     // Header tertiary base
-    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color-dark);     
+    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color-dark);
     @include property(--#{$prefix}app-header-tertiary-base-box-shadow, $app-header-tertiary-base-box-shadow-dark);
     @include property(--#{$prefix}app-header-tertiary-base-border-top, $app-header-tertiary-base-border-top-dark);
     @include property(--#{$prefix}app-header-tertiary-base-border-bottom, $app-header-tertiary-base-border-bottom-dark);

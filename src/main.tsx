@@ -37,14 +37,14 @@ Chart.register(...registerables);
 const queryClient = new QueryClient();
 const container = document.getElementById('root');
 if (container) {
-  createRoot(container).render(
-    <QueryClientProvider client={queryClient}>
-      <MetronicI18nProvider>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
-      </MetronicI18nProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+    createRoot(container).render(
+        <QueryClientProvider client={queryClient}>
+            <MetronicI18nProvider>
+                <AuthProvider>
+                    <AppRoutes />
+                </AuthProvider>
+            </MetronicI18nProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+    );
 }

@@ -37,18 +37,18 @@
 
             i {
                 transition: $transition-link;
-				color: var(--#{$prefix}text-#{$name}) !important;
-			}
+                color: var(--#{$prefix}text-#{$name}) !important;
+            }
 
-			.svg-icon {
-				color: var(--#{$prefix}text-#{$name}) !important;
-			}
+            .svg-icon {
+                color: var(--#{$prefix}text-#{$name}) !important;
+            }
         }
     }
 
     // Active
     .text-active-#{$name} {
-        transition: $transition-link;        
+        transition: $transition-link;
 
         i {
             transition: $transition-link;
@@ -57,12 +57,12 @@
         &.active {
             transition: $transition-link;
             color: var(--#{$prefix}text-#{$name}) !important;
-            
+
             i {
                 transition: $transition-link;
                 color: var(--#{$prefix}text-#{$name}) !important;
             }
-    
+
             .svg-icon {
                 color: var(--#{$prefix}text-#{$name}) !important;
             }
@@ -82,7 +82,7 @@
                 transition: $transition-link;
                 color: var(--#{$prefix}text-#{$name}) !important;
             }
-        }    
+        }
     }
 }
 
@@ -98,7 +98,7 @@
                 transition: $transition-link;
                 color: var(--#{$prefix}text-#{$name}) !important;
             }
-        }    
+        }
     }
 }
 
@@ -124,16 +124,16 @@
 // Icons
 i {
     &.bi,
-    &[class^="fonticon-"],
-    &[class*=" fonticon-"],
-    &[class^="fa-"],
-    &[class*=" fa-"],
-    &[class^="la-"],
-    &[class*=" la-"] {
+    &[class^='fonticon-'],
+    &[class*=' fonticon-'],
+    &[class^='fa-'],
+    &[class*=' fa-'],
+    &[class^='la-'],
+    &[class*=' la-'] {
         line-height: 1;
         font-size: 1rem;
-        color: var(--#{$prefix}text-muted);        
-    }   
+        color: var(--#{$prefix}text-muted);
+    }
 }
 
 // Link transition
@@ -141,6 +141,6 @@ a {
     transition: $transition-link;
 
     &:hover {
-        transition:$transition-link;
+        transition: $transition-link;
     }
 }

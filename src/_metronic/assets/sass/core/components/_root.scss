@@ -5,15 +5,15 @@
 :root {
     // Breakpoints
     @each $breakpoint, $value in $grid-breakpoints {
-        --#{$prefix}#{$breakpoint}:#{$value};
+        --#{$prefix}#{$breakpoint}: #{$value};
     }
 
-    // Keenthemes scrollbar component 
+    // Keenthemes scrollbar component
     --#{$prefix}scrollbar-size: #{$scrollbar-size};
     --#{$prefix}scrollbar-overlay-size: #{$scrollbar-overlay-size};
     --#{$prefix}scrollbar-overlay-space: #{$scrollbar-overlay-space};
 
-    // Bootstrap general    
+    // Bootstrap general
     --#{$prefix}white-bg-rgb: #{to-rgb($white)};
     --#{$prefix}black-bg-rgb: #{to-rgb($black)};
 }
@@ -107,12 +107,12 @@
     --#{$prefix}code-bg: #{$code-bg};
     --#{$prefix}code-shadow: #{$code-shadow};
     --#{$prefix}code-border-color: #{$code-border-color};
-    --#{$prefix}code-color: #{$code-color};  
+    --#{$prefix}code-color: #{$code-color};
 
     // Symbol
     --#{$prefix}symbol-label-color: #{$symbol-label-color};
     --#{$prefix}symbol-label-bg: #{$symbol-label-bg};
-    --#{$prefix}symbol-border-color: #{$symbol-border-color};   
+    --#{$prefix}symbol-border-color: #{$symbol-border-color};
 
     // Bullet
     --#{$prefix}bullet-bg-color: #{$bullet-bg-color};
@@ -143,13 +143,13 @@
     --#{$prefix}menu-link-bg-color-hover: #{$menu-link-bg-color-hover};
     --#{$prefix}menu-link-bg-color-show: #{$menu-link-bg-color-show};
     --#{$prefix}menu-link-bg-color-here: #{$menu-link-bg-color-here};
-    --#{$prefix}menu-link-bg-color-active: #{$menu-link-bg-color-active};    
+    --#{$prefix}menu-link-bg-color-active: #{$menu-link-bg-color-active};
 
-    // Keenthemes scrollbar component 
+    // Keenthemes scrollbar component
     --#{$prefix}scrollbar-color: #{$scrollbar-color};
     --#{$prefix}scrollbar-hover-color: #{$scrollbar-hover-color};
 
-    // Keenthemes overlay component 
+    // Keenthemes overlay component
     --#{$prefix}overlay-bg: #{$overlay-bg};
 
     // Keenthemes blockui component
@@ -159,11 +159,11 @@
     --#{$prefix}rating-color-default: #{$rating-color-default};
     --#{$prefix}rating-color-active: #{$rating-color-active};
 
-    // Keenthemes ribbon component 
+    // Keenthemes ribbon component
     --#{$prefix}ribbon-label-box-shadow: #{$ribbon-label-box-shadow};
     --#{$prefix}ribbon-label-bg: #{$ribbon-label-bg};
     --#{$prefix}ribbon-label-border-color: #{$ribbon-label-border-color};
-    --#{$prefix}ribbon-clip-bg: #{$ribbon-clip-bg}; 
+    --#{$prefix}ribbon-clip-bg: #{$ribbon-clip-bg};
 
     // Engage panel
     --#{$prefix}engage-btn-bg: #{$engage-btn-bg};
@@ -218,7 +218,7 @@
     @each $name, $value in $theme-text-colors-dark {
         --#{$prefix}text-#{$name}: #{$value};
     }
-    
+
     // Components
     --#{$prefix}border-color: #{$border-color-dark};
     --#{$prefix}border-dashed-color: #{$border-dashed-color-dark};
@@ -263,12 +263,12 @@
     --#{$prefix}code-bg: #{$code-bg-dark};
     --#{$prefix}code-shadow: #{$code-shadow-dark};
     --#{$prefix}code-border-color: #{$code-border-color-dark};
-    --#{$prefix}code-color: #{$code-color-dark};  
+    --#{$prefix}code-color: #{$code-color-dark};
 
     // Symbol
     --#{$prefix}symbol-label-color: #{$symbol-label-color-dark};
     --#{$prefix}symbol-label-bg: #{$symbol-label-bg-dark};
-    --#{$prefix}symbol-border-color: #{$symbol-border-color-dark};   
+    --#{$prefix}symbol-border-color: #{$symbol-border-color-dark};
 
     // Bullet
     --#{$prefix}bullet-bg-color: #{$bullet-bg-color-dark};
@@ -292,7 +292,7 @@
     --#{$prefix}menu-dropdown-box-shadow: #{$menu-dropdown-box-shadow-dark};
     --#{$prefix}menu-dropdown-bg-color: #{$menu-dropdown-bg-color-dark};
     --#{$prefix}menu-heading-color: #{$menu-heading-color-dark};
-    
+
     --#{$prefix}menu-link-color-hover: #{$menu-link-color-hover-dark};
     --#{$prefix}menu-link-color-show: #{$menu-link-color-show-dark};
     --#{$prefix}menu-link-color-here: #{$menu-link-color-here-dark};
@@ -301,12 +301,12 @@
     --#{$prefix}menu-link-bg-color-show: #{$menu-link-bg-color-show-dark};
     --#{$prefix}menu-link-bg-color-here: #{$menu-link-bg-color-here-dark};
     --#{$prefix}menu-link-bg-color-active: #{$menu-link-bg-color-active-dark};
-    
-    // Keenthemes scrollbar component 
+
+    // Keenthemes scrollbar component
     --#{$prefix}scrollbar-color: #{$scrollbar-color-dark};
     --#{$prefix}scrollbar-hover-color: #{$scrollbar-hover-color-dark};
 
-    // Keenthemes overlay component 
+    // Keenthemes overlay component
     --#{$prefix}overlay-bg: #{$overlay-bg-dark};
 
     // Keenthemes blockui component
@@ -316,11 +316,11 @@
     --#{$prefix}rating-color-default: #{$rating-color-default-dark};
     --#{$prefix}rating-color-active: #{$rating-color-active-dark};
 
-    // Keenthemes ribbon component 
+    // Keenthemes ribbon component
     --#{$prefix}ribbon-label-box-shadow: #{$ribbon-label-box-shadow-dark};
     --#{$prefix}ribbon-label-bg: #{$ribbon-label-bg-dark};
     --#{$prefix}ribbon-label-border-color: #{$ribbon-label-border-color-dark};
-    --#{$prefix}ribbon-clip-bg: #{$ribbon-clip-bg-dark};  
+    --#{$prefix}ribbon-clip-bg: #{$ribbon-clip-bg-dark};
 
     // Engage panel
     --#{$prefix}engage-btn-bg: #{$engage-btn-bg-dark};

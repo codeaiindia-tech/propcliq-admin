@@ -1,7 +1,6 @@
 //
 // Rotate
-// 
-
+//
 
 $rotate-transition: transform 0.3s ease;
 
@@ -16,13 +15,13 @@ $rotate-transition: transform 0.3s ease;
         backface-visibility: hidden;
         will-change: transform;
 
-        .collapsible:not(.collapsed)> & ,
+        .collapsible:not(.collapsed) > &,
         .show > &,
         .active > & {
             transform: rotateZ(#{$value}deg);
             transition: $rotate-transition;
 
-            [direction="rtl"] & {
+            [direction='rtl'] & {
                 transform: rotateZ(-#{$value}deg);
             }
         }
@@ -33,13 +32,13 @@ $rotate-transition: transform 0.3s ease;
         backface-visibility: hidden;
         will-change: transform;
 
-        .collapsible:not(.collapsed)> &,
+        .collapsible:not(.collapsed) > &,
         .show > &,
         .active > & {
             transform: rotateZ(-#{$value}deg);
             transition: $rotate-transition;
 
-            [direction="rtl"] & {
+            [direction='rtl'] & {
                 transform: rotateZ(#{$value}deg);
             }
         }

@@ -2,33 +2,32 @@
 // CKEditor
 //
 
-
 // Base
-.ck-target{
+.ck-target {
     display: none;
 }
 
-.ck-toolbar{
+.ck-toolbar {
     @include border-radius($border-radius !important);
 }
 
-.ck-content{
+.ck-content {
     min-height: 200px;
     @include border-radius($border-radius !important);
 
-    &.ck-focused{
+    &.ck-focused {
         border-color: var(--#{$prefix}primary) !important;
         box-shadow: none !important;
     }
 }
 
 // CKEditor Classic & Document
-.ck-editor{
-    .ck-toolbar{
+.ck-editor {
+    .ck-toolbar {
         @include border-top-radius($border-radius !important);
         @include border-bottom-radius(0 !important);
     }
-    .ck-content{
+    .ck-content {
         @include border-bottom-radius($border-radius !important);
         @include border-top-radius(0 !important);
     }
@@ -36,12 +35,12 @@
 
 // CKEditor Inline / Balloon / Balloon Block
 .ck-body {
-    .ck-balloon-panel{
-        .ck-content{
+    .ck-balloon-panel {
+        .ck-content {
             min-height: 200px;
             border-color: transparent !important;
 
-            &.ck-focused{
+            &.ck-focused {
                 border-color: var(--#{$prefix}primary) !important;
             }
         }

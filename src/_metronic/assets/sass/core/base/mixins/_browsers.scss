@@ -4,20 +4,20 @@
 
 @mixin for-edge {
     // Microsoft Edge
-	@supports (-ms-ime-align:auto) {
-		@content;
-	}
+    @supports (-ms-ime-align: auto) {
+        @content;
+    }
 }
 
 @mixin for-safari {
-	.safari {
-		@content;
-	}
+    .safari {
+        @content;
+    }
 }
 
 @mixin for-firefox {
-	// Firefox
+    // Firefox
     @-moz-document url-prefix() {
-		@content;
-	}
+        @content;
+    }
 }

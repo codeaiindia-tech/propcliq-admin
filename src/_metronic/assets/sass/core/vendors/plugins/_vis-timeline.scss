@@ -100,14 +100,14 @@ $vis-border-dashed-color: var(--#{$prefix}border-dashed-color);
 }
 
 // Custom style
-.vis-timeline-custom {    
+.vis-timeline-custom {
     .vis-timeline {
         border: 0 !important;
 
         .vis-label {
             padding-left: 0 !important;
         }
-    }    
+    }
 
     .vis-panel {
         &.vis-bottom,
