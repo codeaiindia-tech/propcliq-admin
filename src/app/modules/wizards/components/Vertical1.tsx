@@ -13,6 +13,7 @@ import { Content } from '../../../../_metronic/layout/components/Content';
 import { useNavigate } from 'react-router-dom';
 const Vertical1 = () => {
     const [stepNumber, setStepNumber] = useState('1');
+    const [propertyType, setPropertyType] = useState('Residential');
     // const stepperRef = useRef<HTMLDivElement | null>(null);
     // const [stepper, setStepper] = useState<StepperComponent | null>(null);
     // const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
@@ -48,6 +49,9 @@ const Vertical1 = () => {
 
     //   setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
     // };
+    const handleCommSubmitStep1 = (val: string): any => {
+        setPropertyType(val);
+    };
 
     const handleSubmitStep1 = () => {
         setStepNumber('2');
@@ -88,7 +92,7 @@ const Vertical1 = () => {
 
                                         {/* begin::Label*/}
                                         <div className="stepper-label">
-                                            <h3 className="stepper-title">Property Details</h3>
+                                            <h3 className="stepper-title">{propertyType === 'Residential' ? 'Property Details' : 'BasicDetails'}</h3>
                                             <div className="stepper-desc fw-semibold">In progress</div>
                                         </div>
                                         {/* end::Label*/}
@@ -114,7 +118,7 @@ const Vertical1 = () => {
 
                                         {/* begin::Label*/}
                                         <div className="stepper-label">
-                                            <h3 className="stepper-title">Address</h3>
+                                            <h3 className="stepper-title">{propertyType === 'Residential' ? 'Address' : 'Property detail'}</h3>
                                             <div className="stepper-desc fw-semibold">Pending</div>
                                         </div>
                                         {/* end::Label*/}
@@ -140,7 +144,7 @@ const Vertical1 = () => {
 
                                         {/* begin::Label*/}
                                         <div className="stepper-label">
-                                            <h3 className="stepper-title">Photos </h3>
+                                            <h3 className="stepper-title">{propertyType === 'Residential' ? 'Photos' : 'Aminities'} </h3>
                                             <div className="stepper-desc fw-semibold">Pending</div>
                                         </div>
                                         {/* end::Label*/}
@@ -166,7 +170,7 @@ const Vertical1 = () => {
 
                                         {/* begin::Label*/}
                                         <div className="stepper-label">
-                                            <h3 className="stepper-title">Verify </h3>
+                                            <h3 className="stepper-title">{propertyType === 'Residential' ? 'Verify' : 'Photos'} </h3>
                                             <div className="stepper-desc fw-semibold">Pending</div>
                                         </div>
                                         {/* end::Label*/}
@@ -209,7 +213,11 @@ const Vertical1 = () => {
 
                     <div className="d-flex flex-row-fluid  bg-body rounded py-20  px-9" style={{ overflowY: 'scroll', height: '700px' }}>
                         <div className="current" data-kt-stepper-element="content">
-                            {stepNumber === '1' ? <Step1 handleSubmitStep1={handleSubmitStep1} /> : <Step2 />}
+                            {stepNumber === '1' ? (
+                                <Step1 handleSubmitStep1={handleSubmitStep1} handleCommSubmitStep1={handleCommSubmitStep1} />
+                            ) : (
+                                <Step2 />
+                            )}
                         </div>
 
                         {/* <div data-kt-stepper-element='content'>
