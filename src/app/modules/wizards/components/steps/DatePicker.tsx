@@ -11,7 +11,7 @@ const DatePickerInput = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = React.useRef(null);
 
-    const handleDateChange = (date:any) => {
+    const handleDateChange = (date: any) => {
         setSelectedDate(date);
         setOpen(false);
     };
