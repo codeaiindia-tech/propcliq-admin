@@ -14,6 +14,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const Step1: FC = (props: any) => {
     const propertyTypes = ['Residential', 'Commercial'];
     const lookingIntoMenuItems = ['Rent', 'Sell', 'PG/Co-living'];
+    const commPropertyTypeGroupMenuItems = ['Office', 'Retail Shop', 'Showroom', 'Warehouse', 'Plot', 'Others'];
     const propertyTypeGroupMenuItems = ['Apartment', 'Independent Floor', 'Independent House', 'Villa', 'Plot', 'Agricultural Land'];
     const bhkMenuItems = ['1RK', '1 BHK', '2 BHK', '3+BHK'];
     const bathRoomMenuItems = ['1', '2', '3', '4'];
@@ -36,7 +37,9 @@ const Step1: FC = (props: any) => {
     const [lookingIntoError, setLookingIntoError] = useState('');
     // PropertyTypeGroup Menu
     const [propertyTypeGroupMenu, setPropertyTypeGroupMenu] = useState(propertyTypeGroupMenuItems);
+    const [commPropertyTypeGroupMenu, setCommPropertyTypeGroupMenu] = useState(commPropertyTypeGroupMenuItems);
     const [propertyTypeGroupActive, setPropertyTypeGroupActive] = useState('');
+    const [commPropertyTypeGroupActive, setCommPropertyTypeGroupActive] = useState('');
     const [propertyTypeGroupError, setPropertyTypeGroupError] = useState('');
     // BHK Menu
     const [bhkMenu, setBhkMenu] = useState(bhkMenuItems);
@@ -302,6 +305,7 @@ const Step1: FC = (props: any) => {
                         </div>
                         {propertyTypeError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{propertyTypeError}</div>}
                     </div>
+
                     <div className="add_property-group" style={{ marginTop: '30px' }}>
                         <div className="label_for_label">
                             lookingIntoMenu <span className="mandatoryMarker">*</span>
@@ -315,36 +319,51 @@ const Step1: FC = (props: any) => {
                                         active={val === lookingIntoActive}
                                         handleClick={() => {
                                             setLookingIntoActive(val);
-                                            setLookingIntoError('');
                                         }}
                                     />
                                 );
                             })}
                         </div>
-                        {lookingIntoError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{lookingIntoError}</div>}
                     </div>
                     <div className="add_property-group" style={{ marginTop: '30px' }}>
                         <div className="label_for_label">
                             PropertyType <span className="mandatoryMarker">*</span>
                         </div>
                         <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {propertyTypeGroupMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === propertyTypeGroupActive}
-                                        handleClick={() => {
-                                            setPropertyTypeGroupActive(val);
-                                            setPropertyTypeGroupError('');
-                                        }}
-                                    />
-                                );
-                            })}
+                            {propertyTypeActive === 'Residential' || propertyTypeActive === null || propertyTypeActive === ''
+                                ? propertyTypeGroupMenu.map((val, index) => {
+                                      return (
+                                          <RadioButtonBox
+                                              key={index}
+                                              label={val}
+                                              active={val === propertyTypeGroupActive}
+                                              handleClick={() => {
+                                                  setPropertyTypeGroupActive(val);
+                                                  setPropertyTypeGroupError('');
+                                              }}
+                                          />
+                                      );
+                                  })
+                                : commPropertyTypeGroupMenu.map((val, index) => {
+                                      console.log(propertyTypeActive, 'propertyTypeActive--');
+                                      return (
+                                          <>
+                                              <RadioButtonBox
+                                                  key={index}
+                                                  label={val}
+                                                  active={val === commPropertyTypeGroupActive}
+                                                  handleClick={() => {
+                                                      setCommPropertyTypeGroupActive(val);
+                                                  }}
+                                              />
+                                          </>
+                                      );
+                                  })}
                         </div>
                         {propertyTypeGroupError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{propertyTypeGroupError}</div>}
                     </div>
-                    {lookingIntoActive === 'Rent' && (
+
+                    {lookingIntoActive === 'Rent' && propertyTypeActive === 'Residential' && (
                         <div className="add_property-group" style={{ marginTop: '30px' }}>
                             <TextField
                                 label="Age of Property (in years)"
@@ -374,313 +393,323 @@ const Step1: FC = (props: any) => {
                             />
                         </div>
                     )}
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            BHK <span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {bhkMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === bhkActive}
-                                        handleClick={() => {
-                                            val !== '3+BHK' ? setBhkActive(val) : handleInsertBHKMenuItems();
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {bhkError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{bhkError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Bathroom <span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {bathRoomMenu.map((val, index) => {
-                                console.log(val, 'values');
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === bathRoomActive}
-                                        handleClick={() => {
-                                            setBathRoomActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {bathRoomError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{bathRoomError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Balcony <span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {balconyMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === balconyActive}
-                                        handleClick={() => {
-                                            setBalconyActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {balconyError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{balconyError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Furnish Type <span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {furnishTypeMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === furnishTypeActive}
-                                        handleClick={() => {
-                                            setFurnishTypeActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {furnishTypeError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{furnishTypeError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Covered Parking <span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {coveredParkingMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === coveredParkingActive}
-                                        handleClick={() => {
-                                            val !== '3+' ? setCoveredParkingActive(val) : handleInsertCoveredParkingMenuItems();
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {coveredParkingError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{coveredParkingError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Open Parking<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {openParkingMenu.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === openParkingMenuActive}
-                                        handleClick={() => {
-                                            val !== '3+' ? setOpenParkingMenuActive(val) : handleInsertOpenParkingMenuItems();
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {openParkingError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{openParkingError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Preferred Tenant Type<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {tenantTypeMenuItems.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === tenantTypeActive}
-                                        handleClick={() => {
-                                            settenantTypeActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {tenantTypeError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{tenantTypeError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <DatePickerInput />
-                    </div>
 
-                    {lookingIntoActive === 'Rent' && (
+                    {propertyTypeActive === 'Commercial' && (
                         <div className="add_property-group" style={{ marginTop: '30px' }}>
-                            <TextField
-                                required
-                                id="standard-basic"
-                                label="Monthly Rent"
-                                variant="standard"
-                                className="age_property"
-                                inputProps={{ maxLength: 2 }}
-                                InputLabelProps={{
-                                    style: {
-                                        width: '100%',
-                                        fontWeight: 400,
-                                        fontSize: '18px',
-                                        lineHeight: '20px',
-                                        color: 'rgb(191, 192, 198)',
-                                    },
-                                }}
-                            />
+                            <TextField required id="standard-basic" label="Search City" variant="standard" className="age_property" />
                         </div>
                     )}
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Maintenance Charges<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {mainTenance.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === mainTenanceActive}
-                                        handleClick={() => {
-                                            setMainTenanceActive(val);
+                    {propertyTypeActive === 'Residential' && (
+                        <div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    BHK <span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {bhkMenu.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === bhkActive}
+                                                handleClick={() => {
+                                                    val !== '3+BHK' ? setBhkActive(val) : handleInsertBHKMenuItems();
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {bhkError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{bhkError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Bathroom <span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {bathRoomMenu.map((val, index) => {
+                                        console.log(val, 'values');
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === bathRoomActive}
+                                                handleClick={() => {
+                                                    setBathRoomActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {bathRoomError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{bathRoomError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Balcony <span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {balconyMenu.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === balconyActive}
+                                                handleClick={() => {
+                                                    setBalconyActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {balconyError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{balconyError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Furnish Type <span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {furnishTypeMenu.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === furnishTypeActive}
+                                                handleClick={() => {
+                                                    setFurnishTypeActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {furnishTypeError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{furnishTypeError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Covered Parking <span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {coveredParkingMenu.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === coveredParkingActive}
+                                                handleClick={() => {
+                                                    val !== '3+' ? setCoveredParkingActive(val) : handleInsertCoveredParkingMenuItems();
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {coveredParkingError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{coveredParkingError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Open Parking<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {openParkingMenu.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === openParkingMenuActive}
+                                                handleClick={() => {
+                                                    val !== '3+' ? setOpenParkingMenuActive(val) : handleInsertOpenParkingMenuItems();
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {openParkingError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{openParkingError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Preferred Tenant Type<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {tenantTypeMenuItems.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === tenantTypeActive}
+                                                handleClick={() => {
+                                                    settenantTypeActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {tenantTypeError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{tenantTypeError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <DatePickerInput />
+                            </div>
+
+                            {lookingIntoActive === 'Rent' && (
+                                <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                    <TextField
+                                        required
+                                        id="standard-basic"
+                                        label="Monthly Rent"
+                                        variant="standard"
+                                        className="age_property"
+                                        inputProps={{ maxLength: 2 }}
+                                        InputLabelProps={{
+                                            style: {
+                                                width: '100%',
+                                                fontWeight: 400,
+                                                fontSize: '18px',
+                                                lineHeight: '20px',
+                                                color: 'rgb(191, 192, 198)',
+                                            },
                                         }}
                                     />
-                                );
-                            })}
-                        </div>
+                                </div>
+                            )}
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Maintenance Charges<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {mainTenance.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === mainTenanceActive}
+                                                handleClick={() => {
+                                                    setMainTenanceActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
 
-                        {mainTenanceError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{mainTenanceError}</div>}
-                    </div>
-                    {mainTenanceActive === 'Separate' && (
-                        <div className="add_property-group" style={{ marginTop: '30px' }}>
-                            <TextField
-                                required
-                                id="standard-basic"
-                                label="Maintenance Charges (per month)"
-                                variant="standard"
-                                className="age_property"
-                            />
+                                {mainTenanceError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{mainTenanceError}</div>}
+                            </div>
+                            {mainTenanceActive === 'Separate' && (
+                                <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                    <TextField
+                                        required
+                                        id="standard-basic"
+                                        label="Maintenance Charges (per month)"
+                                        variant="standard"
+                                        className="age_property"
+                                    />
+                                </div>
+                            )}
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Security Deposit<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {securityDeposit.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === securityDepositActive}
+                                                handleClick={() => {
+                                                    setSecurityDepositActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {securityDepositError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{securityDepositError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Lock-in Period<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {lockInPeriod.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === lockInPeriodActive}
+                                                handleClick={() => {
+                                                    setLockInPeriodActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {lockInPeriodError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{lockInPeriodError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <div className="label_for_label">
+                                    Do you charge brokerage?<span className="mandatoryMarker">*</span>
+                                </div>
+                                <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
+                                    {broKerage.map((val, index) => {
+                                        return (
+                                            <RadioButtonBox
+                                                key={index}
+                                                label={val}
+                                                active={val === broKerageActive}
+                                                handleClick={() => {
+                                                    setBroKerageActive(val);
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                                {broKerageError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{broKerageError}</div>}
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <TextField
+                                    required
+                                    id="standard-basic"
+                                    label="Built Up Area"
+                                    variant="standard"
+                                    className="age_property"
+                                    value={builtUpArea}
+                                    onChange={(e) => {
+                                        setBuiltUpArea(e.target.value);
+                                        setBuiltUpError('');
+                                    }}
+                                    error={builtUpError ? true : false}
+                                    helperText={builtUpError}
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position="end">Sq. ft.</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                        style: {
+                                            width: '100%',
+                                            fontWeight: 400,
+                                            fontSize: '16px',
+                                            lineHeight: '20px',
+                                            color: 'rgb(191, 192, 198)',
+                                        }, // Add your styles here
+                                    }}
+                                />
+                            </div>
+                            <div className="add_property-group" style={{ marginTop: '30px' }}>
+                                <TextField
+                                    required
+                                    id="standard-basic"
+                                    label="Carpet Area"
+                                    variant="standard"
+                                    className="age_property"
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position="end">Sq. ft.</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                        style: {
+                                            width: '100%',
+                                            fontWeight: 400,
+                                            fontSize: '16px',
+                                            lineHeight: '20px',
+                                            color: 'rgb(191, 192, 198)',
+                                        }, // Add your styles here
+                                    }}
+                                />
+                            </div>
                         </div>
                     )}
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Security Deposit<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {securityDeposit.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === securityDepositActive}
-                                        handleClick={() => {
-                                            setSecurityDepositActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {securityDepositError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{securityDepositError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Lock-in Period<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {lockInPeriod.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === lockInPeriodActive}
-                                        handleClick={() => {
-                                            setLockInPeriodActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {lockInPeriodError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{lockInPeriodError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <div className="label_for_label">
-                            Do you charge brokerage?<span className="mandatoryMarker">*</span>
-                        </div>
-                        <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
-                            {broKerage.map((val, index) => {
-                                return (
-                                    <RadioButtonBox
-                                        key={index}
-                                        label={val}
-                                        active={val === broKerageActive}
-                                        handleClick={() => {
-                                            setBroKerageActive(val);
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                        {broKerageError && <div style={{ color: '#e02727', padding: '10px 0px' }}>{broKerageError}</div>}
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <TextField
-                            required
-                            id="standard-basic"
-                            label="Built Up Area"
-                            variant="standard"
-                            className="age_property"
-                            value={builtUpArea}
-                            onChange={(e) => {
-                                setBuiltUpArea(e.target.value);
-                                setBuiltUpError('');
-                            }}
-                            error={builtUpError ? true : false}
-                            helperText={builtUpError}
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end">Sq. ft.</InputAdornment>,
-                            }}
-                            InputLabelProps={{
-                                style: {
-                                    width: '100%',
-                                    fontWeight: 400,
-                                    fontSize: '16px',
-                                    lineHeight: '20px',
-                                    color: 'rgb(191, 192, 198)',
-                                }, // Add your styles here
-                            }}
-                        />
-                    </div>
-                    <div className="add_property-group" style={{ marginTop: '30px' }}>
-                        <TextField
-                            required
-                            id="standard-basic"
-                            label="Carpet Area"
-                            variant="standard"
-                            className="age_property"
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end">Sq. ft.</InputAdornment>,
-                            }}
-                            InputLabelProps={{
-                                style: {
-                                    width: '100%',
-                                    fontWeight: 400,
-                                    fontSize: '16px',
-                                    lineHeight: '20px',
-                                    color: 'rgb(191, 192, 198)',
-                                }, // Add your styles here
-                            }}
-                        />
-                    </div>
                     <div
                         style={{
                             display: 'block',
@@ -706,7 +735,7 @@ const Step1: FC = (props: any) => {
                                 // boxShadow: 'rgb(76, 189, 148) 0px -2px inset',
                             }}
                         >
-                            Next, add address
+                            {propertyTypeActive === 'Residential' ? 'Next, add address' : 'Next add property details'}
                         </button>
                     </div>
                 </div>
