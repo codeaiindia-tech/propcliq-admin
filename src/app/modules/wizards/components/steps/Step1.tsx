@@ -11,6 +11,13 @@ import { string } from 'yup';
 import InputAdornment from '@mui/material/InputAdornment';
 import { IconButton } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Select from 'react-select';
+import SaveStep1 from '../../../../utils/authentication.tsx';
+
 const Step1: FC = (props: any) => {
   const propertyTypes = ['Residential', 'Commercial'];
   const lookingIntoMenuItems = ['Rent', 'Sell', 'PG/Co-living'];
@@ -26,6 +33,11 @@ const Step1: FC = (props: any) => {
   const bathRoomMenuItems = ['1', '2', '3', '4'];
   const balconyMenuItems = ['0', '1', '2', '3', '4'];
   const furnishTypeMenuItems = ['Fully Furnished', 'Semi Furnished', 'Unfurnished'];
+  const amenitieseMenuItems = [
+    { value: 'Dining', label: 'Dining Table' },
+    { value: 'Sofa', label: 'Sofa' },
+    { value: 'Fridge', label: 'Fridge' },
+  ];
   const coveredParkingMenuItems = ['1', '2', '3', '3+'];
   const openParkingMenuItems = ['1', '2', '3', '3+'];
   const tenantTypeMenuItems = ['Family', 'Bachelors', 'Company'];
@@ -33,6 +45,7 @@ const Step1: FC = (props: any) => {
   const securityDeposit = ['None', '1 month', '2 month', 'Custom'];
   const lockInPeriod = ['None', '1 month', '2 month', 'Custom'];
   const broKerage = ['None', '1 month', '2 month', 'Custom'];
+
   // Property Type
   const [propertyTypeMenu, setPropertyTypeMenu] = useState(propertyTypes);
   const [propertyTypeActive, setPropertyTypeActive] = useState('');
@@ -61,6 +74,8 @@ const Step1: FC = (props: any) => {
   const [furnishTypeMenu, setFurnishTypeMenu] = useState(furnishTypeMenuItems);
   const [furnishTypeActive, setFurnishTypeActive] = useState('');
   const [furnishTypeError, setFurnishTypeError] = useState('');
+  // Amenties Menu
+  const [amentiesError, setAmentiestError] = useState('');
   // Covered Parking Menu
   const [coveredParkingMenu, setCoveredParkingMenu] = useState(coveredParkingMenuItems);
   const [coveredParkingActive, setCoveredParkingActive] = useState('');
@@ -88,7 +103,8 @@ const Step1: FC = (props: any) => {
   const [builtUpArea, setBuiltUpArea] = useState('');
   const [builtUpError, setBuiltUpError] = useState('');
   // Calender Menu
-  const [showCalender, setShowCalender] = useState(false);
+  const [availableFrom, setAvailableFrom] = useState('');
+  const [availableFromDateError, setAvailableFromDateError] = useState('');
 
   useEffect(() => {
     let look =
@@ -209,42 +225,8 @@ const Step1: FC = (props: any) => {
     setBalconyMenu(balconys);
   };
 
-  // const handleSubmitFirstStep = () => {
-  //   if (!propertyTypeActive) {
-  //     setPropertyTypeError('Please select the category');
-  //   }
-  //   if (!lookingIntoActive) {
-  //     setLookingIntoError('Please select the purpose');
-  //   }
-  //   if (!propertyTypeGroupActive) {
-  //     setPropertyTypeGroupError('Please select the property type');
-  //   }
-  //   if (!bhkActive) {
-  //     setBhkError('Please select the BHK');
-  //   }
-  //   if (!bathRoomActive) {
-  //     setBathRoomError('Please select the bathroom count');
-  //   }
-  //   if (!balconyActive) {
-  //     setBalconyError('Please select the balcony count');
-  //   }
-  //   if (!furnishTypeActive) {
-  //     setFurnishTypeError('Please select the furnish type');
-  //   }
-  //   if (!coveredParkingActive) {
-  //     setCoveredParkingeError('Please select the covered parking');
-  //   }
-  //   if (!openParkingMenuActive) {
-  //     setOpenParkingError('Please select the open  parking');
-  //   }
-  //   if (!tenantTypeActive) {
-  //     setTenantTypeError('Please select the select tenant type');
-  //   }
-
-  //   return;
-  // };
-
   const handleSubmitFirstStep = () => {
+    console.log('availableFrom', availableFrom);
     const errors = {
       propertyTypeActive: !propertyTypeActive ? 'Please select the category' : '',
       lookingIntoActive: !lookingIntoActive ? 'Please select the purpose' : '',
@@ -261,6 +243,7 @@ const Step1: FC = (props: any) => {
       lockInPeriodActive: !lockInPeriodActive ? 'Please select the lock-in period' : '',
       broKerageActive: !broKerageActive ? 'Please select the brokerage' : '',
       builtUpArea: !builtUpArea ? 'Saleable area should be between 150 and 1500' : '',
+      // availableFrom: !availableFrom ? 'Please enter valid date' : '',
     };
 
     // Update state with errors
@@ -279,14 +262,46 @@ const Step1: FC = (props: any) => {
     setLockInPeriodError(errors.lockInPeriodActive);
     setBroKerageError(errors.broKerageActive);
     setBuiltUpError(errors.builtUpArea);
+    // setAvailableFromDateError(errors.availableFrom);
     // Check if any error exists
     for (const error in errors) {
       if (errors[error]) {
         return;
       }
     }
+    const data = {
+      category: propertyTypeActive,
+      service: lookingIntoActive,
+      property_type: propertyTypeGroupActive,
+      age_of_property: '10',
+      bhk: '3',
+      bathroom: '3',
+      balcony: '4',
+      furnish_type: 'Fully-furnish',
+      additional_furnish_type: ['AC', 'Geyser'],
+      covered_parking: '1',
+      open_parking: '1',
+      preferred_tenant_type: 'Family',
+      available_from: '01/02/2024',
+      monthly_rent: '30000',
+      maintenance_charges: '6500',
+      security_deposit: '1 Month',
+      lock_in_period: '6 Months',
+      brokerage: '30 days',
+      built_up_area: '1000 sq .ft.',
+      carpet_area: '1000 sq. ft.',
+      additional_details: {
+        parking_charges: 'include in rent',
+        painting_charges: '1 Month',
+        facing: 'North',
+        address: 'Greater Noida',
+        servant_room: 'No',
+        rera_no: 'RERA001002003',
+        property_description: 'Near Yamuna Experessway',
+      },
+    };
+    SaveStep1(data);
     props.handleSubmitStep1();
-    // Proceed with form submission or other actions
   };
 
   return (
@@ -318,7 +333,7 @@ const Step1: FC = (props: any) => {
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
-              lookingIntoMenu <span className='mandatoryMarker'>*</span>
+              Looking to <span className='mandatoryMarker'>*</span>
             </div>
             <div className='d-flex' style={{ gap: '16px' }}>
               {lookingIntoMenu.map((val, index) => {
@@ -404,7 +419,9 @@ const Step1: FC = (props: any) => {
                     label={val}
                     active={val === bhkActive}
                     handleClick={() => {
-                      val !== '3+BHK' ? setBhkActive(val) : handleInsertBHKMenuItems();
+                      val !== '3+BHK'
+                        ? (setBhkActive(val), setBhkError(''))
+                        : handleInsertBHKMenuItems();
                     }}
                   />
                 );
@@ -426,6 +443,7 @@ const Step1: FC = (props: any) => {
                     active={val === bathRoomActive}
                     handleClick={() => {
                       setBathRoomActive(val);
+                      setBathRoomError('');
                     }}
                   />
                 );
@@ -448,6 +466,7 @@ const Step1: FC = (props: any) => {
                     active={val === balconyActive}
                     handleClick={() => {
                       setBalconyActive(val);
+                      setBalconyError('');
                     }}
                   />
                 );
@@ -470,11 +489,19 @@ const Step1: FC = (props: any) => {
                     active={val === furnishTypeActive}
                     handleClick={() => {
                       setFurnishTypeActive(val);
+                      setFurnishTypeError('');
                     }}
                   />
                 );
               })}
             </div>
+            {furnishTypeError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{furnishTypeError}</div>
+            )}
+          </div>
+          <div className='add_property-group' style={{ marginTop: '30px' }}>
+            <div className='label_for_label py-6'>Add Furnishings / Amenities</div>
+            <Select options={amenitieseMenuItems} isMulti />
             {furnishTypeError && (
               <div style={{ color: '#e02727', padding: '10px 0px' }}>{furnishTypeError}</div>
             )}
@@ -492,7 +519,7 @@ const Step1: FC = (props: any) => {
                     active={val === coveredParkingActive}
                     handleClick={() => {
                       val !== '3+'
-                        ? setCoveredParkingActive(val)
+                        ? (setCoveredParkingActive(val), setCoveredParkingeError(''))
                         : handleInsertCoveredParkingMenuItems();
                     }}
                   />
@@ -516,7 +543,7 @@ const Step1: FC = (props: any) => {
                     active={val === openParkingMenuActive}
                     handleClick={() => {
                       val !== '3+'
-                        ? setOpenParkingMenuActive(val)
+                        ? (setOpenParkingMenuActive(val), setOpenParkingError(''))
                         : handleInsertOpenParkingMenuItems();
                     }}
                   />
@@ -540,6 +567,7 @@ const Step1: FC = (props: any) => {
                     active={val === tenantTypeActive}
                     handleClick={() => {
                       settenantTypeActive(val);
+                      setTenantTypeError('');
                     }}
                   />
                 );
@@ -550,9 +578,23 @@ const Step1: FC = (props: any) => {
             )}
           </div>
           <div className='add_property-group' style={{ marginTop: '30px' }}>
-            <DatePickerInput />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DatePicker']}>
+                <DatePicker
+                  label='Available From'
+                  className='data_container-component'
+                  value={availableFrom}
+                  onChange={() => {
+                    (newValue: any) => setAvailableFrom(newValue);
+                    // setAvailableFromDateError('');
+                  }}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+            {availableFromDateError && (
+              <div style={{ color: '#e02727', padding: '10px 0px' }}>{availableFromDateError}</div>
+            )}
           </div>
-
           {lookingIntoActive === 'Rent' && (
             <div className='add_property-group' style={{ marginTop: '30px' }}>
               <TextField
@@ -561,7 +603,7 @@ const Step1: FC = (props: any) => {
                 label='Monthly Rent'
                 variant='standard'
                 className='age_property'
-                inputProps={{ maxLength: 2 }}
+                inputProps={{ maxLength: 6 }}
                 InputLabelProps={{
                   style: {
                     width: '100%',
@@ -587,6 +629,7 @@ const Step1: FC = (props: any) => {
                     active={val === mainTenanceActive}
                     handleClick={() => {
                       setMainTenanceActive(val);
+                      setMainTenanceError('');
                     }}
                   />
                 );
@@ -621,6 +664,7 @@ const Step1: FC = (props: any) => {
                     active={val === securityDepositActive}
                     handleClick={() => {
                       setSecurityDepositActive(val);
+                      setSecurityDepositError('');
                     }}
                   />
                 );
@@ -630,6 +674,17 @@ const Step1: FC = (props: any) => {
               <div style={{ color: '#e02727', padding: '10px 0px' }}>{securityDepositError}</div>
             )}
           </div>
+          {securityDepositActive === 'Custom' && (
+            <div className='add_property-group' style={{ marginTop: '30px' }}>
+              <TextField
+                required
+                id='standard-basic'
+                label='Security Deposit'
+                variant='standard'
+                className='age_property'
+              />
+            </div>
+          )}
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
               Lock-in Period<span className='mandatoryMarker'>*</span>
@@ -643,6 +698,7 @@ const Step1: FC = (props: any) => {
                     active={val === lockInPeriodActive}
                     handleClick={() => {
                       setLockInPeriodActive(val);
+                      setLockInPeriodError('');
                     }}
                   />
                 );
@@ -652,6 +708,18 @@ const Step1: FC = (props: any) => {
               <div style={{ color: '#e02727', padding: '10px 0px' }}>{lockInPeriodError}</div>
             )}
           </div>
+
+          {lockInPeriodActive === 'Custom' && (
+            <div className='add_property-group' style={{ marginTop: '30px' }}>
+              <TextField
+                required
+                id='standard-basic'
+                label='Lock in Period'
+                variant='standard'
+                className='age_property'
+              />
+            </div>
+          )}
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <div className='label_for_label'>
               Do you charge brokerage?<span className='mandatoryMarker'>*</span>
@@ -665,6 +733,7 @@ const Step1: FC = (props: any) => {
                     active={val === broKerageActive}
                     handleClick={() => {
                       setBroKerageActive(val);
+                      setBroKerageError('');
                     }}
                   />
                 );
@@ -674,6 +743,17 @@ const Step1: FC = (props: any) => {
               <div style={{ color: '#e02727', padding: '10px 0px' }}>{broKerageError}</div>
             )}
           </div>
+          {broKerageActive === 'Custom' && (
+            <div className='add_property-group' style={{ marginTop: '30px' }}>
+              <TextField
+                required
+                id='standard-basic'
+                label='Brokerage (in Rupees)'
+                variant='standard'
+                className='age_property'
+              />
+            </div>
+          )}
           <div className='add_property-group' style={{ marginTop: '30px' }}>
             <TextField
               required
