@@ -11,7 +11,8 @@ import { string } from 'yup';
 import InputAdornment from '@mui/material/InputAdornment';
 import { IconButton } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-const Step1: FC = (props: any) => {
+
+const Step1: FC<any> = (props: any) => {
     const propertyTypes = ['Residential', 'Commercial'];
     const lookingIntoMenuItems = ['Rent', 'Sell', 'PG/Co-living'];
     const commPropertyTypeGroupMenuItems = ['Office', 'Retail Shop', 'Showroom', 'Warehouse', 'Plot', 'Others'];
@@ -234,6 +235,9 @@ const Step1: FC = (props: any) => {
 
     //   return;
     // };
+    const handleNavigationMenu = (val: string) => {
+        props.handleCommSubmitStep1(val);
+    };
 
     const handleSubmitFirstStep = () => {
         const errors = {
@@ -276,6 +280,7 @@ const Step1: FC = (props: any) => {
         //         return;
         //     }
         // }
+
         props.handleSubmitStep1();
         // Proceed with form submission or other actions
     };
@@ -295,6 +300,7 @@ const Step1: FC = (props: any) => {
                                     <RadioButtonBox
                                         label={val}
                                         handleClick={() => {
+                                            handleNavigationMenu(val);
                                             setPropertyTypeActive(val);
                                             setPropertyTypeError('');
                                         }}
@@ -327,7 +333,7 @@ const Step1: FC = (props: any) => {
                     </div>
                     <div className="add_property-group" style={{ marginTop: '30px' }}>
                         <div className="label_for_label">
-                            PropertyType <span className="mandatoryMarker">*</span>
+                            Property Category <span className="mandatoryMarker">*</span>
                         </div>
                         <div className="d-flex flex-wrap" style={{ gap: '16px' }}>
                             {propertyTypeActive === 'Residential' || propertyTypeActive === null || propertyTypeActive === ''
