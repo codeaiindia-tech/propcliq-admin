@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { KTIcon } from '../../../../../_metronic/helpers';
 import { ErrorMessage, Field } from 'formik';
-import PropertyForm from './property';
 import { TextField, Button, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 

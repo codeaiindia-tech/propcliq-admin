@@ -268,11 +268,11 @@ const Step1: FC = (props: any) => {
         setBroKerageError(errors.broKerageActive);
         setBuiltUpError(errors.builtUpArea);
         // Check if any error exists
-        for (const error in errors) {
-            if (errors[error]) {
-                return;
-            }
-        }
+        // for (const error in errors) {
+        //     if (errors[error]) {
+        //         return;
+        //     }
+        // }
         props.handleSubmitStep1();
         // Proceed with form submission or other actions
     };

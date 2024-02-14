@@ -11,7 +11,7 @@ const DatePickerInput = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = React.useRef(null);
 
-    const handleDateChange = (date) => {
+    const handleDateChange = (date:any) => {
         setSelectedDate(date);
         setOpen(false);
     };
@@ -29,7 +29,7 @@ const DatePickerInput = () => {
             <TextField
                 ref={anchorRef}
                 label="Select Date"
-                value={selectedDate ? selectedDate.toLocaleDateString() : ''}
+                value={selectedDate ? new Date(selectedDate).toLocaleDateString() : ''}
                 onFocus={handleClick}
                 InputProps={{
                     endAdornment: (

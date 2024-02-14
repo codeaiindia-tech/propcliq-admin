@@ -14,7 +14,7 @@ const MyComponent = () => {
             }}
         >
             {({ values, setValues }) => (
-                <Form>
+                <Form placeholder={'Basic Form'}>
                     {/* Use a <div> element as an input field */}
                     <div
                         contentEditable
