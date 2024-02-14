@@ -29,7 +29,7 @@ const Step1: FC = (props: any) => {
     const broKerage = ['None', '1 month', '2 month', 'Custom'];
     // Property Type
     const [propertyTypeMenu, setPropertyTypeMenu] = useState(propertyTypes);
-    const [propertyTypeActive, setPropertyTypeActive] = useState('');
+    const [propertyTypeActive, setPropertyTypeActive] = useState('Residential');
     const [propertyTypeError, setPropertyTypeError] = useState('');
     // Looking Into Menu
     const [lookingIntoMenu, setLookingInto] = useState(lookingIntoMenuItems);
