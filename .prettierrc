@@ -1,0 +1,39 @@
+{
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.jsxBracketSameLine": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "prettier.trailingComma": "es5",
+
+  "prettier.printWidth": 100,
+
+  "editor.tabSize": 4,
+
+  "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+
+  "files.autoSave": "afterDelay",
+
+  "editor.tabCompletion": "on",
+
+  "workbench.iconTheme": "material-icon-theme",
+
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+
+    "typescript": "typescriptreact"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.ignoreRebaseWarning": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.formatOnSave": true
+}
