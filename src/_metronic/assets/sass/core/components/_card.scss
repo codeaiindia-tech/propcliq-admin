@@ -3,15 +3,15 @@
 //
 
 // Base
-.card {    
+.card {
     --#{$prefix}card-box-shadow: var(--#{$prefix}root-card-box-shadow);
     --#{$prefix}card-border-color: var(--#{$prefix}root-card-border-color);
 
-    @if ($card-border-enabled)  {
+    @if ($card-border-enabled) {
         border: $card-border-width $card-border-style var(--#{$prefix}card-border-color);
     } @else {
         border: 0;
-    }  
+    }
 
     // Header
     .card-header {
@@ -77,7 +77,12 @@
             }
 
             // Headings
-            h1, h2, h3, h4, h5, h6 {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
                 margin-bottom: 0;
             }
         }
@@ -168,7 +173,7 @@
             border-top: 0 !important;
         }
     }
-    
+
     // Enable shadow
     &.card-shadow {
         box-shadow: var(--#{$prefix}card-box-shadow);
@@ -212,8 +217,8 @@
 // Responsive stretch heights
 .card {
     @each $breakpoint in map-keys($grid-breakpoints) {
-    	@include media-breakpoint-up($breakpoint) {
-    		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        @include media-breakpoint-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
             // Stretch
             &.card#{$infix}-stretch {
@@ -230,7 +235,7 @@
                 height: calc(50% - var(--#{$prefix}gutter-y));
             }
 
-             // Stretch 33
+            // Stretch 33
             &.card#{$infix}-stretch-33 {
                 height: calc(33.333% - var(--#{$prefix}gutter-y));
             }
@@ -245,7 +250,7 @@
                 padding-top: 0 !important;
                 padding-bottom: 0 !important;
                 align-items: stretch;
-    
+
                 .card-toolbar {
                     margin: 0;
                     align-items: stretch;

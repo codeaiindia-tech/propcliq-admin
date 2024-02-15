@@ -25,16 +25,16 @@
 
         &::before,
         &::after {
-            content: " ";
+            content: ' ';
             width: 50%;
             border-bottom: 1px solid var(--#{$prefix}border-color);
         }
 
-        &::before{
+        &::before {
             margin-right: 1.25rem;
         }
 
-        &::after{
+        &::after {
             margin-left: 1.25rem;
         }
 
@@ -55,10 +55,10 @@
         }
 
         @each $color, $value in $theme-colors {
-            &.border-#{$color}{
+            &.border-#{$color} {
                 &::before,
                 &::after {
-                    border-color: $value !important; 
+                    border-color: $value !important;
                 }
             }
         }

@@ -58,14 +58,14 @@
     }
 }
 
-.jstree-open>.jstree-anchor>.fa-folder:before {
+.jstree-open > .jstree-anchor > .fa-folder:before {
     margin-left: 2px;
-    content: "\f07c";
+    content: '\f07c';
 }
 
-.jstree-open>.jstree-anchor>.la-folder:before {
+.jstree-open > .jstree-anchor > .la-folder:before {
     margin-left: 2px;
-    content: "\f200";
+    content: '\f200';
 }
 
 .jstree-default.jstree-rtl .jstree-node {
@@ -118,7 +118,7 @@
         }
     }
 
-    .vakata-context-hover>a,
+    .vakata-context-hover > a,
     li a:hover {
         margin: 0;
         background-color: var(--#{$prefix}gray-100);

@@ -7,48 +7,48 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 const DatePickerInput = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [open, setOpen] = useState(false);
-  const anchorRef = React.useRef(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [open, setOpen] = useState(false);
+    const anchorRef = React.useRef(null);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setOpen(false);
-  };
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
+        setOpen(false);
+    };
 
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
+    const handleClick = () => {
+        setOpen((prev) => !prev);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  return (
-    <div>
-      <TextField
-        ref={anchorRef}
-        label='Select Date'
-        value={selectedDate ? selectedDate.toLocaleDateString() : ''}
-        onFocus={handleClick}
-        InputProps={{
-          endAdornment: (
-            <IconButton onClick={handleClick} aria-label='calendar' edge='end'>
-              <CalendarTodayIcon />
-            </IconButton>
-          ),
-        }}
-        fullWidth
-      />
-      {open && (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={['DatePicker']}>
-            <DatePicker />
-          </DemoContainer>
-        </LocalizationProvider>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <TextField
+                ref={anchorRef}
+                label="Select Date"
+                value={selectedDate ? new Date(selectedDate).toLocaleDateString() : ''}
+                onFocus={handleClick}
+                InputProps={{
+                    endAdornment: (
+                        <IconButton onClick={handleClick} aria-label="calendar" edge="end">
+                            <CalendarTodayIcon />
+                        </IconButton>
+                    ),
+                }}
+                fullWidth
+            />
+            {open && (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={['DatePicker']}>
+                        <DatePicker />
+                    </DemoContainer>
+                </LocalizationProvider>
+            )}
+        </div>
+    );
 };
 
 export default DatePickerInput;

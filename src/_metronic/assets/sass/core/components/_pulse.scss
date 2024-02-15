@@ -2,7 +2,6 @@
 // Pulse
 //
 
-
 // Base
 .pulse {
     position: relative;
@@ -28,12 +27,23 @@
     opacity: 0;
     border-width: 3px;
     border-style: solid;
-    border-color: var(--#{$prefix}gray-500);	
+    border-color: var(--#{$prefix}gray-500);
 }
 
 @keyframes animation-pulse {
-    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-    60% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-    65% {opacity: 1;}
-    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+    0% {
+        -webkit-transform: scale(0.1, 0.1);
+        opacity: 0;
+    }
+    60% {
+        -webkit-transform: scale(0.1, 0.1);
+        opacity: 0;
+    }
+    65% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(1.2, 1.2);
+        opacity: 0;
+    }
 }

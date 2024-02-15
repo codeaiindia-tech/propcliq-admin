@@ -2,7 +2,7 @@
 // Fullcalendar plugin customization: https://fullcalendar.io/
 //
 
-body {    
+body {
     --fc-event-border-color: var(--#{$prefix}primary);
     --fc-event-bg-color: var(--#{$prefix}primary);
     --fc-event-text-color: var(--#{$prefix}primary-inverse);
@@ -17,11 +17,11 @@ body {
 
     // General
     --fc-highlight-color: var(--#{$prefix}light);
-    //--fc-non-business-color: 
+    //--fc-non-business-color:
     //--fc-bg-event-color:
     --fc-bg-event-opacity: 0.3;
     --fc-neutral-bg-color: var(--#{$prefix}light);
-    //--fc-event-selected-overlay-color: 
+    //--fc-event-selected-overlay-color:
     --fc-today-bg-color: var(--#{$prefix}success-light);
     //--fc-neutral-bg-color:
     //--fc-neutral-text-color:
@@ -34,9 +34,9 @@ body {
     --fc-button-text-color: var(--#{$prefix}gray-600);
     --fc-button-bg-color: var(--#{$prefix}gray-100);
     --fc-button-border-color: var(--#{$prefix}gray-100);
-    
-    --fc-button-hover-bg-color:  var(--#{$prefix}gray-100);
-    --fc-button-hover-border-color:  var(--#{$prefix}gray-100);
+
+    --fc-button-hover-bg-color: var(--#{$prefix}gray-100);
+    --fc-button-hover-border-color: var(--#{$prefix}gray-100);
 
     --fc-button-active-bg-color: var(--#{$prefix}gray-200);
     --fc-button-active-border-color: var(--#{$prefix}gray-200);
@@ -44,10 +44,10 @@ body {
     // Table
     table {
         font-size: 1rem;
-    }     
+    }
 
     // Button
-    .fc-button { 
+    .fc-button {
         padding: 0.75rem 1.25rem;
         box-shadow: none !important;
         border: 0 !important;
@@ -78,7 +78,7 @@ body {
                 }
             }
         }
-        
+
         &:not(:disabled).fc-button-active {
             color: var(--#{$prefix}gray-900);
 
@@ -106,12 +106,12 @@ body {
     .fc-col-header-cell {
         padding: 0.75rem 0.5rem;
 
-        .fc-col-header-cell-cushion  {            
+        .fc-col-header-cell-cushion {
             font-size: 1.1rem;
             font-weight: $font-weight-semibold;
             color: var(--#{$prefix}gray-800);
         }
-    }    
+    }
 
     // Border radius
     .fc-scrollgrid {
@@ -177,7 +177,7 @@ body {
     .fc-daygrid-event-dot {
         margin-left: 0.5rem;
         margin-right: 0.1rem;
-    }        
+    }
 
     // Popover
     .fc-popover {
@@ -190,7 +190,7 @@ body {
             @include border-top-radius($dropdown-border-radius);
             padding: 0.65rem 0.75rem;
             background-color: var(--#{$prefix}tooltip-bg);
-            
+
             .fc-popover-title {
                 color: var(--#{$prefix}gray-800);
                 font-size: 1rem;
@@ -207,7 +207,7 @@ body {
             }
         }
 
-        .fc-popover-body  {
+        .fc-popover-body {
             padding: 0.5rem 0.75rem 0.75rem 0.75rem;
         }
     }
@@ -224,7 +224,7 @@ body {
     }
 
     // List
-    .fc-list-day-cushion, 
+    .fc-list-day-cushion,
     .fc-list-table td {
         padding: 0.85rem 1.15rem;
     }
@@ -253,7 +253,7 @@ body {
         padding-right: 0;
     }
 
-    // Main 
+    // Main
     .fc-timegrid-event .fc-event-main {
         padding: 0.25rem 0.25rem;
     }
@@ -273,7 +273,7 @@ body {
 @include media-breakpoint-down(md) {
     .fc {
         // Header toolbar
-        .fc-header-toolbar {   
+        .fc-header-toolbar {
             flex-direction: column;
             align-items: flex-start;
 
@@ -290,8 +290,8 @@ body {
                 &:nth-child(2),
                 &:nth-child(1) {
                     margin-bottom: 1rem;
-                } 
-            }            
+                }
+            }
         }
     }
 }

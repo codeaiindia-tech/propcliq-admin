@@ -5,30 +5,30 @@ import { useIntl } from 'react-intl';
 import { KTIcon, toAbsoluteUrl } from '../../../helpers';
 import { Link } from 'react-router-dom';
 export function MenuInner() {
-  const intl = useIntl();
-  return (
-    <>
-      {/* Menu item have to change here */}
-      <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
-      <MenuItem title='Leads' to='/leads' />
-      <MenuItem title='Listings' to='/listings' />
-      <MenuItem title='Packages' to='/packages' />
-      <MenuItem title='More' to='/more' />
-      <Link to='/addproperty'>
-        <div className='d-flex'>
-          <a
-            className='btn bg-body btn-active-color-primary fs-6'
-            id='kt_toolbar_primary_button'
-            data-bs-theme='light'
-            // onClick={() => setShowCreateAppModal(true)}
-          >
-            <KTIcon iconName='plus' className='text-primary' />
-            Add Property
-          </a>
-        </div>
-      </Link>
+    const intl = useIntl();
+    return (
+        <>
+            {/* Menu item have to change here */}
+            <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to="/dashboard" />
+            <MenuItem title="Leads" to="/leads" />
+            <MenuItem title="Listings" to="/listings" />
+            <MenuItem title="Packages" to="/packages" />
+            <MenuItem title="More" to="/more" />
+            <Link to="/addproperty">
+                <div className="d-flex">
+                    <a
+                        className="btn bg-body btn-active-color-primary fs-6"
+                        id="kt_toolbar_primary_button"
+                        data-bs-theme="light"
+                        // onClick={() => setShowCreateAppModal(true)}
+                    >
+                        <KTIcon iconName="plus" className="text-primary" />
+                        Add Property
+                    </a>
+                </div>
+            </Link>
 
-      {/* <MenuInnerWithSub
+            {/* <MenuInnerWithSub
         title='Leads'
         to='/crafted'
         menuPlacement='bottom-start'
@@ -138,6 +138,6 @@ export function MenuInner() {
       >
         <MegaMenu />
       </MenuInnerWithSub> */}
-    </>
-  );
+        </>
+    );
 }

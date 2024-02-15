@@ -2,7 +2,7 @@
 // Scrolltop
 //
 
-.scrolltop {    
+.scrolltop {
     position: fixed;
     display: none;
     cursor: pointer;
@@ -12,7 +12,7 @@
     width: $scrolltop-size;
     height: $scrolltop-size;
     bottom: $scrolltop-bottom;
-    right: $scrolltop-end;    
+    right: $scrolltop-end;
     background-color: var(--#{$prefix}scrolltop-bg-color);
     box-shadow: var(--#{$prefix}scrolltop-box-shadow);
     opacity: $scrolltop-opacity;
@@ -38,9 +38,9 @@
         }
     }
 
-    [data-kt-scrolltop="on"] & {
+    [data-kt-scrolltop='on'] & {
         opacity: var(--#{$prefix}scrolltop-opacity-on);
-        animation: animation-scrolltop .4s ease-out 1;
+        animation: animation-scrolltop 0.4s ease-out 1;
         display: flex;
 
         &:hover {
@@ -48,15 +48,13 @@
             opacity: var(--#{$prefix}scrolltop-opacity-hover);
         }
     }
-
-    
 }
 
 // Tablet & Mobile Modess
 @include media-breakpoint-down(lg) {
-    .scrolltop { 
+    .scrolltop {
         bottom: $scrolltop-bottom-mobile;
-        right: $scrolltop-end-mobile;    
+        right: $scrolltop-end-mobile;
         width: $scrolltop-size-mobile;
         height: $scrolltop-size-mobile;
     }
@@ -64,6 +62,10 @@
 
 // Animations
 @keyframes animation-scrolltop {
-    from   { margin-bottom: -15px; }
-    to {  margin-bottom: 0; }
+    from {
+        margin-bottom: -15px;
+    }
+    to {
+        margin-bottom: 0;
+    }
 }

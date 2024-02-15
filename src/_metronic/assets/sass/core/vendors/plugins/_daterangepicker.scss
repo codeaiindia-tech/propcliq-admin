@@ -2,7 +2,6 @@
 // Bootstrap Daterangepicker plugin customization: https://www.daterangepicker.com
 //
 
-
 // Base
 .daterangepicker {
     padding: 0;
@@ -73,7 +72,7 @@
     }
 
     &.show-calendar {
-        .ranges {            
+        .ranges {
             @include border-radius(0);
             @include border-top-start-radius($dropdown-border-radius);
             margin-top: 0;
@@ -83,7 +82,7 @@
 
     &.show-ranges {
         &.show-calendar {
-            .ranges  {
+            .ranges {
                 border-right: 1px solid var(--#{$prefix}gray-200);
             }
         }
@@ -97,7 +96,7 @@
         padding: 1rem 1.75rem;
         border-top: 1px solid var(--#{$prefix}gray-200);
 
-       .btn {
+        .btn {
             font-size: 1rem;
             font-weight: $font-weight-semibold;
             padding: 0.5rem 1rem;

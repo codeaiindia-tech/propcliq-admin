@@ -12,8 +12,8 @@
 
 // Tablet & mobile modes
 @include media-breakpoint-down(lg) {
-	.app-layout-builder-toggle { 
-		bottom: $app-layout-builder-toggle-bottom-mobile;
+    .app-layout-builder-toggle {
+        bottom: $app-layout-builder-toggle-bottom-mobile;
         right: $app-layout-builder-toggle-end-mobile;
-	}
+    }
 }

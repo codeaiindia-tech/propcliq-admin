@@ -2,7 +2,6 @@
 // SVG Icon
 //
 
-
 @mixin svg-icon-size($size, $important: false) {
     svg {
         height: $size valueif($important, !important, null);

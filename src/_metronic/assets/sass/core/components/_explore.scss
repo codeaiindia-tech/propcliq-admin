@@ -2,20 +2,20 @@
 // Explore(used for demo product demo)
 //
 
-$explore-primary: #00B2FF;
-$explore-primary-light: #F1FAFF;
-$explore-primary-active: #0098DA;
+$explore-primary: #00b2ff;
+$explore-primary-light: #f1faff;
+$explore-primary-active: #0098da;
 $explore-primary-inverse: $white;
 
-$explore-success: #50CD89;
-$explore-success-light: #E8FFF3;
-$explore-success-active: #47BE7D;
+$explore-success: #50cd89;
+$explore-success-light: #e8fff3;
+$explore-success-active: #47be7d;
 $explore-success-inverse: $white;
 
-$explore-warning: #FFC700;
+$explore-warning: #ffc700;
 $explore-warning-inverse: $white;
 
-$explore-danger: #F1416C;
+$explore-danger: #f1416c;
 $explore-warning-inverse: $white;
 
 .explore-btn-toggle {
@@ -30,7 +30,7 @@ $explore-warning-inverse: $white;
     }
 }
 
-.explore-btn-dismiss {	
+.explore-btn-dismiss {
     border: 0;
 
     &:hover {
@@ -41,8 +41,8 @@ $explore-warning-inverse: $white;
     }
 }
 
-.explore-btn-primary {	
-	border: 0;
+.explore-btn-primary {
+    border: 0;
     color: $explore-primary-inverse;
     background-color: $explore-primary;
 
@@ -52,8 +52,8 @@ $explore-warning-inverse: $white;
     }
 }
 
-.explore-btn-secondary {	
-	border: 0;
+.explore-btn-secondary {
+    border: 0;
     color: var(--#{$prefix}gray-600);
     background-color: var(--#{$prefix}gray-100);
 
@@ -73,7 +73,7 @@ $explore-warning-inverse: $white;
     }
 }
 
-.explore-link {	
+.explore-link {
     color: $explore-primary;
 
     &:hover {
@@ -81,15 +81,15 @@ $explore-warning-inverse: $white;
     }
 }
 
-.explore-link-hover:hover {	
+.explore-link-hover:hover {
     color: $explore-primary !important;
 }
 
-.explore-icon-success {	
+.explore-icon-success {
     color: $explore-success;
 }
 
-.explore-icon-danger {	
+.explore-icon-danger {
     color: $explore-danger;
 }
 
