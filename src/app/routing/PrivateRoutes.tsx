@@ -8,6 +8,7 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils';
 import { WithChildren } from '../../_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import AddProperty from '../pages/AddProperty/addProperty';
+import ListPropertyPage from '../pages/ListProperty/PropertyList'
 
 const PrivateRoutes = () => {
     const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -27,6 +28,7 @@ const PrivateRoutes = () => {
                 <Route path="addproperty" element={<AddProperty />} />
                 <Route path="builder" element={<BuilderPageWrapper />} />
                 <Route path="menu-test" element={<MenuTestPage />} />
+                <Route path='housing-List' element={<ListPropertyPage />} />
                 {/* Lazy Modules */}
                 <Route
                     path="crafted/pages/profile/*"
