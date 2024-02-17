@@ -22,7 +22,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import Select from "react-select";
+import Select, { MultiValue } from "react-select";
 import SaveStep1 from "../../../../utils/authentication.tsx";
 
 const Step1: FC<any> = (props: any) => {
@@ -83,6 +83,10 @@ const Step1: FC<any> = (props: any) => {
   const [commPropertyTypeGroupActive, setCommPropertyTypeGroupActive] =
     useState("");
   const [propertyTypeGroupError, setPropertyTypeGroupError] = useState("");
+  // Age of Property
+  const [ageOfProperty, setAgeOfProperty] = useState("");
+  // Monthly Rent
+  const [monthlyRent, setMonthlyRent] = useState("");
   // BHK Menu
   const [bhkMenu, setBhkMenu] = useState(bhkMenuItems);
   const [bhkActive, setBhkActive] = useState("");
@@ -100,6 +104,11 @@ const Step1: FC<any> = (props: any) => {
   const [furnishTypeActive, setFurnishTypeActive] = useState("");
   const [furnishTypeError, setFurnishTypeError] = useState("");
   // Amenties Menu
+  const [selectedAmenties, setSelectedAmenties] = useState<MultiValue<{
+    value: string;
+    label: string;
+  }> | null>(null);
+
   const [amentiesError, setAmentiestError] = useState("");
   // Covered Parking Menu
   const [coveredParkingMenu, setCoveredParkingMenu] = useState(
@@ -110,6 +119,7 @@ const Step1: FC<any> = (props: any) => {
   // Open Parking Menu
   const [openParkingMenu, setOpenParkingMenuMenu] =
     useState(openParkingMenuItems);
+
   const [openParkingMenuActive, setOpenParkingMenuActive] = useState("");
   const [openParkingError, setOpenParkingError] = useState("");
   //  Tenant Type
@@ -118,18 +128,24 @@ const Step1: FC<any> = (props: any) => {
   // Maintenance Type
   const [mainTenanceActive, setMainTenanceActive] = useState("");
   const [mainTenanceError, setMainTenanceError] = useState("");
+  const [mainTenanceCharges, setMainTenanceCharges] = useState("");
   // Security Deposit Type
   const [securityDepositActive, setSecurityDepositActive] = useState("");
   const [securityDepositError, setSecurityDepositError] = useState("");
+  const [securityDepositCharges, setSecurityDepositCharges] = useState("");
   // Lock In Period Type
   const [lockInPeriodActive, setLockInPeriodActive] = useState("");
   const [lockInPeriodError, setLockInPeriodError] = useState("");
+  const [lockInPeriodCharges, setLockInPeriodCharges] = useState("");
   // Brokerrage Active Type
   const [broKerageActive, setBroKerageActive] = useState("");
   const [broKerageError, setBroKerageError] = useState("");
+  const [broKerageCharges, setBroKerageCharges] = useState("");
   // Built Up Area
   const [builtUpArea, setBuiltUpArea] = useState("");
   const [builtUpError, setBuiltUpError] = useState("");
+  // Carpet Area
+  const [carpetArea, setCarpetArea] = useState("");
   // Calender Menu
   const [availableFrom, setAvailableFrom] = useState("");
   const [availableFromDateError, setAvailableFromDateError] = useState("");
@@ -336,23 +352,34 @@ const Step1: FC<any> = (props: any) => {
       category: propertyTypeActive,
       service: lookingIntoActive,
       property_type: propertyTypeGroupActive,
-      age_of_property: "10",
-      bhk: "3",
-      bathroom: "3",
-      balcony: "4",
-      furnish_type: "Fully-furnish",
-      additional_furnish_type: ["AC", "Geyser"],
-      covered_parking: "1",
-      open_parking: "1",
-      preferred_tenant_type: "Family",
-      available_from: "01/02/2024",
-      monthly_rent: "30000",
-      maintenance_charges: "6500",
-      security_deposit: "1 Month",
-      lock_in_period: "6 Months",
-      brokerage: "30 days",
-      built_up_area: "1000 sq .ft.",
-      carpet_area: "1000 sq. ft.",
+      age_of_property: ageOfProperty,
+      bhk: bhkActive,
+      bathroom: bathRoomActive,
+      balcony: balconyActive,
+      furnish_type: furnishTypeActive,
+      additional_furnish_type: selectedAmenties,
+      covered_parking: coveredParkingActive,
+      open_parking: openParkingMenuActive,
+      preferred_tenant_type: tenantTypeActive,
+      available_from: availableFrom,
+      monthly_rent: monthlyRent,
+      maintenance_charges:
+        mainTenanceActive === "Separate"
+          ? mainTenanceCharges
+          : mainTenanceActive,
+      security_deposit:
+        securityDepositActive === "Custom"
+          ? securityDepositCharges
+          : securityDepositActive,
+      lock_in_period:
+        lockInPeriodActive === "Custom"
+          ? lockInPeriodCharges
+          : lockInPeriodActive,
+
+      brokerage:
+        broKerageActive === "Custom" ? broKerageCharges : broKerageActive,
+      built_up_area: builtUpArea,
+      carpet_area: carpetArea,
       additional_details: {
         parking_charges: "include in rent",
         painting_charges: "1 Month",
@@ -476,6 +503,10 @@ const Step1: FC<any> = (props: any) => {
                 <TextField
                   label="Age of Property (in years)"
                   variant="standard"
+                  value={ageOfProperty}
+                  onChange={(e) => {
+                    setAgeOfProperty(e.target.value);
+                  }}
                   fullWidth
                   required
                   className="age_property"
@@ -621,7 +652,12 @@ const Step1: FC<any> = (props: any) => {
                 <div className="label_for_label py-6">
                   Add Furnishings / Amenities
                 </div>
-                <Select options={amenitieseMenuItems} isMulti />
+                <Select
+                  options={amenitieseMenuItems}
+                  isMulti
+                  value={selectedAmenties}
+                  onChange={setSelectedAmenties}
+                />
                 {furnishTypeError && (
                   <div style={{ color: "#e02727", padding: "10px 0px" }}>
                     {furnishTypeError}
@@ -740,6 +776,8 @@ const Step1: FC<any> = (props: any) => {
                     label="Monthly Rent"
                     variant="standard"
                     className="age_property"
+                    value={monthlyRent}
+                    onChange={(e) => setMonthlyRent(e.target.value)}
                     inputProps={{ maxLength: 6 }}
                     InputLabelProps={{
                       style: {
@@ -790,6 +828,10 @@ const Step1: FC<any> = (props: any) => {
                     label="Maintenance Charges (per month)"
                     variant="standard"
                     className="age_property"
+                    value={mainTenanceCharges}
+                    onChange={(e) => {
+                      setMainTenanceCharges(e.target.value);
+                    }}
                   />
                 </div>
               )}
@@ -828,6 +870,10 @@ const Step1: FC<any> = (props: any) => {
                     label="Security Deposit"
                     variant="standard"
                     className="age_property"
+                    value={securityDepositCharges}
+                    onChange={(e) => {
+                      setSecurityDepositCharges(e.target.value);
+                    }}
                   />
                 </div>
               )}
@@ -861,6 +907,10 @@ const Step1: FC<any> = (props: any) => {
                   style={{ marginTop: "30px" }}
                 >
                   <TextField
+                    value={lockInPeriodCharges}
+                    onChange={(e) => {
+                      setLockInPeriodCharges(e.target.value);
+                    }}
                     required
                     id="standard-basic"
                     label="Lock in Period"
@@ -905,6 +955,10 @@ const Step1: FC<any> = (props: any) => {
                     label="Brokerage (in Rupees)"
                     variant="standard"
                     className="age_property"
+                    value={broKerageCharges}
+                    onChange={(e) => {
+                      setBroKerageCharges(e.target.value);
+                    }}
                   />
                 </div>
               )}
@@ -945,6 +999,10 @@ const Step1: FC<any> = (props: any) => {
                   label="Carpet Area"
                   variant="standard"
                   className="age_property"
+                  value={carpetArea}
+                  onChange={(e) => {
+                    setCarpetArea(e.target.value);
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">Sq. ft.</InputAdornment>
@@ -985,7 +1043,6 @@ const Step1: FC<any> = (props: any) => {
                 textAlign: "center",
                 color: "rgb(255, 255, 255)",
                 border: "none",
-                // boxShadow: 'rgb(76, 189, 148) 0px -2px inset',
               }}
             >
               {propertyTypeActive === "Residential"
