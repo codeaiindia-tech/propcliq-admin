@@ -10,8 +10,8 @@ export function MenuInner() {
         <>
             {/* Menu item have to change here */}
             <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to="/dashboard" />
-            <MenuItem title="Leads" to="/leads" />
-            <MenuItem title="Listings" to="/listings" />
+            <MenuItem title="Leads" to="/lead-list" />
+            <MenuItem title="Listings" to="/property-List" />
             <MenuItem title="Packages" to="/packages" />
             <MenuItem title="More" to="/more" />
             <Link to="/addproperty">
