@@ -9,6 +9,7 @@ import { WithChildren } from '../../_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import {AddPropertyLayout} from '../pages/AddProperty/AddPropertyLayout';
 import ListPropertyPage from '../pages/ListProperty/PropertyList'
+import ListPropertiesPage from '../pages/PropertyListing/ListProperty'
 
 const PrivateRoutes = () => {
     const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -28,7 +29,9 @@ const PrivateRoutes = () => {
                 <Route path="addproperty" element={<AddPropertyLayout />} />
                 <Route path="builder" element={<BuilderPageWrapper />} />
                 <Route path="menu-test" element={<MenuTestPage />} />
-                <Route path='housing-List' element={<ListPropertyPage />} />
+                <Route path='lead-List' element={<ListPropertyPage />} />
+                <Route path='property-List' element={<ListPropertiesPage />} />
+              
                 {/* Lazy Modules */}
                 <Route
                     path="crafted/pages/profile/*"
