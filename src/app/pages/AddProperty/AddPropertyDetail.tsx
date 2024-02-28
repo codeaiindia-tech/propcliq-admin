@@ -1,20 +1,6 @@
 import { FC, useState, useEffect } from "react";
-import { KTIcon } from '../../../_metronic/helpers';
-import { Formik, Form, ErrorMessage } from "formik";
-// import FormControl from "@mui/material/FormControl";
-import {
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Box,
-} from "@mui/material";
 import RadioButtonBox from "../../../app/modules/wizards/components/RadioBox/RadioBox.tsx";
 import TextField from "@mui/material/TextField";
-import DatePickerInput from "./DatePicker";
-import BasicForm from "./BasicForm";
-import { string } from "yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import { IconButton } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -23,7 +9,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Select, { MultiValue } from "react-select";
-import SaveStep1 from "../../utils/authentication.tsx";
+import {SaveStep1} from "../../Apis/AddPropertyApiList.tsx";
 
 const Step1: FC<any> = (props: any) => {
   const propertyTypes = ["Residential", "Commercial"];
@@ -285,13 +271,13 @@ const Step1: FC<any> = (props: any) => {
     props.handleCommSubmitStep1(val);
   };
 
-  const handleSubmitFirstStep = () => {
+  const handleSubmitFirstStep = async () => {
     const errors = {
       propertyTypeActive: !propertyTypeActive
         ? "Please select the category"
         : "",
       lookingIntoActive: !lookingIntoActive ? "Please select the purpose" : "",
-      propertyTypeGroupActive: !propertyTypeGroupActive
+      propertyTypeGroupActive: (!propertyTypeGroupActive && propertyTypeActive != 'Commercial')
         ? "Please select the property type"
         : "",
       bhkActive: !bhkActive ? "Please select the BHK" : "",
@@ -343,6 +329,8 @@ const Step1: FC<any> = (props: any) => {
     setBuiltUpError(errors.builtUpArea);
     // setAvailableFromDateError(errors.availableFrom);
     // Check if any error exists
+
+    console.log('errors',errors)
     for (const error in errors) {
       if (errors[error]) {
         return;
@@ -390,7 +378,8 @@ const Step1: FC<any> = (props: any) => {
         property_description: "Near Yamuna Experessway",
       },
     };
-    SaveStep1(data);
+    const savedPropertyData:any = await SaveStep1(data);
+    window.history.replaceState(null, '', `?id=${savedPropertyData._id}`);
     props.handleSubmitStep1();
     // Proceed with form submission or other actions
   };
@@ -401,7 +390,7 @@ const Step1: FC<any> = (props: any) => {
         Add Property Details
       </h2>
       <div className="row">
-        <div className="col">
+        <div className="col" style={{height:'500px'}}>
           <div className="add_property-group" style={{ marginTop: "30px" }}>
             <div className="label_for_label">
               PropertyType <span className="mandatoryMarker">*</span>
@@ -412,6 +401,7 @@ const Step1: FC<any> = (props: any) => {
                   <RadioButtonBox
                     label={val}
                     handleClick={() => {
+                      
                       handleNavigationMenu(val);
                       setPropertyTypeActive(val);
                       setPropertyTypeError("");
@@ -751,10 +741,8 @@ const Step1: FC<any> = (props: any) => {
                       label="Available From"
                       className="data_container-component"
                       value={availableFrom}
-                      onChange={() => {
-                        (newValue: any) => setAvailableFrom(newValue);
-                        // setAvailableFromDateError('');
-                      }}
+                      onChange={(newValue: any) => setAvailableFrom(newValue)}
+                      
                     />
                   </DemoContainer>
                 </LocalizationProvider>

@@ -3,8 +3,9 @@ import { KTIcon } from '../../../_metronic/helpers';
 import { ErrorMessage, Field } from 'formik';
 import { TextField, Button, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import {SaveStep2} from "../../Apis/AddPropertyApiList";
 
-const Step2: FC = () => {
+const Step2: FC<any> = (props:any) => {
     const [city, setCity] = useState<string>('');
     const [building, setBuilding] = useState<string>('');
     const [locality, setLocality] = useState<string>('');
@@ -42,12 +43,33 @@ const Step2: FC = () => {
         // Proceed with form submission if valid
         if (isValid) {
             // Perform form submission logic here
+            const url: URL = new URL(window.location.href);
+            const params: URLSearchParams = url.searchParams;
+            const propertyId: any = params.get('id');
+           const data = {
+                "property_id": propertyId,
+                "address_details": {
+                    "area": city,
+                    "project": building,
+                    "locality": locality,
+                    "flat_no": flatNo,
+                    "floor_no":floorNo,
+                    "total_floors": totalFloors
+                }
+            }
+                
+
+         const saveData =  SaveStep2(data);
+         props.handleSubmitStep2();
             console.log('Form submitted successfully');
         }
     };
 
     return (
         <div className="w-100">
+            <h2 className="fw-bolder d-flex align-items-center text-gray-900">
+                 Add Address Details
+            </h2>
             <TextField
                 label="Search City"
                 placeholder="Search City"
