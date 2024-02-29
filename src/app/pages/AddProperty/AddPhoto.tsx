@@ -8,8 +8,14 @@ import { Button } from '@mui/material';
 const Step3: FC<any> = (props: any) => {
 
   const [files, setFiles] = useState([]);
+  const [propertyId, setPropertyId] = useState('');
+
   const updateFiles = (incommingFiles:any) => {
     setFiles(incommingFiles);
+    const url: URL = new URL(window.location.href);
+    const params: URLSearchParams = url.searchParams;
+    const property_id: any = params.get('id');
+    setPropertyId(property_id);
   };
 
  const  onUpload = async () => {
@@ -28,16 +34,24 @@ const Step3: FC<any> = (props: any) => {
                  Add Address Details
             </h2>
            <div>
-    <Dropzone onChange={updateFiles} value={files}>
-      {files.map((file:any) => (
-        <FileMosaic {...file} preview />
+    <Dropzone onChange={updateFiles} value={files} uploadConfig={{
+      url: `https://api.propcliq.com/property/step3/image/${propertyId}`,
+      method: "POST",
+      headers: {
+          Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQyMjVkMTFmNzRlODJlZmRmODRmYmMiLCJpYXQiOjE3MDkyMzE5ODcsImV4cCI6MTcwOTIzNTU4N30.I_OuXmBXdtnP8fTSly7p4vdZ2OkzHIi4YchRSDY8I7U",
+      },
+      cleanOnUpload: true,
+    }}>
+      {files.map((file:any, key:any) => (
+        <FileMosaic key={key} {...file} preview />
       ))}
     </Dropzone>
     </div>
     <div>
-    <Button variant="contained" color="primary" onClick={onUpload} style={{ marginTop: '20%' }}>
+    {/* <Button variant="contained" color="primary" onClick={onUpload} style={{ marginTop: '20%' }}>
                 Save Photos
-            </Button>
+            </Button> */}
     </div>
     
     </div>

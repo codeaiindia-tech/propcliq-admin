@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkwNzcxMTAsImV4cCI6MTcwOTA4MDcxMH0.bPqP_Ucs4hbzQADTntbqQqGmhJK0iAnxncZ44P1qfCg';
+const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQyMjVkMTFmNzRlODJlZmRmODRmYmMiLCJpYXQiOjE3MDkyMzE5ODcsImV4cCI6MTcwOTIzNTU4N30.I_OuXmBXdtnP8fTSly7p4vdZ2OkzHIi4YchRSDY8I7U';
 
 export const SaveStep2 =   async (data: any) => {
             try {
