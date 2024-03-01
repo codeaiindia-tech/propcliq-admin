@@ -2,9 +2,9 @@
 import clsx from 'clsx'
 import React from 'react'
 import {KTIcon} from '../../../_metronic/helpers';
-import {FilterDropdown} from '../ListProperty/ListFilter';
-import {useThemeMode} from '../../../../src/_metronic/partials/layout/theme-mode/ThemeModeProvider'
-import RadioButtonBox from '../../../../src/app/modules/wizards/components/RadioBox/RadioBox';
+import {FilterDropdown} from './ListFilter';
+import {useThemeMode} from '../../../_metronic/partials/layout/theme-mode/ThemeModeProvider'
+import RadioButtonBox from '../../modules/wizards/components/RadioBox/RadioBox';
 
 type Props = {
   className: string

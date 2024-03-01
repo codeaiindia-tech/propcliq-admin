@@ -1,7 +1,7 @@
 
 import clsx from 'clsx'
 import React from 'react'
-import {useThemeMode} from '../../../../src/_metronic/partials/layout/theme-mode/ThemeModeProvider'
+import {useThemeMode} from '../../../_metronic/partials/layout/theme-mode/ThemeModeProvider'
 
 export function FilterDropdown() {
   const {mode} = useThemeMode()

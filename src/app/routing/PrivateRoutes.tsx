@@ -8,7 +8,7 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils';
 import { WithChildren } from '../../_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import {AddPropertyLayout} from '../pages/AddProperty/AddPropertyLayout';
-import ListPropertyPage from '../pages/ListProperty/PropertyList'
+import ListPropertyPage from '../pages/LeadListing/PropertyList'
 import ListPropertiesPage from '../pages/PropertyListing/ListProperty'
 import ListPackagesPage from '../pages/ListPackages/PackageList'
 

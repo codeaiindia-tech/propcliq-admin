@@ -2,9 +2,9 @@
 import clsx from 'clsx'
 import React from 'react'
 import {KTIcon} from '../../../_metronic/helpers';
-import {FilterDropdown} from '../ListProperty/ListFilter';
 import {useThemeMode} from '../../../../src/_metronic/partials/layout/theme-mode/ThemeModeProvider'
 import RadioButtonBox from '../../../../src/app/modules/wizards/components/RadioBox/RadioBox';
+import { useRadioGroup } from '@mui/material/RadioGroup';
 
 type Props = {
   className: string
@@ -27,7 +27,7 @@ const PropertyListMainFilter: React.FC<Props> = ({className}) => {
     <div className={`card ${className}`}>
       {/* begin::Header */}
       <div className='card-header border-0'>
-        <h3 className='card-title fw-bold text-gray-900'>Filter</h3>
+        <h3 className='card-title fw-bold text-gray-900'>Show</h3>
         <div className='card-toolbar'>
           {/* begin::Menu */}
           <button
@@ -46,27 +46,12 @@ const PropertyListMainFilter: React.FC<Props> = ({className}) => {
       {/* end::Header */}
       {/* begin::Body */}
       <div className='card-body pt-2'>
-      <div className='mb-10'>
-      <label className='form-label fw-semibold'>Search:</label>
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
-        <input
-          type='text'
-          data-kt-user-table-filter='search'
-          className='form-control form-control-solid w-250px ps-14'
-          placeholder='Enter Property Id'
-          // value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      </div>
+     
 
 
       <div className='mb-10'>
       <div className='add_property-group' style={{ marginTop: '30px' }}>
-            <div className='label_for_label'>
-              Filter<span className='mandatoryMarker'>*</span>
-            </div>
+           
             <div className='d-flex flex-wrap' style={{ gap: '16px' }}>
               {sectorList.map((val, index) => {
                 return (
@@ -81,10 +66,8 @@ const PropertyListMainFilter: React.FC<Props> = ({className}) => {
            
           </div>
       </div>
-
-      <label className='form-label fw-semibold'>Sub - Category</label>
-  <div className='mb-10'>
-          <label className='form-label fw-semibold'>Status:</label>
+         <div className='mb-10'>
+          <label className='form-label fw-semibold'>Sub - Category</label>
 
           <div>
             <select
@@ -95,124 +78,19 @@ const PropertyListMainFilter: React.FC<Props> = ({className}) => {
               defaultValue={'1'}
             >
               <option></option>
-              <option value='1'>Approved</option>
-              <option value='2'>Pending</option>
-              <option value='3'>In Process</option>
-              <option value='4'>Rejected</option>
+              <option value='1'>Buy (77)</option>
+              <option value='2'>Reported(0)</option>
+              <option value='3'>Active(0)</option>
+              <option value='4'>Expired(32)</option>
+              <option value='4'>Under Review (0)</option>
+              <option value='4'>Rejected (0)</option>
+              <option value='5'>Delted (34)</option>
+              <option value='6'>Expiring Soon (0)</option>
             </select>
           </div>
         </div>
 
-        <div className='mb-10'>
-          <label className='form-label fw-semibold'>Service:</label>
-
-          <div className='d-flex'>
-          {serviceList.map((val, index) => {
-                return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-              <input className='form-check-input' type='checkbox' value={index} />
-              <span className='form-check-label'>{val}</span>
-            </label>)})}
-          </div>
-        </div>
-
-        <div className='mb-10'>
-      <label className='form-label fw-semibold'>Locality:</label>
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
-        <input
-          type='text'
-          data-kt-user-table-filter='search'
-          className='form-control form-control-solid w-250px ps-14'
-          placeholder='Enter Locality here'
-          // value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      </div>
-
-      <div className='mb-10'>
-      <label className='form-label fw-semibold'>Project:</label>
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
-        <input
-          type='text'
-          data-kt-user-table-filter='search'
-          className='form-control form-control-solid w-250px ps-14'
-          placeholder='Enter Project here'
-          // value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      </div>
-
-      <div className='mb-10'>
-          <label className='form-label fw-semibold'>Property Type:</label>
-
-          <div className='d-flex' style ={{overflow: 'auto'}}>
-          {propertyType.map((val, index) => {
-                return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-              <input className='form-check-input' type='checkbox' value={index} />
-              <span className='form-check-label'>{val}</span>
-            </label>)})}
-          </div>
-        </div>
-
-        <div className='mb-10'>
-          <label className='form-label fw-semibold'>BHK:</label>
-
-          <div className='d-flex'>
-          {bhk.map((val, index) => {
-                return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-              <input className='form-check-input' type='checkbox' value={index} />
-              <span className='form-check-label'>{val}</span>
-            </label>)})}
-          </div>
-        </div>
-
-        <div className='mb-10'>
-          <label className='form-label fw-semibold'>Sale type:</label>
-
-          <div className='d-flex'>
-          {saleType.map((val, index) => {
-                return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-              <input className='form-check-input' type='checkbox' value={index} />
-              <span className='form-check-label'>{val}</span>
-            </label>)})}
-          </div>
-        </div>
-
-        
-        <div className='mb-10'>
-          <label className='form-label fw-semibold'>Listed By:</label>
-
-          <div className='d-flex'>
-          {listedBy.map((val, index) => {
-                return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-              <input className='form-check-input' type='checkbox' value={index} />
-              <span className='form-check-label'>{val}</span>
-            </label>)})}
-          </div>
-        </div>
-
-
-
-
-
-        <div className='d-flex justify-content-end'>
-          <button
-            type='reset'
-            className={clsx('btn btn-sm btn-active-light-primary me-2', {
-              'btn-light ': mode === 'light',
-            })}
-            data-kt-menu-dismiss='true'
-          >
-            Reset
-          </button>
-
-          <button type='submit' className='btn btn-sm btn-primary' data-kt-menu-dismiss='true'>
-            Apply
-          </button>
-        </div>
+ 
       </div>
       {/* end::Body */}
     </div>

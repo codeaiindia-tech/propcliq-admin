@@ -22,6 +22,7 @@ import {
   import { Content } from '../../../_metronic/layout/components/Content'
 
   import {PropertyListMainFilter} from '../PropertyListing/PropertyListMainFilter';
+  import {PropertyListingRightView} from '../PropertyListing/PropertListingRight'
   
   const DashboardPage = () => (
     <>
@@ -32,12 +33,16 @@ import {
         {/* begin::Row */}
         <div className='row gy-5 gx-xl-8'>
         
-          <div className='col-xxl-4'>
+          <div className='col-xxl-2'>
             <PropertyListMainFilter className='card-xxl-stretch mb-xl-3' />
             {/* <FilterDropdown></FilterDropdown> */}
           </div>
-          <div className='col-xl-8'>
+          <div className='col-xl-6'>
             <TabularList className='card-xxl-stretch mb-5 mb-xl-8' />
+          </div>
+          <div className='col-xxl-4'>
+            <PropertyListingRightView className='card-xxl-stretch mb-xl-3' />
+            {/* <FilterDropdown></FilterDropdown> */}
           </div>
         </div>
         {/* end::Row */}

@@ -1,43 +1,14 @@
-import React,{useEffect, useState } from 'react';
+import React from 'react';
 import { KTIcon, toAbsoluteUrl } from '../../../_metronic/helpers';
-import { Link } from 'react-router-dom';
-import { Dropdown1 } from '../../../_metronic/partials';
 import clsx from 'clsx';
 import { useLocation } from 'react-router';
-import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
-import { Content } from '../../../_metronic/layout/components/Content';
+
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const Step4: React.FC<any>  = (props:any) => {
-    const location = useLocation();
-    const [leadListing, setLeadListing] = useState([]);
+export const PropertyListingLeftView: React.FC<any>  = (props:any) => {
 
-    // const url: URL = new URL(window.location.href);
-    // const params: URLSearchParams = url.searchParams;
-    // const propertyId: any = params.get('id');
 
-    // const getPropertyDetail = async() => {
-    //     const leadListingDetail = await getPropertyDetail();
-    //     setLeadListing(leadListingDetail)
-    //    console.log('leadListingDetail',leadListingDetail)
-    //   }
-      
-      
-    //     useEffect(() =>  {
-    //       getPropertyDetail();
-    //      },[])
-
-const {monthly_rent, service, property_type,  bhk, furnish_type, carpet_area, project, available_from
-} = props?.reviewData;
-console.log('reviewData',props);
-
-const closeAddProperty = () => {
-
-    const navigate = useNavigate();
-
-    navigate('/dashboard')
-}
 
 
     return (
@@ -63,13 +34,13 @@ const closeAddProperty = () => {
                     <div className="col-xl-4 self_verify-card">
                         <div className="d-flex align-items-center">
     
-                           {monthly_rent && ( <h4 className="pl-2">Rs {monthly_rent}</h4>)}
+                            <h4 className="pl-2">5000</h4>
                         </div>
 
                         <p>
-                              <strong>{bhk} {property_type}</strong> for {service}                           
+                              <strong>bhk property_type</strong>                           
                         </p>
-                        <div>{carpet_area} sq.ft | {furnish_type} | {project}</div>
+                        <div>100 sq.ft 0</div>
                         <div>Listing score : <strong>100%</strong> </div>
                         <div className={`progress h-7px bg-success bg-opacity-50 mt-7`}>
                     <div className={`progress-bar bg-success`} role="progressbar" style={{ width: "50%" }} />
@@ -81,7 +52,7 @@ const closeAddProperty = () => {
                     <div className="col-xl-4 ">
                         <div className="verify_card" style={{background:'white'}}>
                           
-                            <div className="py-3"> Available from {(available_from?.split('T'))[0]}</div>
+                            <div className="py-3"> Available from </div>
                             
                             <div style={{marginTop:'75%'}}>
                             {/* <a
@@ -143,14 +114,14 @@ const closeAddProperty = () => {
                         </div>
                     </div>
                 </div> */}
-
+{/* 
 <Button variant="contained" color="primary" onClick={closeAddProperty} style={{ marginTop: '20px' }}>
                 Go to Home
-            </Button>
+            </Button> */}
             </div>
         </div>
         </>
     );
 };
 
-export { Step4 };
+

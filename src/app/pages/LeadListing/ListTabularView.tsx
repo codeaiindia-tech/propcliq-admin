@@ -1,6 +1,7 @@
 
-import { FC } from 'react'
+import { FC,useEffect, useState } from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers';
+import {getLeadListingData} from "../../Apis/AddPropertyApiList";
 
 
 type Props = {
@@ -8,6 +9,16 @@ type Props = {
 }
 
 const ListTabularView: FC<Props> = ({className}) => {
+  const [leadListing, setLeadListing] = useState([]);
+  const getLeadListing = async() => {
+    const leadListingDetail = await getLeadListingData();
+   console.log('leadListingDetail',leadListingDetail)
+  }
+  
+  
+    useEffect(() =>  {
+      getLeadListing();
+     },[])
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}

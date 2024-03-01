@@ -17,11 +17,11 @@ import {
     TilesWidget4,
     TilesWidget5,
   } from '../../../_metronic/partials/widgets'
-  import {ListTabularView} from '../ListProperty/ListTabularView';
+  import {ListTabularView} from './ListTabularView';
   import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar'
   import { Content } from '../../../_metronic/layout/components/Content'
 
-  import {ListPropertyFilterMain} from '../ListProperty/ListPropertyFilterMain';
+  import {ListPropertyFilterMain} from './ListPropertyFilterMain';
   
   const DashboardPage = () => (
     <>
