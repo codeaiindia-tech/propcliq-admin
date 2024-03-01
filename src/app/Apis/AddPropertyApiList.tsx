@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQxODMsImV4cCI6MTcwOTI5Nzc4M30.WBTDmUrev8IehEmUweQnMQJdb350bmjYFVdwbhA0PO4';
 
