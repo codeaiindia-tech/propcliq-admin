@@ -19,12 +19,8 @@ const Step3: FC<any> = (props: any) => {
   };
 
  const  onUpload = async () => {
-  const url: URL = new URL(window.location.href);
-            const params: URLSearchParams = url.searchParams;
-            const propertyId: any = params.get('id');
-  const getData = await SaveStep3(files, propertyId);
   props.handleSubmitStep3();
-  props.sendDataToReview(getData);
+
  }
   console.log('setFiles', files)
   return (
@@ -49,9 +45,9 @@ const Step3: FC<any> = (props: any) => {
     </Dropzone>
     </div>
     <div>
-    {/* <Button variant="contained" color="primary" onClick={onUpload} style={{ marginTop: '20%' }}>
-                Save Photos
-            </Button> */}
+    <Button variant="contained" color="primary" onClick={onUpload} style={{ marginTop: '20%' }}>
+              Continue
+            </Button>
     </div>
     
     </div>

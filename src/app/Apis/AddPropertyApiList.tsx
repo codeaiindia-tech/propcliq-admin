@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTAwNjMsImV4cCI6MTcwOTI5MzY2M30.vqqbvWFghBc4_0mm5OOXIiNOwKMxkHMov5inz9sZl_k';
+const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQxODMsImV4cCI6MTcwOTI5Nzc4M30.WBTDmUrev8IehEmUweQnMQJdb350bmjYFVdwbhA0PO4';
 
 export const SaveStep1  = async (data: any) : Promise<any> => {
   try {
@@ -112,6 +112,27 @@ export const getPropertyListing  = async () : Promise<any> => {
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+  };
+
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse lead' , jsonResponse )
+  return jsonResponse.data;
+} catch (error) {
+  throw error;
+}
+};
+
+export const getPropertyDetailById  = async (data:any) : Promise<any> => {
+  try {
+  const url = `https://api.propcliq.com/property/${data.id}`;  
+  console.log('hi', url)        
+  const reqOpts: RequestInit = {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': Auth_Token
