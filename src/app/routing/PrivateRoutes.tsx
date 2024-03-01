@@ -10,6 +10,7 @@ import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import {AddPropertyLayout} from '../pages/AddProperty/AddPropertyLayout';
 import ListPropertyPage from '../pages/ListProperty/PropertyList'
 import ListPropertiesPage from '../pages/PropertyListing/ListProperty'
+import ListPackagesPage from '../pages/ListPackages/PackageList'
 
 const PrivateRoutes = () => {
     const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -31,6 +32,7 @@ const PrivateRoutes = () => {
                 <Route path="menu-test" element={<MenuTestPage />} />
                 <Route path='lead-List' element={<ListPropertyPage />} />
                 <Route path='property-List' element={<ListPropertiesPage />} />
+                <Route path='packages' element={<ListPackagesPage />} />
               
                 {/* Lazy Modules */}
                 <Route
