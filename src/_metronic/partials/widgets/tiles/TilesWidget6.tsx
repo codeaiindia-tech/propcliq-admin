@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
+import {getLeadListingData} from "../../../../app/Apis/DashboardPageApiList";
+import { useEffect, useState } from 'react';
 
 type Props = {
     className?: string;
@@ -13,6 +15,19 @@ type Props = {
 
 const TilesWidget6 = (props: Props) => {
     const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
+    const [leadCount, setLeadCount] = useState([]);
+   
+    const getLeadListing = async() => {
+      const leadListing = await getLeadListingData();
+      setLeadCount(leadListing.length)
+     console.log('leadListingDetail',leadListing.length)
+    }
+    
+    
+      useEffect(() =>  {
+        getLeadListing();
+       },[])
+
     return (
         <a href="#" className={clsx('card', className)}>
             <div className="card-body d-flex flex-column justify-content-between ">
@@ -51,7 +66,7 @@ const TilesWidget6 = (props: Props) => {
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        0
+                                        {leadCount}
                                     </div>
                                     <div
                                         style={{
@@ -85,7 +100,7 @@ const TilesWidget6 = (props: Props) => {
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        10
+                                        0
                                     </div>
                                     <div
                                         style={{

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTAwNjMsImV4cCI6MTcwOTI5MzY2M30.vqqbvWFghBc4_0mm5OOXIiNOwKMxkHMov5inz9sZl_k';
+const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQ1NTIsImV4cCI6MTcwOTI5ODE1Mn0.64ZxS6LQr3yznBf4sKgNOGDGcHRnZGMmOY7YT6sSgCc';
 
 export const SaveStep1  = async (data: any) : Promise<any> => {
   try {

@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
+import { useEffect, useState } from 'react';
+import {getPropertyListing} from "../../../../app/Apis/DashboardPageApiList";
 
 type Props = {
     className?: string;
@@ -12,6 +14,17 @@ type Props = {
 };
 const TilesWidget7 = (props: Props) => {
     const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
+    const [propertyCount, setPropertyCount] = useState([]);
+    const getPropertyList = async() => {
+        const propertyListing = await getPropertyListing();
+        setPropertyCount(propertyListing.length)
+      }
+      
+      
+        useEffect(() =>  {
+            getPropertyList();
+         },[])
+
     return (
         <a href="#" className={clsx('card', className)}>
             <div className="card-body d-flex flex-column justify-content-between">
@@ -29,7 +42,7 @@ const TilesWidget7 = (props: Props) => {
                     >
                         <div className="d-flex">
                             <div>
-                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>0</strong>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{propertyCount}</strong>
                                 <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Residential</div>
                             </div>
                             <div>
