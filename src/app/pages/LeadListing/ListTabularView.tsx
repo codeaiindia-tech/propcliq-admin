@@ -2,7 +2,7 @@
 import { FC,useEffect, useState } from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers';
 import {getLeadListingData} from "../../Apis/AddPropertyApiList";
-
+import { Button } from '@mui/material';
 
 type Props = {
   className: string
@@ -10,10 +10,26 @@ type Props = {
 
 const ListTabularView: FC<Props> = ({className}) => {
   const [leadListing, setLeadListing] = useState([]);
+  const [showContact, setShowContact] = useState(false);
   const getLeadListing = async() => {
     const leadListingDetail = await getLeadListingData();
+    setLeadListing(leadListingDetail)
    console.log('leadListingDetail',leadListingDetail)
   }
+
+  const showContactDetail = () => {
+    setShowContact(!showContact)
+  }
+
+  function sendMail(text: string) {
+  
+    const subject = `Lead Listing subject`;
+    const bodyData = `Lead listing Body`;
+    document.location.href = `mailto:${text}?subject=${encodeURIComponent(
+      `${subject}`,
+    )}&body=Hi,%0D%0A %0D%0A ${bodyData} %0D%0A  %0D%0A`;
+  }
+  
   
   
     useEffect(() =>  {
@@ -66,7 +82,9 @@ const ListTabularView: FC<Props> = ({className}) => {
             </thead>
             {/* end::Table head */}
             {/* begin::Table body */}
-            <tbody>
+            {leadListing?.map((listItem: any, index: any) => (   
+              
+              <tbody>
               <tr>
                 <td>
                 
@@ -78,7 +96,7 @@ const ListTabularView: FC<Props> = ({className}) => {
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Tanuja Joshi
+                        {listItem.name}
                       </a>
                       
                     </div>
@@ -101,234 +119,42 @@ const ListTabularView: FC<Props> = ({className}) => {
             data-kt-menu-placement='bottom-end'
             data-kt-menu-flip='top-end'
           >
-            <KTIcon iconName='send' className='fs-2' />
+            <KTIcon iconName='' className='fs-2' />
           </button>
                   </div>
                 </td>
                 <td className='text-end'>
-                <div
-          className='card-toolbar'
-          data-bs-toggle='tooltip'
-          data-bs-placement='top'
-          data-bs-trigger='hover'
-          title='Click to download leads'
-        >
-          <a
-            href='#'
-            className='btn btn-sm btn-primary'
-            // data-bs-toggle='modal'
-            // data-bs-target='#kt_modal_invite_friends'
-          >
-            <KTIcon iconName='' className='fs-3' />
-           View contact
-          </a>
-        </div>
-                </td>
-                <td>
-                  <div className='d-flex justify-content-end flex-shrink-0'>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                  17 Jan 24, 2:57 pm
-                  </span>
-                  </div>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                
-                </td>
-                <td>
-                  <div className='d-flex align-items-center'>
-                    <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('media/avatars/300-20.jpg')} alt='' />
-                    </div>
-                    <div className='d-flex justify-content-start flex-column'>
-                      <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Tanuja Joshi
-                      </a>
-                      
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <a href='#' className='text-gray-900 fw-bold text-hover-primary d-block fs-6'>
-                    2 BHK Apartment
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                   Jaypee Aman, sector 51
-                  </span>
-                  <div style= {{paddingTop:'1%'}}>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>953 sq.ft</span>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>$49.1L</span>
-                  <button
-            type='button'
-            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
-            <KTIcon iconName='send' className='fs-2' />
-          </button>
-                  </div>
-                </td>
-                <td className='text-end'>
-                <div
-          className='card-toolbar'
-          data-bs-toggle='tooltip'
-          data-bs-placement='top'
-          data-bs-trigger='hover'
-          title='Click to download leads'
-        >
-          <a
-            href='#'
-            className='btn btn-sm btn-primary'
-            // data-bs-toggle='modal'
-            // data-bs-target='#kt_modal_invite_friends'
-          >
-            <KTIcon iconName='' className='fs-3' />
-           View contact
-          </a>
-        </div>
-                </td>
-                <td>
-                  <div className='d-flex justify-content-end flex-shrink-0'>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                  17 Jan 24, 2:57 pm
-                  </span>
-                  </div>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                
-                </td>
-                <td>
-                  <div className='d-flex align-items-center'>
-                    <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('media/avatars/300-20.jpg')} alt='' />
-                    </div>
-                    <div className='d-flex justify-content-start flex-column'>
-                      <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Tanuja Joshi
-                      </a>
-                      
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <a href='#' className='text-gray-900 fw-bold text-hover-primary d-block fs-6'>
-                    2 BHK Apartment
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                   Jaypee Aman, sector 51
-                  </span>
-                  <div style= {{paddingTop:'1%'}}>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>953 sq.ft</span>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>$49.1L</span>
-                  <button
-            type='button'
-            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
-            <KTIcon iconName='send' className='fs-2' />
-          </button>
-                  </div>
-                </td>
-                <td className='text-end'>
-                <div
-          className='card-toolbar'
-          data-bs-toggle='tooltip'
-          data-bs-placement='top'
-          data-bs-trigger='hover'
-          title='Click to download leads'
-        >
-          <a
-            href='#'
-            className='btn btn-sm btn-primary'
-            // data-bs-toggle='modal'
-            // data-bs-target='#kt_modal_invite_friends'
-          >
-            <KTIcon iconName='' className='fs-3' />
-           View contact
-          </a>
-        </div>
-                </td>
-                <td>
-                  <div className='d-flex justify-content-end flex-shrink-0'>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                  17 Jan 24, 2:57 pm
-                  </span>
-                  </div>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                
-                </td>
-                <td>
-                  <div className='d-flex align-items-center'>
-                    <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('media/avatars/300-20.jpg')} alt='' />
-                    </div>
-                    <div className='d-flex justify-content-start flex-column'>
-                      <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Tanuja Joshi
-                      </a>
-                      
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <a href='#' className='text-gray-900 fw-bold text-hover-primary d-block fs-6'>
-                    2 BHK Apartment
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                   Jaypee Aman, sector 51
-                  </span>
-                  <div style= {{paddingTop:'1%'}}>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>953 sq.ft</span>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>$49.1L</span>
-                  <button
-            type='button'
-            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
-            <KTIcon iconName='send' className='fs-2' />
-          </button>
-                  </div>
-                </td>
-                <td className='text-end'>
-                <div
-          className='card-toolbar'
-          data-bs-toggle='tooltip'
-          data-bs-placement='top'
-          data-bs-trigger='hover'
-          title='Click to download leads'
-        >
-          <a
-            href='#'
-            className='btn btn-sm btn-primary'
-            // data-bs-toggle='modal'
-            // data-bs-target='#kt_modal_invite_friends'
-          >
-            <KTIcon iconName='' className='fs-3' />
-           View contact
-          </a>
-        </div>
-                </td>
-                <td>
-                  <div className='d-flex justify-content-end flex-shrink-0'>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                  17 Jan 24, 2:57 pm
-                  </span>
-                  </div>
-                </td>
-                </tr>
+                <Button variant="contained" onClick = {showContactDetail} color="primary"  style={{ marginTop: '20px' }}>
+               {showContact?'Hide contact':'View contact'} 
+            </Button>
 
-            </tbody>
+          {showContact && ( <div>
+            <div style ={{padding:'2%'}}>Phone : <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.phone}</span></div>
+            <div style ={{padding:'2%'}}> Email :    <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.email}</span> <button
+            type='button'
+            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
+            data-kt-menu-trigger='click'
+            data-kt-menu-placement='bottom-end'
+            data-kt-menu-flip='top-end'
+            onClick={() => sendMail(listItem.email)}
+          ><KTIcon iconName='send' className='fs-2' />
+          </button></div> 
+
+
+            </div> )}
+            
+                </td>
+                <td>
+                  <div className='d-flex justify-content-end flex-shrink-0'>
+                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                  17 Jan 24, 2:57 pm
+                  </span>
+                  </div>
+                </td>
+                </tr>
+              
+
+            </tbody> ))}
             {/* end::Table body */}
           </table>
           {/* end::Table */}

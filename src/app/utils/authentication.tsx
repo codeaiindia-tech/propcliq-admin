@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.headers.common['Authorization'] =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWM3NmI1MzdhYWY5MDIwYThlNzMwYmMiLCJpYXQiOjE3MDc1NzE5NTksImV4cCI6MTcwNzU3NTU1OX0.qUSzMKcIfJQS38-yv_ycEhixvnMft7GqtViajJBbRy8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQ1NTIsImV4cCI6MTcwOTI5ODE1Mn0.64ZxS6LQr3yznBf4sKgNOGDGcHRnZGMmOY7YT6sSgCc';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const SaveStep1 = async (data: any) => {

@@ -8,28 +8,30 @@ import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
 import { Content } from '../../../_metronic/layout/components/Content';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 
 const Step4: React.FC<any>  = (props:any) => {
     const location = useLocation();
-    const [leadListing, setLeadListing] = useState([]);
+    const [propertyDetail, setPropertyDetail] = useState([]);
 
-    // const url: URL = new URL(window.location.href);
-    // const params: URLSearchParams = url.searchParams;
-    // const propertyId: any = params.get('id');
+    
 
-    // const getPropertyDetail = async() => {
-    //     const leadListingDetail = await getPropertyDetail();
-    //     setLeadListing(leadListingDetail)
-    //    console.log('leadListingDetail',leadListingDetail)
-    //   }
+    const getPropertyDetail = async() => {
+        const url: URL = new URL(window.location.href);
+        const params: URLSearchParams = url.searchParams;
+        const propertyId: any = params.get('id');
+        const fetchPropertyDetail = await getPropertyDetailById({id:'65e1bcccd46d549eee86e0cc'});
+        setPropertyDetail(fetchPropertyDetail)
+       console.log('leadListingDetail',fetchPropertyDetail)
+      }
       
       
-    //     useEffect(() =>  {
-    //       getPropertyDetail();
-    //      },[])
+        useEffect(() =>  {
+          getPropertyDetail();
+         },[])
 
 const {monthly_rent, service, property_type,  bhk, furnish_type, carpet_area, project, available_from
-} = props?.reviewData;
+}: any = propertyDetail;
 console.log('reviewData',props);
 
 const closeAddProperty = () => {
@@ -43,7 +45,8 @@ const closeAddProperty = () => {
     return (
         <>
            <div className={clsx('card self_verify-container')}>
-            <div className="card-body d-flex flex-column justify-content-between">
+ {propertyDetail && (          
+     <div className="card-body d-flex flex-column justify-content-between">
                 <div className=" row " style= {{border:'1px solid rgb(225, 226, 231)', borderRadius:'10px'}}>
 
                 <div className="col-xl-12" style={{padding:'2%', backgroundColor:'rgb(228, 255, 231)', marginBottom:'1%'}}>
@@ -81,7 +84,7 @@ const closeAddProperty = () => {
                     <div className="col-xl-4 ">
                         <div className="verify_card" style={{background:'white'}}>
                           
-                            <div className="py-3"> Available from {(available_from?.split('T'))[0]}</div>
+                            <div className="py-3"> Available from {(available_from)}</div>
                             
                             <div style={{marginTop:'75%'}}>
                             {/* <a
@@ -144,10 +147,10 @@ const closeAddProperty = () => {
                     </div>
                 </div> */}
 
-<Button variant="contained" color="primary" onClick={closeAddProperty} style={{ marginTop: '20px' }}>
-                Go to Home
+            <Button variant="contained" color="primary" onClick={closeAddProperty} style={{ marginTop: '20px' }}>
+                Go to Property Listing
             </Button>
-            </div>
+            </div> )}
         </div>
         </>
     );
