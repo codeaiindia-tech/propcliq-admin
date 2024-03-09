@@ -1,5 +1,5 @@
 
-const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQxODMsImV4cCI6MTcwOTI5Nzc4M30.WBTDmUrev8IehEmUweQnMQJdb350bmjYFVdwbhA0PO4';
+const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 export const SaveStep1  = async (data: any) : Promise<any> => {
   try {
@@ -147,6 +147,27 @@ export const getPropertyDetailById  = async (data:any) : Promise<any> => {
 }
 };
 
+
+export const deletePropertyDetailById  = async (data:any) : Promise<any> => {
+  try { 
+  const url = `https://api.propcliq.com/property/${data.id}`;  
+  console.log('hi', url)        
+  const reqOpts: RequestInit = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+  };
+
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse lead' , jsonResponse )
+  return jsonResponse.data;
+} catch (error) {
+  throw error;
+}
+};
 
 
 

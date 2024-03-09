@@ -5,7 +5,16 @@ import { Languages } from './Languages';
 import { toAbsoluteUrl } from '../../../helpers';
 
 const HeaderUserMenu: FC = () => {
-    const { currentUser, logout } = useAuth();
+    const logout = () => {
+        localStorage.setItem("Auth_Token", '');
+        localStorage.setItem("User_Email", '');
+        localStorage.setItem("User_Name", '');
+        document.location.reload();
+    }
+
+    const userEmail = localStorage.getItem("User_Email");
+    const userName = localStorage.getItem("User_Name");
+    console.log('ud', userEmail, userName)
     return (
         <div
             className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-semibold py-4 fs-6 w-275px"
@@ -19,11 +28,11 @@ const HeaderUserMenu: FC = () => {
 
                     <div className="d-flex flex-column">
                         <div className="fw-bold d-flex align-items-center fs-5">
-                            {currentUser?.first_name} {currentUser?.last_name}
+                            {userName}
                             <span className="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
                         </div>
                         <a href="#" className="fw-semibold text-muted text-hover-primary fs-7">
-                            {currentUser?.email}
+                            {userEmail}
                         </a>
                     </div>
                 </div>
@@ -37,7 +46,7 @@ const HeaderUserMenu: FC = () => {
                 </Link>
             </div>
 
-            <div className="menu-item px-5">
+            {/* <div className="menu-item px-5">
                 <a href="#" className="menu-link px-5">
                     <span className="menu-text">My Projects</span>
                     <span className="menu-badge">
@@ -111,7 +120,7 @@ const HeaderUserMenu: FC = () => {
                 <Link to="/crafted/account/settings" className="menu-link px-5">
                     Account Settings
                 </Link>
-            </div>
+            </div> */}
 
             <div className="menu-item px-5">
                 <a onClick={logout} className="menu-link px-5">

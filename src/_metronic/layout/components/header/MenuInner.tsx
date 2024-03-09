@@ -14,7 +14,8 @@ export function MenuInner() {
             <MenuItem title="Listings" to="/property-List" />
             <MenuItem title="Packages" to="/packages" />
             <MenuItem title="More" to="/more" />
-            <Link to="/addproperty">
+            <MenuItem title="Add Property" to="/addproperty" />
+            {/* <Link to="/addproperty">
                 <div className="d-flex">
                     <a
                         className="btn bg-body btn-active-color-primary fs-6"
@@ -26,7 +27,22 @@ export function MenuInner() {
                         Add Property
                     </a>
                 </div>
-            </Link>
+            </Link> */}
+             {/* ACCOUNT */}
+        {/* <MenuInnerWithSub
+          title='Accounts'
+          to='/crafted/accounts'
+          icon='profile-circle'
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
+          <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
+        </MenuInnerWithSub> */}
+
+
+        
 
             {/* <MenuInnerWithSub
         title='Leads'

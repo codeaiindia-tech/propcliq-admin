@@ -20,7 +20,7 @@ const Step4: React.FC<any>  = (props:any) => {
         const url: URL = new URL(window.location.href);
         const params: URLSearchParams = url.searchParams;
         const propertyId: any = params.get('id');
-        const fetchPropertyDetail = await getPropertyDetailById({id:'65e1bcccd46d549eee86e0cc'});
+        const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
         setPropertyDetail(fetchPropertyDetail)
        console.log('leadListingDetail',fetchPropertyDetail)
       }
@@ -58,7 +58,7 @@ const closeAddProperty = () => {
                             </div>
                         </div>
              
-                    </div>   
+                </div>   
 
                 <div className="col-xl-4">
                         <img className="verify_image" style = {{width:'100%'}}src={toAbsoluteUrl('media/custom/verify.svg')} alt="" />

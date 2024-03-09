@@ -3,9 +3,9 @@ import * as Yup from 'yup';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { getUserByToken, login } from '../core/_requests';
-import { toAbsoluteUrl } from '../../../../_metronic/helpers';
 import { useAuth } from '../core/Auth';
+import {sendOtp} from '../../../Apis/AuthApiList'
+import Verify from  './VerifyOtp';
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('Wrong email format').min(3, 'Minimum 3 symbols').max(50, 'Maximum 50 symbols').required('Email is required'),
@@ -13,8 +13,10 @@ const loginSchema = Yup.object().shape({
 });
 
 const initialValues = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: '',
+    password: '',
+    // email: 'Sonalsawarn00@gmail.com',
+    // password: 'Sonal123',
 };
 
 /*
@@ -25,7 +27,10 @@ const initialValues = {
 
 export function Login() {
     const [loading, setLoading] = useState(false);
+    const [signInViaPhone, setSignInViaPhone] = useState(false);
     const { saveAuth, setCurrentUser } = useAuth();
+    const [openOtpFlag, setOpenOtpFlag] = useState(false);
+    const [ userData, setUserData] =  useState<any>();
 
     const formik = useFormik({
         initialValues,
@@ -33,10 +38,14 @@ export function Login() {
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             setLoading(true);
             try {
-                const { data: auth } = await login(values.email, values.password);
-                saveAuth(auth);
-                const { data: user } = await getUserByToken(auth.api_token);
-                setCurrentUser(user);
+                const sendOtpToMail = await sendOtp({"email" : values.email, "password" : values.password});
+       
+                if(sendOtpToMail?.success === true) {
+                    setLoading(false);
+                    setOpenOtpFlag(true);
+                    setUserData(values);
+                }
+              
             } catch (error) {
                 console.error(error);
                 saveAuth(undefined);
@@ -48,64 +57,31 @@ export function Login() {
     });
 
     return (
-        <form className="form w-100" onSubmit={formik.handleSubmit} noValidate id="kt_login_signin_form">
+        <>
+        {openOtpFlag && (
+            // <OTPApp></OTPApp>
+            <Verify userData={userData}></Verify>
+        )}
+       {!openOtpFlag && ( <form className="form w-100" onSubmit={formik.handleSubmit} noValidate id="kt_login_signin_form">
             {/* begin::Heading */}
             <div className="text-center mb-11">
                 <h1 className="text-gray-900 fw-bolder mb-3">Sign In</h1>
-                <div className="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div>
+                <div className="text-gray-500 fw-semibold fs-6">Sign in with this account across the following sites.</div>
             </div>
             {/* begin::Heading */}
 
             {/* begin::Login options */}
-            <div className="row g-3 mb-9">
-                {/* begin::Col */}
-                <div className="col-md-6">
-                    {/* begin::Google link */}
-                    <a
-                        href="#"
-                        className="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100"
-                    >
-                        <img alt="Logo" src={toAbsoluteUrl('media/svg/brand-logos/google-icon.svg')} className="h-15px me-3" />
-                        Sign in with Google
-                    </a>
-                    {/* end::Google link */}
-                </div>
-                {/* end::Col */}
-
-                {/* begin::Col */}
-                <div className="col-md-6">
-                    {/* begin::Google link */}
-                    <a
-                        href="#"
-                        className="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100"
-                    >
-                        <img alt="Logo" src={toAbsoluteUrl('media/svg/brand-logos/apple-black.svg')} className="theme-light-show h-15px me-3" />
-                        <img alt="Logo" src={toAbsoluteUrl('media/svg/brand-logos/apple-black-dark.svg')} className="theme-dark-show h-15px me-3" />
-                        Sign in with Apple
-                    </a>
-                    {/* end::Google link */}
-                </div>
-                {/* end::Col */}
-            </div>
+        
             {/* end::Login options */}
 
             {/* begin::Separator */}
             <div className="separator separator-content my-14">
-                <span className="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
+                
             </div>
+            
             {/* end::Separator */}
 
-            {formik.status ? (
-                <div className="mb-lg-15 alert alert-danger">
-                    <div className="alert-text font-weight-bold">{formik.status}</div>
-                </div>
-            ) : (
-                <div className="mb-10 bg-light-info p-8 rounded">
-                    <div className="text-info">
-                        Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to continue.
-                    </div>
-                </div>
-            )}
+            
 
             {/* begin::Form group */}
             <div className="fv-row mb-8">
@@ -191,6 +167,7 @@ export function Login() {
                     Sign up
                 </Link>
             </div>
-        </form>
+        </form>)}
+        </>
     );
 }

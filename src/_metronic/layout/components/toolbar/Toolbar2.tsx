@@ -4,6 +4,7 @@ import { useLayout } from '../../core';
 import { KTIcon, toAbsoluteUrl } from '../../../helpers';
 const Toolbar2: FC = () => {
     const { classes } = useLayout();
+    const userName = localStorage.getItem("User_Name");
     return (
         <>
             <div className="toolbar py-5 py-lg-15" id="kt_toolbar">
@@ -15,7 +16,7 @@ const Toolbar2: FC = () => {
                             <img src={toAbsoluteUrl('media/avatars/300-23.jpg')} alt="" />
                         </div>
                         <div>
-                            <h3>Hi Investor Delights</h3>
+                            <h3>Hi {userName}</h3>
                             <span>Hope you're having a great day !</span>
                         </div>
                     </div>

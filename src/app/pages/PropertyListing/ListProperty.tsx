@@ -37,13 +37,13 @@ import {
             <PropertyListMainFilter className='card-xxl-stretch mb-xl-3' />
             {/* <FilterDropdown></FilterDropdown> */}
           </div>
-          <div className='col-xl-6'>
+          <div className='col-xl-10'>
             <TabularList className='card-xxl-stretch mb-5 mb-xl-8' />
           </div>
-          <div className='col-xxl-4'>
+          {/* <div className='col-xxl-4'>
             <PropertyListingRightView className='card-xxl-stretch mb-xl-3' />
-            {/* <FilterDropdown></FilterDropdown> */}
-          </div>
+         
+          </div> */}
         </div>
         {/* end::Row */}
   

@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const Auth_Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQ1NTIsImV4cCI6MTcwOTI5ODE1Mn0.64ZxS6LQr3yznBf4sKgNOGDGcHRnZGMmOY7YT6sSgCc';
-
-
+const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 
 

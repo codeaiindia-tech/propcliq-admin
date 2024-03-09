@@ -46,21 +46,25 @@ const ListPropertyFilterMain: React.FC<Props> = ({className}) => {
       {/* end::Header */}
       {/* begin::Body */}
       <div className='card-body pt-2'>
+   
       <div className='mb-10'>
-      <label className='form-label fw-semibold'>Search:</label>
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
-        <input
-          type='text'
-          data-kt-user-table-filter='search'
-          className='form-control form-control-solid w-250px ps-14'
-          placeholder='Enter Property Id'
-          // value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      </div>
+          <label className='form-label fw-semibold'>Sector:</label>
 
+          <div>
+            <select
+              className='form-select form-select-solid'
+              data-kt-select2='true'
+              data-placeholder='Select option'
+              data-allow-clear='true'
+              defaultValue={'1'}
+            >
+              <option value='1'>Select</option>
+              <option value='Residential'>Residential</option>
+              <option value='Commercial'>Commercial</option>
+             
+            </select>
+          </div>
+        </div>
 
       <div className='mb-10'>
       <div className='add_property-group' style={{ marginTop: '30px' }}>

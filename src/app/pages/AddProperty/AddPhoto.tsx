@@ -4,6 +4,7 @@ import { DropzoneArea } from "mui-file-dropzone";
 import { SaveStep3 } from '../../Apis/AddPropertyApiList';
 import { Button } from '@mui/material';
 
+const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 const Step3: FC<any> = (props: any) => {
 
@@ -34,8 +35,7 @@ const Step3: FC<any> = (props: any) => {
       url: `https://api.propcliq.com/property/step3/image/${propertyId}`,
       method: "POST",
       headers: {
-          Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQyMjVkMTFmNzRlODJlZmRmODRmYmMiLCJpYXQiOjE3MDkyMzE5ODcsImV4cCI6MTcwOTIzNTU4N30.I_OuXmBXdtnP8fTSly7p4vdZ2OkzHIi4YchRSDY8I7U",
+          Authorization:Auth_Token
       },
       cleanOnUpload: true,
     }}>
