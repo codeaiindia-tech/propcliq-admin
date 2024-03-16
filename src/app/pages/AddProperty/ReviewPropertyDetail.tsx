@@ -12,6 +12,7 @@ import {getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 
 const Step4: React.FC<any>  = (props:any) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [propertyDetail, setPropertyDetail] = useState([]);
 
     
@@ -36,9 +37,9 @@ console.log('reviewData',props);
 
 const closeAddProperty = () => {
 
-    const navigate = useNavigate();
+    
 
-    navigate('/dashboard')
+    navigate('/property-List')
 }
 
 

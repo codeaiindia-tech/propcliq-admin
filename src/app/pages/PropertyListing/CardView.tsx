@@ -66,7 +66,7 @@ export default function RecipeReviewCard(props:any) {
       <CardMedia
         component="img"
         height="194"
-        image="https://th.bing.com/th/id/R.ff20b5ef8b0405610b226866b74b12f2?rik=eGIy74viLRY%2b%2bA&riu=http%3a%2f%2fww1.prweb.com%2fprfiles%2f2015%2f03%2f02%2f12556168%2fGeneva_Q1_Facade.jpg&ehk=JPpfgQiaCOhK7BwYU8TBB6FCKISsQc%2fvK6kd9ElEKGs%3d&risl=1&pid=ImgRaw&r=0"
+        image={listItem.files[0]}
         alt="Paella dish"
       />
       <CardContent>

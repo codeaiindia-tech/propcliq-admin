@@ -194,8 +194,9 @@ export function Registration() {
                             <div className="col-lg-8 fv-row">
                                 <select className="form-select form-select-solid form-select-lg" {...formik.getFieldProps('role')}>
                                     <option value="">Select a Role..</option>
-                                    <option value="BUILDER">Seller</option>
-                                    <option value="USER">Buyer</option>
+                                    <option value="USER">User</option>
+                                    <option value="BROKER">Broker</option>
+                                    <option value="BUILDER">Builder</option>
                                 </select>
                                 {formik.touched.role && formik.errors.role && (
                                     <div className="fv-plugins-message-container">

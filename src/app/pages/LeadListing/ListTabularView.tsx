@@ -42,7 +42,7 @@ const ListTabularView: FC<Props> = ({className}) => {
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
           {/* <span className='card-label fw-bold fs-3 mb-1'>Housing List</span> */}
-          <span className='text-muted mt-1 fw-semibold fs-7'>Showing {leadListing.length} <b> Buy </b>  lead </span>
+          <span className='text-muted mt-1 fw-semibold fs-7'>Showing {leadListing?.length} <b> Buy </b>  lead </span>
         </h3>
         <div
           className='card-toolbar'
@@ -115,15 +115,15 @@ const ListTabularView: FC<Props> = ({className}) => {
                 </td>
                 <td>
                   <a href='#' className='text-gray-900 fw-bold text-hover-primary d-block fs-6'>
-                    {listItem.property_id.bhk} BHK {listItem.property_id.property_type}
+                    {listItem.property_id?.bhk} {listItem.property_id?.property_type}
                   </a>
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                  {listItem.property_id.address_details.area}, {listItem.property_id.address_details.locality} 
+                  {listItem.property_id?.address_details.area}, {listItem.property_id?.address_details.locality} 
 
                   </span>
                   <div style= {{paddingTop:'1%'}}>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.property_id.built_up_area} sq.ft</span>
-                  <span className='badge badge-light-primary fs-8 fw-bold'>Rs. {listItem.property_id.monthly_rent}</span>
+                  <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.property_id?.built_up_area} sq.ft</span>
+                  <span className='badge badge-light-primary fs-8 fw-bold'>Rs. {listItem.property_id?.monthly_rent}</span>
                   <button
             type='button'
             className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
