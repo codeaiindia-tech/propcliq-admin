@@ -31,6 +31,9 @@ export function Login() {
     const { saveAuth, setCurrentUser } = useAuth();
     const [openOtpFlag, setOpenOtpFlag] = useState(false);
     const [ userData, setUserData] =  useState<any>();
+    const [errorFlag, setErrorFlag] = useState(false);
+    const [errorFlagMsg, setErrorFlagMsg] = useState('');
+    
 
     const formik = useFormik({
         initialValues,
@@ -44,6 +47,10 @@ export function Login() {
                     setLoading(false);
                     setOpenOtpFlag(true);
                     setUserData(values);
+                }else {
+                    setErrorFlag(true)
+                    setErrorFlagMsg(sendOtpToMail.message)
+                    setLoading(false);
                 }
               
             } catch (error) {
@@ -75,9 +82,11 @@ export function Login() {
             {/* end::Login options */}
 
             {/* begin::Separator */}
-            <div className="separator separator-content my-14">
-                
-            </div>
+            {(formik.status || errorFlag) && (
+                <div className="mb-lg-15 alert alert-danger">
+                    <div className="alert-text font-weight-bold">{formik.status ? formik.status : errorFlagMsg}</div>
+                </div>
+            )}
             
             {/* end::Separator */}
 

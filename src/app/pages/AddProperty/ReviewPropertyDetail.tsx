@@ -7,7 +7,7 @@ import { useLocation } from 'react-router';
 import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
 import { Content } from '../../../_metronic/layout/components/Content';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import {getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 
 const Step4: React.FC<any>  = (props:any) => {
@@ -22,7 +22,8 @@ const Step4: React.FC<any>  = (props:any) => {
         const propertyId: any = params.get('id');
         const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
         setPropertyDetail(fetchPropertyDetail)
-       console.log('leadListingDetail',fetchPropertyDetail)
+       console.log('leadListingDetail',fetchPropertyDetail);
+      
       }
       
       
@@ -34,11 +35,11 @@ const {monthly_rent, service, property_type,  bhk, furnish_type, carpet_area, pr
 }: any = propertyDetail;
 console.log('reviewData',props);
 
+const navigate = useNavigate();
+
+
 const closeAddProperty = () => {
-
-    const navigate = useNavigate();
-
-    navigate('/dashboard')
+    navigate('/property-List')
 }
 
 
@@ -147,9 +148,36 @@ const closeAddProperty = () => {
                     </div>
                 </div> */}
 
-            <Button variant="contained" color="primary" onClick={closeAddProperty} style={{ marginTop: '20px' }}>
-                Go to Property Listing
-            </Button>
+<div
+            style={{
+              display: "block",
+              width: "100%",
+              margin: "25px 0px",
+              position: "relative",
+              bottom: "0px",
+              padding: "0px",
+            }}
+          >
+            <button
+              onClick={closeAddProperty}
+              style={{
+                background: "#1B84FF",
+                borderRadius: "8px",
+                fontWeight: 500,
+                fontSize: "14px",
+                width: "100%",
+                padding: "17px 0px",
+                textAlign: "center",
+                color: "rgb(255, 255, 255)",
+                border: "none",
+              }}
+            >
+             
+             Go to Property Listing
+            </button>
+          </div>
+
+    
             </div> )}
         </div>
         </>

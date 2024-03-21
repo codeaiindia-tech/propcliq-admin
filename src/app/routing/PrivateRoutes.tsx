@@ -28,6 +28,7 @@ const PrivateRoutes = () => {
                 {/* Pages */}
                 <Route path="dashboard" element={<DashboardWrapper />} />
                 <Route path="addproperty" element={<AddPropertyLayout />} />
+                <Route path="edit-property" element={<AddPropertyLayout />} />
                 <Route path="builder" element={<BuilderPageWrapper />} />
                 <Route path="menu-test" element={<MenuTestPage />} />
                 <Route path='lead-List' element={<ListPropertyPage />} />

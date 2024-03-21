@@ -19,6 +19,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import {AlertDialog} from './ModalPopUp';
+import {ImagesGallery} from './ImageGallery';
+import { useNavigate } from 'react-router';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -37,18 +39,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export default function RecipeReviewCard(props:any) {
     const {leadListing,refreshData} = props;
-    const [expanded, setExpanded] = React.useState(false);
     const [propertyId, setPropertyId] = React.useState();
-    console.log('hi', leadListing)
-  const [deleteFlagModal, setDeleteFlagModal] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const [deleteFlagModal, setDeleteFlagModal] = React.useState(false);
+  const navigate = useNavigate();
+  const handleEditClick = (id:any) => {
+    navigate(`/edit-property?id=${id}`);
   };
 
   const deleteProperty = (id:any) => {
-    setDeleteFlagModal(!deleteFlagModal); 
-    
+    setDeleteFlagModal(!deleteFlagModal);    
     setPropertyId(id);
   }
   
@@ -58,22 +58,20 @@ export default function RecipeReviewCard(props:any) {
    {deleteFlagModal && ( <AlertDialog id = {propertyId} handleCloseModal = { () => {setDeleteFlagModal(!deleteFlagModal);refreshData();} }></AlertDialog>)}
       <Box style = {{padding:'1%'}} sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-       
+     
     {leadListing?.map((listItem: any, index: any) => (   
-     <Grid item xs={4} key = {index}>
+ 
+ 
+ <Grid item xs={4} key = {index}>
     <Card sx={{ maxWidth: 345 }}>
   
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://th.bing.com/th/id/R.ff20b5ef8b0405610b226866b74b12f2?rik=eGIy74viLRY%2b%2bA&riu=http%3a%2f%2fww1.prweb.com%2fprfiles%2f2015%2f03%2f02%2f12556168%2fGeneva_Q1_Facade.jpg&ehk=JPpfgQiaCOhK7BwYU8TBB6FCKISsQc%2fvK6kd9ElEKGs%3d&risl=1&pid=ImgRaw&r=0"
-        alt="Paella dish"
-      />
+    <ImagesGallery></ImagesGallery> 
       <CardContent>
-        <h3>{listItem.address_details.area}</h3>
+
+        <h3>{listItem?.address_details?.area}</h3>
     
       <div>
-      <h5>   Rs. {listItem.monthly_rent? listItem.monthly_rent: 0}</h5>  
+      <h5>   Rs. {listItem?.monthly_rent? listItem?.monthly_rent: 0}</h5>  
         <div>
       
                 
@@ -84,7 +82,7 @@ export default function RecipeReviewCard(props:any) {
                 
                     <Typography variant="body2" color="text.secondary">
                     <span className=' fs-8 fw-bold'>Last Added : </span>
-                          {(listItem.updatedAt?.split('T'))[0]}
+                          {(listItem?.updatedAt?.split('T'))[0]}
                           </Typography>
                   </div>
 
@@ -93,7 +91,7 @@ export default function RecipeReviewCard(props:any) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="Edit Detail">
-          <EditIcon />
+          <EditIcon  onClick={() => handleEditClick(listItem._id)}/>
         </IconButton>
         <IconButton onClick={() => deleteProperty(listItem._id)} aria-label="Delete">
           <DeleteIcon  />
@@ -101,36 +99,13 @@ export default function RecipeReviewCard(props:any) {
         <span className='badge badge-light-primary fs-8 fw-bold'>In Progress</span>
        
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card> </Grid>))}
+  
+    </Card> </Grid>
+    
+    
+    
+    
+    ))}
    
     </Grid>
     </Box>

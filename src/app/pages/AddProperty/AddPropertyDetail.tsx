@@ -9,11 +9,17 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Select, { MultiValue } from "react-select";
-import {SaveStep1} from "../../Apis/AddPropertyApiList.tsx";
+import {SaveStep1, getPropertyDetailById , UpdateStep1} from "../../Apis/AddPropertyApiList.tsx";
+import dayjs, { Dayjs } from 'dayjs';
+
+
+
 
 const Step1: FC<any> = (props: any) => {
+ 
   const propertyTypes = ["Residential", "Commercial"];
   const lookingIntoMenuItems = ["Rent", "Sell", "PG/Co-living"];
+  
   const commPropertyTypeGroupMenuItems = [
     "Office",
     "Retail Shop",
@@ -135,6 +141,12 @@ const Step1: FC<any> = (props: any) => {
   // Calender Menu
   const [availableFrom, setAvailableFrom] = useState("");
   const [availableFromDateError, setAvailableFromDateError] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
+
+const url: URL = new URL(window.location.href);
+const params: URLSearchParams = url.searchParams;
+const getPropertyId: any = params.get('id');
+
 
   useEffect(() => {
     let look =
@@ -330,13 +342,12 @@ const Step1: FC<any> = (props: any) => {
     // setAvailableFromDateError(errors.availableFrom);
     // Check if any error exists
 
-    console.log('errors',errors)
     for (const error in errors) {
       if (errors[error]) {
         return;
       }
     }
-    const data = {
+    let data = {
       category: propertyTypeActive,
       service: lookingIntoActive,
       property_type: propertyTypeGroupActive,
@@ -378,16 +389,110 @@ const Step1: FC<any> = (props: any) => {
         property_description: "Near Yamuna Experessway",
       },
     };
-    const savedPropertyData:any = await SaveStep1(data);
-    window.history.replaceState(null, '', `?id=${savedPropertyData._id}`);
+    if(isEdit) {
+      data['property_id']= getPropertyId;
+      const updatePropertyData:any = await UpdateStep1(data);
+      window.history.replaceState(null, '', `?id=${updatePropertyData._id}`);
+    } else {
+      const savedPropertyData:any = await SaveStep1(data);
+      window.history.replaceState(null, '', `?id=${savedPropertyData._id}`);
+    }
+   
     props.handleSubmitStep1();
     // Proceed with form submission or other actions
   };
 
+
+
+  const getPropertyDetail = async() => {
+      const url: URL = new URL(window.location.href);
+      const params: URLSearchParams = url.searchParams;
+      const propertyId: any = params.get('id');
+      const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
+     const {category, service, property_type, age_of_property,  bhk, monthly_rent, bathroom
+      , balcony, furnish_type, 
+      brokerage ,built_up_area, open_parking, preferred_tenant_type, 
+      security_deposit, carpet_area, 
+      covered_parking, available_from, maintenance_charges, 
+      lock_in_period,additional_furnish_type }: any = fetchPropertyDetail;
+      setPropertyTypeActive(category);
+      setLookingIntoActive(service);
+      setPropertyTypeGroupActive(property_type);
+      setBhkActive(bhk)
+      setBathRoomActive(bathroom);
+      setBalconyActive(balcony);
+      setFurnishTypeActive(furnish_type);
+      setSelectedAmenties(additional_furnish_type);
+      settenantTypeActive(preferred_tenant_type);
+      const dateFormat = (available_from.split('T'))[0];
+
+      const [year, month,day ] = dateFormat.split('-');
+      const finaldate = (`${year}-${day}-${month}`);
+     
+setAvailableFrom(finaldate);
+setMonthlyRent(monthly_rent);
+setAgeOfProperty(age_of_property);
+setMainTenanceActive(maintenance_charges);
+setMainTenanceCharges(maintenance_charges);
+setSecurityDepositActive(security_deposit);
+setSecurityDepositCharges(security_deposit);
+setLockInPeriodActive(lock_in_period);
+ setLockInPeriodCharges(lock_in_period);
+setBroKerageActive(brokerage);
+setBroKerageCharges(brokerage);
+ setBuiltUpArea(built_up_area);
+ setCarpetArea(carpet_area);
+ setCoveredParkingActive(covered_parking);
+setOpenParkingMenuActive(open_parking);
+
+
+    }
+
+    const initalState = () => {
+
+      setPropertyTypeActive('');
+      setLookingIntoActive('');
+      setPropertyTypeGroupActive('');
+      setBhkActive('')
+      setBathRoomActive('');
+      setBalconyActive('');
+      setFurnishTypeActive('');
+      setSelectedAmenties(null);
+      settenantTypeActive('');
+    
+setAvailableFrom('');
+setMonthlyRent('');
+setAgeOfProperty('');
+setMainTenanceActive('');
+setMainTenanceCharges('');
+setSecurityDepositActive('');
+setSecurityDepositCharges('');
+setLockInPeriodActive('');
+ setLockInPeriodCharges('');
+setBroKerageActive('');
+setBroKerageCharges('');
+ setBuiltUpArea('');
+ setCarpetArea('');
+ setCoveredParkingActive('');
+setOpenParkingMenuActive('');
+    }
+    
+    
+      useEffect(() =>  {
+        if(getPropertyId){
+          getPropertyDetail();
+          setIsEdit(true);
+          
+        }  else {
+          initalState();
+          setIsEdit(false);
+        }     
+       },[getPropertyId])
+
   return (
     <div style={{ padding: "0px 50px" }}>
       <h2 className="fw-bolder d-flex align-items-center text-gray-900">
-        Add Property Details
+      {isEdit ? 'Edit Property Details' : ' Add Property Details'} 
       </h2>
       <div className="row">
         <div className="col" style={{height:'500px'}}>
@@ -465,7 +570,6 @@ const Step1: FC<any> = (props: any) => {
                     );
                   })
                 : commPropertyTypeGroupMenu.map((val, index) => {
-                    console.log(propertyTypeActive, "propertyTypeActive--");
                     return (
                       <>
                         <RadioButtonBox
@@ -568,7 +672,7 @@ const Step1: FC<any> = (props: any) => {
                 </div>
                 <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
                   {bathRoomMenu.map((val, index) => {
-                    console.log(val, "values");
+  
                     return (
                       <RadioButtonBox
                         key={index}
@@ -740,8 +844,9 @@ const Step1: FC<any> = (props: any) => {
                     <DatePicker
                       label="Available From"
                       className="data_container-component"
-                      value={availableFrom}
+                      value={dayjs(availableFrom) }
                       onChange={(newValue: any) => setAvailableFrom(newValue)}
+      
                       
                     />
                   </DemoContainer>
@@ -1033,9 +1138,8 @@ const Step1: FC<any> = (props: any) => {
                 border: "none",
               }}
             >
-              {propertyTypeActive === "Residential"
-                ? "Next, add address"
-                : "Next add property details"}
+             
+                {isEdit ? "Next, Edit Address" : "Next, Add Address"} 
             </button>
           </div>
         </div>

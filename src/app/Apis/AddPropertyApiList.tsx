@@ -13,6 +13,7 @@ export const SaveStep1  = async (data: any) : Promise<any> => {
     body: JSON.stringify(data),
   };
 
+
   const response = await fetch(url, reqOpts);
   const jsonResponse = await response.json();
   console.log('reponse' , jsonResponse )
@@ -21,6 +22,27 @@ export const SaveStep1  = async (data: any) : Promise<any> => {
   throw error;
 }
 };
+
+export const UpdateStep1 = async (data: any) : Promise<any> => {
+  try {
+  const url = 'https://api.propcliq.com/property/updatestep1';          
+  const reqOpts: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse' , jsonResponse )
+  return jsonResponse.data;
+} catch (error) {
+  throw error;
+}
+};
+
 
 export const SaveStep2 =   async (data: any) => {
             try {
@@ -43,6 +65,27 @@ export const SaveStep2 =   async (data: any) => {
             }
          
 }
+
+
+export const UpdateStep2 = async (data: any) : Promise<any> => {
+  try {
+  const url = 'https://api.propcliq.com/property/updatestep2';          
+  const reqOpts: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse' , jsonResponse )
+  return jsonResponse.data;
+} catch (error) {
+  throw error;
+}
+};
 
 
 export const SaveStep3  = async (data: any, propertyId: any) : Promise<any> => {

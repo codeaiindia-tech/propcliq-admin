@@ -28,7 +28,7 @@ const Step3: FC<any> = (props: any) => {
     <>
       <div className="w-100">
       <h2 className="fw-bolder d-flex align-items-center text-gray-900">
-                 Add Address Details
+                 Add Property Photos
             </h2>
            <div>
     <Dropzone onChange={updateFiles} value={files} uploadConfig={{
@@ -45,9 +45,36 @@ const Step3: FC<any> = (props: any) => {
     </Dropzone>
     </div>
     <div>
-    <Button variant="contained" color="primary" onClick={onUpload} style={{ marginTop: '20%' }}>
-              Continue
-            </Button>
+
+    <div
+            style={{
+              display: "block",
+              width: "100%",
+              margin: "25px 0px",
+              position: "relative",
+              bottom: "0px",
+              padding: "0px",
+            }}
+          >
+            <button
+              onClick={onUpload}
+              style={{
+                background: "#1B84FF",
+                borderRadius: "8px",
+                fontWeight: 500,
+                fontSize: "14px",
+                width: "100%",
+                padding: "17px 0px",
+                textAlign: "center",
+                color: "rgb(255, 255, 255)",
+                border: "none",
+              }}
+            >
+             
+               Next, Review Property
+            </button>
+          </div>
+ 
     </div>
     
     </div>

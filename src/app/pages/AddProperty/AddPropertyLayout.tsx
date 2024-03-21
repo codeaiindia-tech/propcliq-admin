@@ -43,12 +43,12 @@ const AddPropertyLayout = () => {
     //     return;
     //   }
 
-    //   if (stepper.currentStepIndex !== stepper.totalStepsNumber) {
-    //     stepper.goNext();
-    //   } else {
-    //     stepper.goto(1);
-    //     actions.resetForm();
-    //   }
+      if (stepper?.currentStepIndex !== stepper?.totalStepsNumber) {
+        stepper?.goNext();
+      } else {
+        stepper?.goto(1);
+    
+      }
 
     //   console.log(values);
 
@@ -122,7 +122,7 @@ setReviewData(data)
                             {/* begin::Nav*/}
                             <div className="stepper-nav">
                                 {/* begin::Step 1*/}
-                                <div className="stepper-item current" data-kt-stepper-element="nav">
+                                <div className= {stepNumber >= '1' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -148,7 +148,7 @@ setReviewData(data)
                                 {/* end::Step 1*/}
 
                                 {/* begin::Step 2*/}
-                                <div className="stepper-item" data-kt-stepper-element="nav">
+                                <div className= {stepNumber >= '2' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -174,7 +174,7 @@ setReviewData(data)
                                 {/* end::Step 2*/}
 
                                 {/* begin::Step 3*/}
-                                <div className="stepper-item" data-kt-stepper-element="nav">
+                                <div className= {stepNumber >= '3' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -202,7 +202,7 @@ setReviewData(data)
                               
 
                                 {/* begin::Step 5*/}
-                                <div className="stepper-item" data-kt-stepper-element="nav">
+                                <div className= {stepNumber >= '4' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
