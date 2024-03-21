@@ -12,6 +12,7 @@ import {getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 
 const Step4: React.FC<any>  = (props:any) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [propertyDetail, setPropertyDetail] = useState([]);
 
     
@@ -21,9 +22,7 @@ const Step4: React.FC<any>  = (props:any) => {
         const params: URLSearchParams = url.searchParams;
         const propertyId: any = params.get('id');
         const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
-        setPropertyDetail(fetchPropertyDetail)
-       console.log('leadListingDetail',fetchPropertyDetail);
-      
+        setPropertyDetail(fetchPropertyDetail)     
       }
       
       
@@ -33,9 +32,7 @@ const Step4: React.FC<any>  = (props:any) => {
 
 const {monthly_rent, service, property_type,  bhk, furnish_type, carpet_area, project, available_from
 }: any = propertyDetail;
-console.log('reviewData',props);
 
-const navigate = useNavigate();
 
 
 const closeAddProperty = () => {

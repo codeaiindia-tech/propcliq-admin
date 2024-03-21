@@ -994,7 +994,7 @@ const Step1: FC<any> = (props: any) => {
               </div>
               <div className="add_property-group" style={{ marginTop: "30px" }}>
                 <TextField
-                  required
+                  
                   id="standard-basic"
                   label="Carpet Area"
                   variant="standard"

@@ -13,7 +13,7 @@ export function MenuInner() {
             <MenuItem title="Leads" to="/lead-list" />
             <MenuItem title="Listings" to="/property-List" />
             <MenuItem title="Packages" to="/packages" />
-            <MenuItem title="More" to="/more" />
+            <MenuItem title="Add Project" to="/project" />
             <MenuItem title="Add Property" to="/addproperty" />
             {/* <Link to="/addproperty">
                 <div className="d-flex">

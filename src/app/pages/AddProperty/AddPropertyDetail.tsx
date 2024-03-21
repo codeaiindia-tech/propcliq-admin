@@ -55,7 +55,7 @@ const Step1: FC<any> = (props: any) => {
   const mainTenance = ["Include in rent", "Separate"];
   const securityDeposit = ["None", "1 month", "2 month", "Custom"];
   const lockInPeriod = ["None", "1 month", "2 month", "Custom"];
-  const broKerage = ["None", "1 month", "2 month", "Custom"];
+  const broKerage = ["None", "15 days", "1 month", "2 month", "Custom"];
   // Property Type
   const [propertyTypeMenu, setPropertyTypeMenu] = useState(propertyTypes);
   const [propertyTypeActive, setPropertyTypeActive] = useState("");
