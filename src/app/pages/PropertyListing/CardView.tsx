@@ -65,7 +65,7 @@ export default function RecipeReviewCard(props:any) {
  <Grid item xs={4} key = {index}>
     <Card sx={{ maxWidth: 345 }}>
   
-    <ImagesGallery></ImagesGallery> 
+    <ImagesGallery images={listItem.files}></ImagesGallery> 
       <CardContent>
 
         <h3>{listItem?.address_details?.area}</h3>
