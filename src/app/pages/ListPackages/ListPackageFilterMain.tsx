@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import {KTIcon} from '../../../_metronic/helpers';
-import {FilterDropdown} from '../ListProperty/ListFilter';
+// import {FilterDropdown} from '../ListProperty/ListFilter';
 import {useThemeMode} from '../../../_metronic/partials/layout/theme-mode/ThemeModeProvider'
 import RadioButtonBox from '../../modules/wizards/components/RadioBox/RadioBox';
 
@@ -20,7 +20,7 @@ const ListPackageFilterMain: React.FC<Props> = ({className}) => {
     const  sectorList = ['Residential', 'Commercial' ];
     const serviceList = ['Buy', 'Rent', 'PG'];
     const propertyType = ['Apartment', 'Independent Floor', 'Independent House', 'Villa', 'Plot', 'Agricultural Land']
-  const bhk = ['2 BHK', '3 BHK', '3+ BHK', 'Plot'];
+  const bhk = ['2 BHK', '2.5 BHK', '3 BHK', '3.5 BHK', '3+ BHK', 'Plot'];
   const saleType = ['New project', 'Resale Properties'];
   const listedBy = ['Investor Delights(Myself) (430)', 'Rakesh kumar(55)'];
     return (

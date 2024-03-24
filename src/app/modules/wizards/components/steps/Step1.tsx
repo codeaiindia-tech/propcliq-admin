@@ -44,7 +44,7 @@ const Step1: FC<any> = (props: any) => {
     "Plot",
     "Agricultural Land",
   ];
-  const bhkMenuItems = ["1RK", "1 BHK", "2 BHK", "3+BHK"];
+  const bhkMenuItems = ["1RK", "1 BHK", "2 BHK", "2.5 BHK", "3+BHK"];
   const bathRoomMenuItems = ["1", "2", "3", "4"];
   const balconyMenuItems = ["0", "1", "2", "3", "4"];
   const furnishTypeMenuItems = [
@@ -198,7 +198,9 @@ const Step1: FC<any> = (props: any) => {
       setBhkMenu([
         ...bhkMenuItems.slice(0, 3), // Keep 1RK to 3 BHK
         "3 BHK",
+        "3.5 BHK",
         "4 BHK",
+        "4.5 BHK",
         "5 BHK",
         "6 BHK",
         "7 BHK",
@@ -224,18 +226,30 @@ const Step1: FC<any> = (props: any) => {
         bathrooms = ["1", "2"];
         balconys = ["0", "1", "2"];
         break;
-      case "2 BHK":
-        bathrooms = ["1", "2", "3"];
-        balconys = ["0", "1", "2", "3"];
-        break;
-      case "3 BHK":
-        bathrooms = ["1", "2", "3", "4"];
-        balconys = ["0", "1", "2", "3", "4"];
-        break;
-      case "4 BHK":
-        bathrooms = ["1", "2", "3", "4", "5"];
-        balconys = ["0", "1", "2", "3", "4", "5"];
-        break;
+        case "2 BHK":
+          bathrooms = ["1", "2", "3"];
+          balconys = ["0", "1", "2", "3"];
+          break;
+        case "2.5 BHK":
+            bathrooms = ["1", "2", "3"];
+            balconys = ["0", "1", "2", "3"];
+            break;
+        case "3 BHK":
+          bathrooms = ["1", "2", "3", "4"];
+          balconys = ["0", "1", "2", "3", "4"];
+          break;
+        case "3.5 BHK":
+            bathrooms = ["1", "2", "3", "4"];
+            balconys = ["0", "1", "2", "3", "4"];
+            break;
+        case "4 BHK":
+          bathrooms = ["1", "2", "3", "4", "5"];
+          balconys = ["0", "1", "2", "3", "4", "5"];
+          break;
+        case "4.5 BHK":
+            bathrooms = ["1", "2", "3", "4", "5"];
+            balconys = ["0", "1", "2", "3", "4", "5"];
+            break;  
       case "5 BHK":
         bathrooms = ["1", "2", "3", "4", "5", "6"];
         balconys = ["0", "1", "2", "3", "4", "5", "6"];

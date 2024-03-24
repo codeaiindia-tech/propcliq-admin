@@ -20,7 +20,7 @@ const ListPropertyFilterMain: React.FC<Props> = ({className}) => {
     const  sectorList = ['Residential', 'Commercial' ];
     const serviceList = ['Buy', 'Rent', 'PG'];
     const propertyType = ['Apartment', 'Independent Floor', 'Independent House', 'Villa', 'Plot', 'Agricultural Land']
-  const bhk = ['2 BHK', '3 BHK', '3+ BHK', 'Plot'];
+  const bhk = ['2 BHK', '2.5 BHK', '3 BHK', '3+ BHK', 'Plot'];
   const saleType = ['New project', 'Resale Properties'];
   const listedBy = ['Investor Delights(Myself) (430)', 'Rakesh kumar(55)'];
     return (
