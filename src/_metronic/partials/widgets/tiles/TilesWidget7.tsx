@@ -31,7 +31,22 @@ const TilesWidget7 = (props: Props) => {
                 <div>
                     <div className="d-flex justify-content-between mb-2">
                         <h2 className="fw-600">Listings Summary</h2>
+
+                        <div>
+                            <select
+                                name="status"
+                                data-control="select2"
+                                data-hide-search="true"
+                                className="form-select form-select-sm form-select-white w-125px"
+                                defaultValue="Active"
+                            >
+                                <option value="Active">Last Week</option>
+                                <option value="Approved">Last Month</option>
+                                <option value="In Progress">Last Year</option>
+                            </select>
+                        </div>
                     </div>
+                    
                     <div
                         style={{
                             borderRadius: '10px',

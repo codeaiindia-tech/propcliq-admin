@@ -33,20 +33,8 @@ const TilesWidget6 = (props: Props) => {
             <div className="card-body d-flex flex-column justify-content-between ">
                 <div>
                     <div className="d-flex justify-content-between align-items-center mb-2">
-                        <h2 className="fw-600">Leads Summary</h2>
-                        <div>
-                            <select
-                                name="status"
-                                data-control="select2"
-                                data-hide-search="true"
-                                className="form-select form-select-sm form-select-white w-125px"
-                                defaultValue="Active"
-                            >
-                                <option value="Active">Last Week</option>
-                                <option value="Approved">Last Month</option>
-                                <option value="In Progress">Last Year</option>
-                            </select>
-                        </div>
+                        <h2 className="fw-600">Leads Reach</h2>
+                        
                     </div>
                     <div className="d-flex justify-content-between mt-6">
                         <div className="col d-flex p-3 justify-content-between  align-items-center border border-secondary rounded-2 me-7 mb-7">
@@ -60,13 +48,13 @@ const TilesWidget6 = (props: Props) => {
                                     <div
                                         style={{
                                             fontWeight: 600,
-                                            fontSize: '28px',
+                                            fontSize: '20px',
                                             lineHeight: '33px',
                                             marginBottom: '4px',
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        {leadCount}
+                                        {leadCount}-4 each week
                                     </div>
                                     <div
                                         style={{
@@ -74,7 +62,7 @@ const TilesWidget6 = (props: Props) => {
                                         }}
                                         className="fw-semibold fs-6"
                                     >
-                                        Residential
+                                        Current lead reach
                                     </div>
                                 </div>
                             </div>
@@ -94,13 +82,13 @@ const TilesWidget6 = (props: Props) => {
                                     <div
                                         style={{
                                             fontWeight: 600,
-                                            fontSize: '28px',
+                                            fontSize: '20px',
                                             lineHeight: '33px',
                                             marginBottom: '4px',
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        0
+                                        7-9 each week
                                     </div>
                                     <div
                                         style={{
@@ -108,7 +96,7 @@ const TilesWidget6 = (props: Props) => {
                                         }}
                                         className="fw-semibold fs-6"
                                     >
-                                        Commercial
+                                        Expected lead reach
                                     </div>
                                 </div>
                             </div>

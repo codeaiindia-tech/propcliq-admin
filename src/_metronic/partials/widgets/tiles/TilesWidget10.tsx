@@ -15,12 +15,54 @@ const TilesWidget10 = (props: Props) => {
     return (
         <a href="#" className={clsx('card', className)}>
             <div className="card-body d-flex flex-column justify-content-between" style={{ height: '222px' }}>
-                <div className="bg-white">
-                    <h2 style={{ margin: '24px 0' }}>Looking for Help or Support ?</h2>
-                    <a href="#" className="btn btn-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">
-                        Visit Help Center
-                    </a>
+            <div className="bg-white">
+                <h2>Active Package</h2>
+                  <div>
+                    <div
+                        style={{
+                            borderRadius: '10px',
+                            padding: '12px',
+                            cursor: 'pointer',
+                        }}
+                        className="d-flex align-items-center justify-content-between border border-secondary h-74 mt-6"
+                    >
+                        <div className="d-flex">
+                            <div>
+                                <strong style={{ fontSize: '25px', lineHeight: '33px' }}>02 Dec 24</strong>
+                                <div style={{ fontSize: '12px', color: '#1F82F6' }}>Expiry</div>
+                            </div>
+                            <div>
+                                {' '}
+                                <KTIcon iconName="text-circle" className="fs-3x text-warning" />
+                            </div>
+                        </div>
+
+                        <div className="d-flex">
+                            <div>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>30</strong>
+                                <div style={{ fontSize: '12px', color: '#1F82F6' }}>Listing Cap</div>
+                            </div>
+                            <div>
+                                {' '}
+                                <KTIcon iconName="text-circle" className="fs-3x text-warning" />
+                            </div>
+                        </div>
+
+                        <div className="d-flex">
+                            <div>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>1</strong>
+                                <div style={{ fontSize: '12px', color: '#1F82F6' }}>Used</div>
+                            </div>
+                            <div>
+                                {' '}
+                                <KTIcon iconName="text-circle" className="fs-3x text-warning" />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
+
+                
             </div>
         </a>
     );

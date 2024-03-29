@@ -26,18 +26,22 @@ import {
 import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
 import { Content } from '../../../_metronic/layout/components/Content';
 import { KTIcon, toAbsoluteUrl } from '../../../_metronic/helpers';
+import { ProfileWidget } from '../../../_metronic/partials/widgets/tiles/ProfileWidget';
 const DashboardPage = () => (
     <>
         <Toolbar />
         <Content>
-            <div className="row g-5 g-xl-8 mb-5">
-                <div className="col-xl-10">
+            <div className="row g-12 g-xl-12 mb-12">
+                <div className="col-xl-8">
                     {/* <MixedWidget8
             className='card-xxl-stretch mb-xl-3'
             chartColor='success'
             chartHeight='150px'
           /> */}
                     <TilesWidget11 />
+                </div>
+                <div className="col-xl-4 g-12 g-xl-12">
+                    <ProfileWidget className="card-xl-12 g-12" />
                 </div>
             </div>
             <div className="row g-5 g-xl-8  mb-5">
