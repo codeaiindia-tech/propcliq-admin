@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
-import {getLeadListingData} from "../../../../app/Apis/DashboardPageApiList";
+import {getLeadListingData, getPackageDetails} from "../../../../app/Apis/DashboardPageApiList";
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -14,18 +14,27 @@ type Props = {
 };
 
 const TilesWidget6 = (props: Props) => {
-    const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
+    const { className} = props;
     const [leadCount, setLeadCount] = useState([]);
+    const [leadCountPerWeek, setLeadCountPerWeek] = useState(0);
    
     const getLeadListing = async() => {
       const leadListing = await getLeadListingData();
       setLeadCount(leadListing.length)
-     console.log('leadListingDetail',leadListing.length)
+     console.log('leadListingDetail',leadListing)
     }
+
+    const getPackages = async() => {
+        const packageListing = await getPackageDetails();
+        setLeadCountPerWeek(packageListing.leadLastWeek)
+        //setExpectedCountPerWeek(packageListing.leadLastWeek+5)
+       console.log('packageListing--------',packageListing.leadLastWeek)
+      }
     
     
       useEffect(() =>  {
         getLeadListing();
+        getPackages();
        },[])
 
     return (
@@ -54,7 +63,7 @@ const TilesWidget6 = (props: Props) => {
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        {leadCount}-4 each week
+                                        {leadCountPerWeek} - {leadCountPerWeek + 2} each week
                                     </div>
                                     <div
                                         style={{
@@ -88,7 +97,7 @@ const TilesWidget6 = (props: Props) => {
                                             color: 'rgb(34, 34, 34)',
                                         }}
                                     >
-                                        7-9 each week
+                                        {leadCountPerWeek + 8} - {leadCountPerWeek + 10} each week
                                     </div>
                                     <div
                                         style={{

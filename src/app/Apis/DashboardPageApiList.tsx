@@ -26,6 +26,27 @@ export const getLeadListingData  = async () : Promise<any> => {
 }
 };
 
+export const getPackageDetails  = async () : Promise<any> => {
+  try {
+  const url = 'https://api.propcliq.com/auth/profile';  
+  console.log('hiiiiiii', url)        
+  const reqOpts: RequestInit = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+  };
+
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse packageeeeee' , jsonResponse )
+  return jsonResponse;
+} catch (error) {
+  throw error;
+}
+};
+
 
 export const getPropertyListing  = async () : Promise<any> => {
   try {

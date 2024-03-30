@@ -13,7 +13,7 @@ type Props = {
 const TilesWidget11 = (props: Props) => {
     const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
     return (
-        <div className={clsx('card self_verify-container', className)}>
+        <div style={{height:"370px"}} className={clsx('card self_verify-container', className)}>
             <div className="card-body d-flex flex-column justify-content-between">
                 <div className=" row ">
                     <div className="col-xl-4 self_verify-card">

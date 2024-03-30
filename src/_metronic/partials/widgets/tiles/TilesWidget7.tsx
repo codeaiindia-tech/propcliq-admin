@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
 import { useEffect, useState } from 'react';
-import {getPropertyListing} from "../../../../app/Apis/DashboardPageApiList";
+import {getPropertyListing, getPackageDetails} from "../../../../app/Apis/DashboardPageApiList";
 
 type Props = {
     className?: string;
@@ -15,6 +15,15 @@ type Props = {
 const TilesWidget7 = (props: Props) => {
     const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
     const [propertyCount, setPropertyCount] = useState([]);
+    const [residential, setResidentialListingCount] = useState(0);
+   
+    const getPackages = async() => {
+        const packageListing = await getPackageDetails();
+        setResidentialListingCount(packageListing.residential)
+        //setExpectedCountPerWeek(packageListing.leadLastWeek+5)
+       console.log('packageListing--------',packageListing)
+    }
+
     const getPropertyList = async() => {
         const propertyListing = await getPropertyListing();
         setPropertyCount(propertyListing.length)
@@ -57,7 +66,7 @@ const TilesWidget7 = (props: Props) => {
                     >
                         <div className="d-flex">
                             <div>
-                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{propertyCount}</strong>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{residential}</strong>
                                 <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Residential</div>
                             </div>
                             <div>

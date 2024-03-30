@@ -31,7 +31,7 @@ const DashboardPage = () => (
     <>
         <Toolbar />
         <Content>
-            <div className="row g-12 g-xl-12 mb-12">
+            <div className="row g-12 g-xl-12 mb-12" >
                 <div className="col-xl-8">
                     {/* <MixedWidget8
             className='card-xxl-stretch mb-xl-3'
@@ -45,20 +45,20 @@ const DashboardPage = () => (
                 </div>
             </div>
             <div className="row g-5 g-xl-8  mb-5">
-                <div className="col-xl-6">
+                <div className="col-xl-8">
                     <TilesWidget6 className="card-xl-stretch" />
                 </div>
                 <div className="col-xl-4">
                     <TilesWidget7 className="card-xl-stretch" />
                 </div>
             </div>
-            <div className="row g-5 g-xl-8  mb-5">
-                <div className="col-xl-10">
+            <div className="row g-12 g-xl-8  mb-5">
+                <div className="col-xl-12">
                     <TilesWidget8 className="card-xl-stretch" />
                 </div>
             </div>
-            <div className="row g-5 g-xl-8  mb-5">
-                <div className="col-xl-4">
+            <div className="row g-12 g-xl-8  mb-5">
+                <div className="col-xl-6">
                     <TilesWidget9 className="card-xl-stretch" />
                 </div>
                 <div className="col-xl-6">
