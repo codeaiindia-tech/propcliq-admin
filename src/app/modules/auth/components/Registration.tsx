@@ -41,6 +41,8 @@ export function Registration() {
     const [errorFlagMsg, setErrorFlagMsg] = useState('');
     const [openOtpFlag, setOpenOtpFlag] = useState(false);
     const [ userData, setUserData] =  useState<any>();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const formik = useFormik({
         initialValues,
@@ -214,7 +216,7 @@ export function Registration() {
                     <label className="form-label fw-bolder text-gray-900 fs-6">Password</label>
                     <div className="position-relative mb-3">
                         <input
-                            type="password"
+                            type={showPassword?'text':'password'}
                             placeholder="Password"
                             autoComplete="off"
                             {...formik.getFieldProps('password')}
@@ -228,6 +230,15 @@ export function Registration() {
                                 }
                             )}
                         />
+                        
+                        {showPassword ? <span className="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n0" style={{marginRight: '15px'}}
+                        data-kt-password-meter-control="visibility" onClick={() => setShowPassword(!showPassword)}>
+                            <i className="ki-duotone ki-eye fs-1"><span className="path1"></span><span className="path2"></span><span className="path3"></span></i>
+                        </span>: <span className="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n0" style={{marginRight: '15px'}}
+                        data-kt-password-meter-control="visibility" onClick={() => setShowPassword(!showPassword)}>
+                            <i className="ki-duotone ki-eye-slash fs-1"><span className="path1"></span><span className="path2"></span><span className="path3"></span><span className="path4"></span></i>    
+                        </span>}
+                        
                         {formik.touched.password && formik.errors.password && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
@@ -250,10 +261,10 @@ export function Registration() {
             {/* end::Form group */}
 
             {/* begin::Form group Confirm password */}
-            <div className="fv-row mb-5">
+            <div className="position-relative mb-3 fv-row mb-5">
                 <label className="form-label fw-bolder text-gray-900 fs-6">Confirm Password</label>
                 <input
-                    type="password"
+                    type={showConfirmPassword?'text':'password'}
                     placeholder="Password confirmation"
                     autoComplete="off"
                     {...formik.getFieldProps('changepassword')}
@@ -267,6 +278,14 @@ export function Registration() {
                         }
                     )}
                 />
+                {showConfirmPassword ? <span className="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n0" style={{marginRight: '15px', marginTop: '3%'}}
+                        data-kt-password-meter-control="visibility" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                            <i className="ki-duotone ki-eye fs-1"><span className="path1"></span><span className="path2"></span><span className="path3"></span></i>
+                        </span>: <span className="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n0" style={{marginRight: '15px', marginTop: '3%'}}
+                        data-kt-password-meter-control="visibility" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                            <i className="ki-duotone ki-eye-slash fs-1"><span className="path1"></span><span className="path2"></span><span className="path3"></span><span className="path4"></span></i>    
+                        </span>}
+
                 {formik.touched.changepassword && formik.errors.changepassword && (
                     <div className="fv-plugins-message-container">
                         <div className="fv-help-block">
