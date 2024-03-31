@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
 import { useEffect, useState } from 'react';
-import {getPropertyListing} from "../../../../app/Apis/DashboardPageApiList";
+import {getPropertyListing,getPackageDetails} from "../../../../app/Apis/DashboardPageApiList";
 
 type Props = {
     className?: string;
@@ -14,14 +14,23 @@ type Props = {
 };
 const ProfileWidget= (props: Props) => {
     const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
-    const [propertyCount, setPropertyCount] = useState([]);
-    const getPropertyList = async() => {
-        const propertyListing = await getPropertyListing();
-        setPropertyCount(propertyListing.length)
+    const [weeklyLeadCount, setLeadCountPerWeek] = useState([]);
+    const [monthlyLeadCount, setLeadCountPerMonth] = useState([]);
+    const [quarterlyLeadCount, setLeadCountPerQuarter] = useState([]);
+
+    
+
+      const getPackages = async() => {
+        const packageListing = await getPackageDetails();
+        setLeadCountPerWeek(packageListing.leadLastWeek)
+        setLeadCountPerMonth(packageListing.leadLastMonth)
+        setLeadCountPerQuarter(packageListing.leadLastQuarter)
+        //setExpectedCountPerWeek(packageListing.leadLastWeek+5)
+       console.log('packageListing--------1',packageListing)
       }
       
         useEffect(() =>  {
-            getPropertyList();
+            getPackages();
          },[])
 
     return (<>
@@ -45,7 +54,7 @@ const ProfileWidget= (props: Props) => {
                                 <KTIcon iconName="calendar-search" className="fs-3x text-warning" />
                             </div> 
                           <div>
-                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{propertyCount}</strong>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{weeklyLeadCount}</strong>
                                 <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Last Week</div>
                             </div>
                            
@@ -65,7 +74,7 @@ const ProfileWidget= (props: Props) => {
                                 <KTIcon iconName="calendar-search" className="fs-3x text-warning" />
                             </div> 
                           <div>
-                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{propertyCount}</strong>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{monthlyLeadCount}</strong>
                                 <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Last Month</div>
                             </div>
                             <div>
@@ -89,7 +98,7 @@ const ProfileWidget= (props: Props) => {
                                 <KTIcon iconName="calendar-search" className="fs-3x text-warning" />
                             </div> 
                           <div>
-                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{propertyCount}</strong>
+                                <strong style={{ fontSize: '28px', lineHeight: '33px' }}>{quarterlyLeadCount || 0}</strong>
                                 <div style={{ fontSize: '12px', color: 'rgb(127, 127, 127)' }}>Last 90 days</div>
                             </div>
                             

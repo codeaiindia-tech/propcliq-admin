@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { KTIcon } from '../../../helpers';
-import {getLeadListingData, getPackageDetails} from "../../../../app/Apis/DashboardPageApiList";
+import { getPackageDetails} from "../../../../app/Apis/DashboardPageApiList";
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -15,14 +15,8 @@ type Props = {
 
 const TilesWidget6 = (props: Props) => {
     const { className} = props;
-    const [leadCount, setLeadCount] = useState([]);
     const [leadCountPerWeek, setLeadCountPerWeek] = useState(0);
    
-    const getLeadListing = async() => {
-      const leadListing = await getLeadListingData();
-      setLeadCount(leadListing.length)
-     console.log('leadListingDetail',leadListing)
-    }
 
     const getPackages = async() => {
         const packageListing = await getPackageDetails();
@@ -33,7 +27,7 @@ const TilesWidget6 = (props: Props) => {
     
     
       useEffect(() =>  {
-        getLeadListing();
+       // getLeadListing();
         getPackages();
        },[])
 
@@ -48,7 +42,7 @@ const TilesWidget6 = (props: Props) => {
                     <div className="d-flex justify-content-between mt-6">
                         <div className="col d-flex p-3 justify-content-between  align-items-center border border-secondary rounded-2 me-7 mb-7">
                             <div className="d-flex">
-                                <KTIcon iconName="bi bi-house" className="fs-3x text-warning d-block my-2" />
+                                <KTIcon iconName="call" className="fs-3x text-warning d-block my-2" />
                                 <div
                                     style={{
                                         marginLeft: '10px',
@@ -82,7 +76,7 @@ const TilesWidget6 = (props: Props) => {
                         </div>
                         <div className="col d-flex justify-content-between  align-items-center p-3 border border-secondary rounded-2 mb-7">
                             <div className="d-flex">
-                                <KTIcon iconName="bi bi-house" className="fs-3x text-warning d-block my-2" />
+                                <KTIcon iconName="emoji-happy" className="fs-3x text-warning d-block my-2" />
                                 <div
                                     style={{
                                         marginLeft: '10px',
