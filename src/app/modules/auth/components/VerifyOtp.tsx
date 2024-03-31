@@ -5,9 +5,11 @@
     import {sendOtp, verifyOtp} from '../../../Apis/AuthApiList';
     import { useAuth } from '../core/Auth';
     import { Link } from 'react-router-dom';
+    import { useNavigate } from 'react-router-dom';
 
     function Verify(props:any) {
         const {userData} =  props;
+        const navigate = useNavigate();
     const [OTP, setOTP] = useState("");
     const [invalidOTP, setInvalidOTP] = useState<boolean>(false);
     const { saveAuth, setCurrentUser } = useAuth();
@@ -31,7 +33,7 @@
             localStorage.setItem("Auth_Token", verifyOtpToMail.token);
             localStorage.setItem("User_Email", verifyOtpToMail.user.email);
             localStorage.setItem("User_Name", verifyOtpToMail.user.username);
-            document.location.reload();
+            navigate('/auth/login');
         } else {
             setInvalidOTP(true)
         }
