@@ -1,21 +1,19 @@
 
 import { FC, useEffect, useState } from 'react'
-import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers';
-import {getPropertyListing} from "../../Apis/AddPropertyApiList";
-import {Link} from 'react-router-dom'
-import { Button } from '@mui/material';
-import RecipeReviewCard from './CardView';
+import {getPropertyListing, filterPropertySearch} from "../../Apis/AddPropertyApiList";
+import PropertyCard from './CardView';
 
 
 type Props = {
   className: string
+  filterData: any
 }
 
 
 
 
 
-const TabularList: FC<Props> = ({className}) => {
+const TabularList: FC<Props> = ({className, filterData}) => {
   const [leadListing, setLeadListing] = useState([]);
   const [refreshData, setRefreshData] = useState(false);
 
@@ -26,15 +24,30 @@ const getLeadListing = async() => {
 }
 
 
+useEffect(() =>  {
+  getLeadListing();
+ },[refreshData])
+
+
+ const getFilterPropertyList = async() => {
+  const leadListingDetail = await filterPropertySearch(filterData); 
+  setLeadListing(leadListingDetail)
+
+}
+
   useEffect(() =>  {
-    getLeadListing();
-   },[refreshData])
+    if (filterData) {
+      getFilterPropertyList()
+    }  else {
+      getLeadListing();
+    } 
+   },[filterData])
 
   return (
     <>
-      <div style = {{padding:'2%', backgroundColor:'#338fad', marginBottom:'2%'}}className='card-header border-0 pt-5'>
+      <div style = {{padding:'1%', backgroundColor:'#338fad', marginBottom:'2%'}}className='card-header border-0 pt-5'>
       <div style={{padding:'1%'}}>
-      <div className=" row ">
+      {/* <div className=" row ">
                 <div className="col-xl-3">
             <select
             
@@ -101,21 +114,22 @@ const getLeadListing = async() => {
             </select>
             </div>
             
-            </div>
+            </div> */}
 
-            <div className=" row " style={{paddingTop:'4%', color:'white'}}>
+            <div className=" row " style={{paddingTop:'1%'}}>
+            <div className="col-xl-6">
+             <h3 style = {{color:'white'}}> <strong> Property Listing </strong></h3>
+            </div>
+          
+          
+              </div>
+
+            <div className=" row " style={{paddingTop:'1%', color:'white'}}>
             <div className="col-xl-6">
               <strong>Showing {leadListing?.length} properties</strong>
             </div>
-            <div className="col-xl-3">
-           
-                     <strong> MORE FILTER </strong>   
-            
-
-            </div>
-            <div className="col-xl-3">
-            <strong> RESET FILTER</strong>   
-            </div>
+          
+          
               </div>
           </div>
       
@@ -137,7 +151,7 @@ const getLeadListing = async() => {
           </div> */}
 
     
-   
+
     <div className={`card ${className}`}>
       
       
@@ -146,7 +160,7 @@ const getLeadListing = async() => {
       {/* end::Header */}
       {/* begin::Body */}
     
-      <RecipeReviewCard leadListing={leadListing} refreshData={() => setRefreshData(!refreshData)}></RecipeReviewCard>
+      <PropertyCard leadListing={leadListing} refreshData={() => setRefreshData(!refreshData)}></PropertyCard>
         
 
     

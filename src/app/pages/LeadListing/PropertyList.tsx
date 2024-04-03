@@ -1,22 +1,5 @@
 import {FC} from 'react'
 import {PageTitle} from '../../../_metronic/layout/core'
-import {
-    ListsWidget2,
-    ListsWidget3,
-    ListsWidget4,
-    ListsWidget5,
-    ListsWidget6,
-    MixedWidget10,
-    MixedWidget11,
-    MixedWidget2,
-    MixedWidget8,
-    TablesWidget10,
-    TilesWidget1,
-    TilesWidget2,
-    TilesWidget3,
-    TilesWidget4,
-    TilesWidget5,
-  } from '../../../_metronic/partials/widgets'
   import {ListTabularView} from './ListTabularView';
   import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar'
   import { Content } from '../../../_metronic/layout/components/Content'

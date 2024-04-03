@@ -9,13 +9,8 @@ import {deletePropertyDetailById} from '../../Apis/AddPropertyApiList';
 
 export function AlertDialog(props:any) {
     const {id,handleCloseModal} = props;
-    console.log('handleCloseModal',handleCloseModal)
-
+ 
   const [open, setOpen] = React.useState(true);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -31,7 +26,6 @@ export function AlertDialog(props:any) {
         setOpen(false);
         handleCloseModal();
     }
-    console.log('deleteResponse',deleteResponse)
   }
 
   return (

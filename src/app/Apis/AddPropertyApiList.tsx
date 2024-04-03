@@ -213,6 +213,28 @@ export const deletePropertyDetailById  = async (data:any) : Promise<any> => {
 };
 
 
+export const filterPropertySearch = async (data: any) : Promise<any> => {
+  try {
+  const url = 'https://api.propcliq.com/property/search';  
+     
+  const reqOpts: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': Auth_Token
+    },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(url, reqOpts);
+  const jsonResponse = await response.json();
+  console.log('reponse filter Property data' , jsonResponse )
+  return jsonResponse.data;
+} catch (error) {
+  throw error;
+}
+};
+
 
 
 

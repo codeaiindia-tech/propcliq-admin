@@ -4,8 +4,9 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useAuth } from '../core/Auth';
-import {sendOtp} from '../../../Apis/AuthApiList'
+import {sendOtp, sendOtpToPhone} from '../../../Apis/AuthApiList'
 import Verify from  './VerifyOtp';
+
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('Wrong email format').min(3, 'Minimum 3 symbols').max(50, 'Maximum 50 symbols').required('Email is required'),
@@ -27,12 +28,52 @@ const initialValues = {
 
 export function Login() {
     const [loading, setLoading] = useState(false);
-    const [signInViaPhone, setSignInViaPhone] = useState(false);
+    const [signInViaPhone, setSignInViaPhone] = useState(true);
     const { saveAuth, setCurrentUser } = useAuth();
     const [openOtpFlag, setOpenOtpFlag] = useState(false);
     const [ userData, setUserData] =  useState<any>();
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorFlagMsg, setErrorFlagMsg] = useState('');
+    const [phoneNo, setPhoneNo] = useState('');
+
+    const validatePhoneNo = (phoneNo: any) => {
+        if(phoneNo !== '') {
+            setErrorFlag(false)
+            setErrorFlagMsg('')
+            return true
+        } else {
+            setErrorFlag(true)
+            setErrorFlagMsg('Enter Valid Phone Number')
+            return false;
+        }
+        
+    }
+
+    const sendOtpToPhoneNo  = async() => {
+        console.log(phoneNo)
+        setLoading(true);
+        try {
+           if (validatePhoneNo(phoneNo) === true) {
+            const sendOtpToMail = await sendOtpToPhone({"phoneNo" : phoneNo});
+   
+            if(sendOtpToMail?.success === true) {
+                setLoading(false);
+                setOpenOtpFlag(true);
+                // setUserData(values);
+            }else {
+                setErrorFlag(true)
+                setErrorFlagMsg(sendOtpToMail.message)
+                setLoading(false);
+            }
+          
+           } 
+            
+        } catch (error) {
+            console.error(error);
+            saveAuth(undefined);
+            setLoading(false);
+        }  
+    }
     
 
     const formik = useFormik({
@@ -78,7 +119,15 @@ export function Login() {
             {/* begin::Heading */}
 
             {/* begin::Login options */}
-        
+            <div className='row g-3 mb-9'>
+         <a
+            href='#'
+            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
+          >
+           
+            Sign in with Email
+          </a>
+          </div>
             {/* end::Login options */}
 
             {/* begin::Separator */}
@@ -89,8 +138,44 @@ export function Login() {
             )}
             
             {/* end::Separator */}
+            {!signInViaPhone && (
+                  <div className="fv-row mb-8">
+                  <label className="form-label fs-6 fw-bolder text-gray-900">Phone Number</label>
+                  <input
+                      placeholder="Enter Phone No "
+                      onChange={e => setPhoneNo(e.target.value)}
+                    
+                      className={clsx(
+                          'form-control bg-transparent',   
+                      )}
+                      type="phone"
+                      name="phone"
+                      autoComplete="off"
+                  />
+              <div className="fv-row mb-8" style ={{marginTop:'3%'}}>
+                   <button
+                       type="submit"
+                       id="kt_sign_up_submit"
+                       className="btn btn-lg btn-primary w-100 mb-5"
+                       onClick = {sendOtpToPhoneNo}
+                     
+                   >
+                       <span className="indicator-label">Continue</span>
+                    
+                          
+                    
+                   </button>
+                   </div>
+                   </div>
+                   
+                   
 
-            
+            )
+           
+            }
+
+           {signInViaPhone && (
+           <div>
 
             {/* begin::Form group */}
             <div className="fv-row mb-8">
@@ -169,7 +254,7 @@ export function Login() {
                 </button>
             </div>
             {/* end::Action */}
-
+            </div> )}
             <div className="text-gray-500 text-center fw-semibold fs-6">
                 Not a Member yet?{' '}
                 <Link to="/auth/registration" className="link-primary">
@@ -177,6 +262,9 @@ export function Login() {
                 </Link>
             </div>
         </form>)}
+        
+
+
         </>
     );
 }

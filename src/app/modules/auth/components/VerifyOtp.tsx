@@ -21,7 +21,9 @@
 
     const reSendOtp = async() => {
         setOTP("");
+        setInvalidOTP(false)
         const sendOtpToMail = await sendOtp({"email" : userData.email, "password" : userData.password});
+
 
     }
 
@@ -33,7 +35,7 @@
             localStorage.setItem("Auth_Token", verifyOtpToMail.token);
             localStorage.setItem("User_Email", verifyOtpToMail.user.email);
             localStorage.setItem("User_Name", verifyOtpToMail.user.username);
-            navigate('/auth/login');
+            document.location.reload();
         } else {
             setInvalidOTP(true)
         }
