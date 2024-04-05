@@ -2,7 +2,8 @@
 import { FC, useEffect, useState } from 'react'
 import {getPropertyListing, filterPropertySearch} from "../../Apis/AddPropertyApiList";
 import PropertyCard from './CardView';
-
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 type Props = {
   className: string
@@ -14,24 +15,25 @@ type Props = {
 
 
 const TabularList: FC<Props> = ({className, filterData}) => {
-  const [leadListing, setLeadListing] = useState([]);
+  const [propertyLists, setPropertyLists] = useState([]);
   const [refreshData, setRefreshData] = useState(false);
+  const navigate = useNavigate();
 
-const getLeadListing = async() => {
-  const leadListingDetail = await getPropertyListing();
-  setLeadListing(leadListingDetail)
+const getPropertyLists = async() => {
+  const propertyListsDetail = await getPropertyListing();
+  setPropertyLists(propertyListsDetail)
 
 }
 
 
 useEffect(() =>  {
-  getLeadListing();
+  getPropertyLists();
  },[refreshData])
 
 
  const getFilterPropertyList = async() => {
-  const leadListingDetail = await filterPropertySearch(filterData); 
-  setLeadListing(leadListingDetail)
+  const filteredPropertyDetails = await filterPropertySearch(filterData); 
+  setPropertyLists(filteredPropertyDetails)
 
 }
 
@@ -39,13 +41,13 @@ useEffect(() =>  {
     if (filterData) {
       getFilterPropertyList()
     }  else {
-      getLeadListing();
+      getPropertyLists();
     } 
    },[filterData])
 
   return (
     <>
-      <div style = {{padding:'1%', backgroundColor:'#338fad', marginBottom:'2%'}}className='card-header border-0 pt-5'>
+      <div style = {{padding:'1%', backgroundColor:'#d1e6ff', marginBottom:'2%'}}className='card-header border-0 pt-5'>
       <div style={{padding:'1%'}}>
       {/* <div className=" row ">
                 <div className="col-xl-3">
@@ -118,15 +120,20 @@ useEffect(() =>  {
 
             <div className=" row " style={{paddingTop:'1%'}}>
             <div className="col-xl-6">
-             <h3 style = {{color:'white'}}> <strong> Property Listing </strong></h3>
+             <h3 > <strong> Property Listing </strong></h3>
             </div>
           
           
               </div>
 
-            <div className=" row " style={{paddingTop:'1%', color:'white'}}>
-            <div className="col-xl-6">
-              <strong>Showing {leadListing?.length} properties</strong>
+            <div className=" row " style={{paddingTop:'1%'}}>
+            <div className="col-xl-10">
+              <strong>Showing {propertyLists?.length} properties</strong>
+            </div>
+            <div className="col-xl-2">
+            <Button onClick={() => navigate('/addproperty')} variant="contained" color="primary"  style={{ marginTop: '20px' }}>
+                      Add New Property
+            </Button>
             </div>
           
           
@@ -160,7 +167,7 @@ useEffect(() =>  {
       {/* end::Header */}
       {/* begin::Body */}
     
-      <PropertyCard leadListing={leadListing} refreshData={() => setRefreshData(!refreshData)}></PropertyCard>
+      <PropertyCard propertyLists={propertyLists} refreshData={() => setRefreshData(!refreshData)}></PropertyCard>
         
 
     

@@ -2,7 +2,6 @@
 import clsx from 'clsx'
 import React from 'react'
 import {KTIcon} from '../../../_metronic/helpers';
-import {FilterDropdown} from './ListFilter';
 import {useThemeMode} from '../../../_metronic/partials/layout/theme-mode/ThemeModeProvider'
 import RadioButtonBox from '../../modules/wizards/components/RadioBox/RadioBox';
 

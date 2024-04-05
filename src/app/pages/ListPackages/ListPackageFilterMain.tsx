@@ -15,14 +15,6 @@ type Props = {
 
 
 const ListPackageFilterMain: React.FC<Props> = ({className}) => {
-    const {mode} = useThemeMode();
-    const lockInPeriod = ['test', 'non-test'];
-    const  sectorList = ['Residential', 'Commercial' ];
-    const serviceList = ['Buy', 'Rent', 'PG'];
-    const propertyType = ['Apartment', 'Independent Floor', 'Independent House', 'Villa', 'Plot', 'Agricultural Land']
-  const bhk = ['2 BHK', '2.5 BHK', '3 BHK', '3.5 BHK', '3+ BHK', 'Plot'];
-  const saleType = ['New project', 'Resale Properties'];
-  const listedBy = ['Investor Delights(Myself) (430)', 'Rakesh kumar(55)'];
     return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -45,12 +37,8 @@ const ListPackageFilterMain: React.FC<Props> = ({className}) => {
       {/* end::Header */}
       {/* begin::Body */}
       <div className='card-body pt-2'>
-     
-
-
-
-
-  <div className='mb-10'>
+  
+      <div className='mb-10'>
           <label className='form-label fw-semibold'>Package status:</label>
 
           <div  className='d-flex justify-content-end'>
@@ -59,14 +47,14 @@ const ListPackageFilterMain: React.FC<Props> = ({className}) => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              defaultValue={'1'}
+              defaultValue={'Active'}
             >
               
               <option value='Active'>Active product</option>
               <option value='Upcoming'>Upcoming Product</option>
               <option value='Expired'>Expired Product</option>
             </select>
-            <button type='submit' className='btn btn-sm btn-primary' data-kt-menu-dismiss='true'>
+            <button style = {{marginRight:'1%'}}type='submit' className='btn btn-sm btn-primary' data-kt-menu-dismiss='true'>
             Apply
           </button>
           </div>

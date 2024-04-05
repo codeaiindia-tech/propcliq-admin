@@ -3,6 +3,7 @@ import { Dropzone, FileMosaic } from "@dropzone-ui/react";
 import { DropzoneArea } from "mui-file-dropzone";
 import { SaveStep3 } from '../../Apis/AddPropertyApiList';
 import { Button } from '@mui/material';
+import {PhotoApp} from './Photo'
 
 const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
@@ -31,7 +32,9 @@ const Step3: FC<any> = (props: any) => {
                  Add Property Photos
             </h2>
            <div>
-    <Dropzone onChange={updateFiles} value={files} uploadConfig={{
+
+           <PhotoApp></PhotoApp>
+    {/* <Dropzone onChange={updateFiles} value={files} uploadConfig={{
       url: `https://api.propcliq.com/property/step3/image/${propertyId}`,
       method: "POST",
       headers: {
@@ -42,7 +45,7 @@ const Step3: FC<any> = (props: any) => {
       {files.map((file:any, key:any) => (
         <FileMosaic key={key} {...file} preview />
       ))}
-    </Dropzone>
+    </Dropzone> */}
     </div>
     <div>
 

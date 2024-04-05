@@ -29,12 +29,14 @@ const ListTabularView: FC<Props> = ({className}) => {
             <thead>
               <tr className='fw-bold text-muted'>
                 <th className='w-25px'>
-                
+               
                 </th>
-                <th className='min-w-150px'></th>
-                <th className='min-w-140px'></th>
-                <th className='min-w-120px'></th>
-                <th className='min-w-100px text-end'></th>
+                <th className='min-w-150px'>  Package Name  </th>
+                <th className='min-w-140px'> Start Date   </th>
+                <th className='min-w-120px'> End Date  </th>
+                <th className='min-w-120px'> Boosted listing  </th>
+                <th className='min-w-100px '>  Listing cap </th>
+                <th className='min-w-100px '>  Status </th>
               </tr>
             </thead>
             {/* end::Table head */}
@@ -58,40 +60,35 @@ const ListTabularView: FC<Props> = ({className}) => {
                   </div>
                 </td>
                 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Start Date
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Oct,2023
                   </span>
                   </td>
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   End Date
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Dec,2023
                   </span>
                   </td>
 
 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Boosted listing
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
                   </td>
 
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Listing cap
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
                   </td>
+                  <td>
+                  <span className='badge badge-light-primary fs-8 fw-bold'>Upcoming</span>
                 
+                  </td>
                 
               </tr>
 
@@ -113,38 +110,34 @@ const ListTabularView: FC<Props> = ({className}) => {
                   </div>
                 </td>
                 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Start Date
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Oct,2023
                   </span>
                   </td>
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   End Date
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Dec,2023
                   </span>
                   </td>
 
 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Boosted listing
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
                   </td>
 
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Listing cap
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
+                  </td>
+                  <td>
+                  <span className="badge badge-light-success fs-8 fw-bold">Active</span>
+              
                   </td>
                 
                 
@@ -169,38 +162,34 @@ const ListTabularView: FC<Props> = ({className}) => {
                   </div>
                 </td>
                 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Start Date
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Oct,2023
                   </span>
                   </td>
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   End Date
-                  </a>
+                
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Dec,2023
                   </span>
                   </td>
 
 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Boosted listing
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
                   </td>
 
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Listing cap
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
+                  </td>
+                  <td>
+                  <span className="badge badge-light-success fs-8 fw-bold">Active</span>
+              
                   </td>
                 
                 
@@ -225,38 +214,34 @@ const ListTabularView: FC<Props> = ({className}) => {
                   </div>
                 </td>
                 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Start Date
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Oct,2023
                   </span>
                   </td>
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   End Date
-                  </a>
+                  
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    21 Dec,2023
                   </span>
                   </td>
 
 <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Boosted listing
-                  </a>
+                 
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
                   </td>
 
                   <td>
-                  <a href='#' className='badge badge-light-primary fs-8 fw-bold'>
-                   Listing cap
-                  </a>
+                
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    0
                   </span>
+                  </td>
+                  <td>
+               
+                  <span className="badge badge-light-danger fs-8 fw-bold">Expired</span>
                   </td>
                 
                 

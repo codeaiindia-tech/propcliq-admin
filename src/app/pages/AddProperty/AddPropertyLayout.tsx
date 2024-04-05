@@ -4,44 +4,19 @@ import { Step1 } from './AddPropertyDetail';
 import { Step2 } from './AddAddressDetail';
 import {Step3} from './AddPhoto';
 import {Step4} from   './ReviewPropertyDetail';
-// import { Previews } from './PhotoUpload';
-// import { Step3 } from './steps/Step3';
-// import { Step4 } from './steps/Step4';
-// import { Step5 } from './steps/Step5';
 import { StepperComponent } from '../../../_metronic/assets/ts/components';
-import { Form, Formik, FormikValues } from 'formik';
-// import { createAccountSchemas, ICreateAccount, inits } from './CreateAccountWizardHelper';
-import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
 import { Content } from '../../../_metronic/layout/components/Content';
 
-import { useNavigate } from 'react-router-dom';
 const AddPropertyLayout = () => {
     const [stepNumber, setStepNumber] = useState('1');
     const [propertyType, setPropertyType] = useState('Residential');
     const [reviewData, setReviewData] = useState();
     const stepperRef = useRef<HTMLDivElement | null>(null);
     const [stepper, setStepper] = useState<StepperComponent | null>(null);
-    // const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
-    // const [initValues] = useState<ICreateAccount>(inits);
-    // const navigate = useNavigate();
     const loadStepper = () => {
       setStepper(StepperComponent.createInsance(stepperRef.current as HTMLDivElement));
     };
 
-    // const prevStep = () => {
-    //   if (!stepper) {
-    //     return;
-    //   }
-
-    //   stepper.goPrev();
-
-    //   setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
-    // };
-
-    // const submitStep = (values: ICreateAccount, actions: FormikValues) => {
-    //   if (!stepper) {
-    //     return;
-    //   }
 
       if (stepper?.currentStepIndex !== stepper?.totalStepsNumber) {
         stepper?.goNext();
@@ -50,13 +25,13 @@ const AddPropertyLayout = () => {
     
       }
 
-    //   console.log(values);
-
-    //   setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
-    // };
     const handleCommSubmitStep1 = (val: string): any => {
         setPropertyType(val);
     };
+
+    const handleSubmitStep0 = () => {
+        setStepNumber('1'); 
+    }
 
     const handleSubmitStep1 = () => {
         setStepNumber('2');
@@ -71,8 +46,8 @@ const AddPropertyLayout = () => {
     }
 
     const sendDataToReview =(data:any) => {
-console.log('data',data)
-setReviewData(data)
+
+    setReviewData(data)
     }
     useEffect(() => {
       if (!stepperRef.current) {
@@ -122,7 +97,7 @@ setReviewData(data)
                             {/* begin::Nav*/}
                             <div className="stepper-nav">
                                 {/* begin::Step 1*/}
-                                <div className= {stepNumber >= '1' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
+                                <div onClick={handleSubmitStep0} className= {stepNumber >= '1' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -148,7 +123,7 @@ setReviewData(data)
                                 {/* end::Step 1*/}
 
                                 {/* begin::Step 2*/}
-                                <div className= {stepNumber >= '2' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
+                                <div onClick={handleSubmitStep1} className= {stepNumber >= '2' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -174,7 +149,7 @@ setReviewData(data)
                                 {/* end::Step 2*/}
 
                                 {/* begin::Step 3*/}
-                                <div className= {stepNumber >= '3' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
+                                <div onClick={handleSubmitStep2} className= {stepNumber >= '3' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -202,7 +177,7 @@ setReviewData(data)
                               
 
                                 {/* begin::Step 5*/}
-                                <div className= {stepNumber >= '4' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
+                                <div onClick={handleSubmitStep3} className= {stepNumber >= '4' ? 'stepper-item current' : 'stepper-item'} data-kt-stepper-element="nav">
                                     {/* begin::Wrapper*/}
                                     <div className="stepper-wrapper">
                                         {/* begin::Icon*/}
@@ -233,20 +208,13 @@ setReviewData(data)
                         <div className="current" style ={{width:'100%'}}  data-kt-stepper-element="content">
 
                             {RenderComponent(stepNumber)}
-                            {/* {stepNumber === '1' ? (
-                                <Step1 handleSubmitStep1={handleSubmitStep1} handleCommSubmitStep1={handleCommSubmitStep1} />
-                            ) : (
-                                <Step2  handleSubmitStep2 = {handleSubmitStep2} />
-                            )} */}
+                        
                         </div>
 
-                        {/* <div data-kt-stepper-element='content'>
-              <Step2 />
-            </div> */}
+                       
 
                         <div data-kt-stepper-element="content"><Step2 /></div>
 
-                        {/* <div data-kt-stepper-element="content"><Step4 /></div> */}
 
                         <div data-kt-stepper-element="content">{/* <Step5 /> */}</div>
 
@@ -258,9 +226,7 @@ setReviewData(data)
                                 </button>
                             </div>
                         </div>
-                        {/* </Form>
-              )}
-            </Formik> */}
+                       
                     </div>
                 </div>
             </Content>

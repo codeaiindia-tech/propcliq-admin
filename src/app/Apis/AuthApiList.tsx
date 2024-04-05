@@ -41,6 +41,25 @@ export const sendOtp  = async (data: any) : Promise<any> => {
   }
   };
 
+  export const verifyOtpOnPhone  = async (data:any) : Promise<any> => {
+    try {
+    const url = '  https://api.propcliq.com/verify-otp/login-with-phone';         
+    const reqOpts: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+  
+    const response = await fetch(url, reqOpts);
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    throw error;
+  }
+  };
+
   export const sendOtpToPhone  = async (data: any) : Promise<any> => {
     try {
     const url = 'https://api.propcliq.com/auth/login-with-phone';          
@@ -80,6 +99,10 @@ export const sendOtp  = async (data: any) : Promise<any> => {
     throw error;
   }
   };
+
+
+
+
 
 
   export const  userRegister= async (data: any) : Promise<any> => {

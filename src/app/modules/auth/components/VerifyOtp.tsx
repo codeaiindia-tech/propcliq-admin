@@ -2,18 +2,15 @@
     import React, { useState } from "react";
     import "../Style/OtpStyle.css";
     import clsx from 'clsx';
-    import {sendOtp, verifyOtp} from '../../../Apis/AuthApiList';
-    import { useAuth } from '../core/Auth';
+    import {sendOtp, verifyOtp, sendOtpToPhone, verifyOtpOnPhone} from '../../../Apis/AuthApiList';
     import { Link } from 'react-router-dom';
     import { useNavigate } from 'react-router-dom';
 
     function Verify(props:any) {
-        const {userData} =  props;
+        const {userData, signInViaPhone, backToSignIn} =  props;
         const navigate = useNavigate();
-    const [OTP, setOTP] = useState("");
-    const [invalidOTP, setInvalidOTP] = useState<boolean>(false);
-    const { saveAuth, setCurrentUser } = useAuth();
-
+        const [OTP, setOTP] = useState("");
+        const [invalidOTP, setInvalidOTP] = useState<boolean>(false);
 
     function handleChange(OTP:any) {
         setOTP(OTP);
@@ -22,28 +19,46 @@
     const reSendOtp = async() => {
         setOTP("");
         setInvalidOTP(false)
-        const sendOtpToMail = await sendOtp({"email" : userData.email, "password" : userData.password});
-
-
-    }
-
-    const verifyEmailOtp = async () => {
-
-        const verifyOtpToMail = await verifyOtp({"email" : userData.email, "otp" : OTP});
-
-        if (verifyOtpToMail.success === true) {
-            localStorage.setItem("Auth_Token", verifyOtpToMail.token);
-            localStorage.setItem("User_Email", verifyOtpToMail.user.email);
-            localStorage.setItem("User_Name", verifyOtpToMail.user.username);
-            document.location.reload();
-        } else {
-            setInvalidOTP(true)
+        if (signInViaPhone) {
+             await sendOtpToPhone({"phoneNo" : userData.phoneNo});  
+        }else {
+            await sendOtp({"email" : userData.email, "password" : userData.password});
         }
         
 
-   
-                // setCurrentUser(verifyOtpToMail.user);
-        
+    }
+
+    const handleCancel = () => {
+        backToSignIn();
+    }
+
+    const verifyEmailOtp = async () => {
+    
+
+        if (signInViaPhone) {
+
+         const verifyOtpToPhone =  await verifyOtpOnPhone({"phone" : userData.phoneNo, "otp" : OTP});
+            if (verifyOtpToPhone?.success === true) {
+                
+                localStorage.setItem("Auth_Token", verifyOtpToPhone.token);
+                localStorage.setItem("User_Email", verifyOtpToPhone.user.phone);
+                localStorage.setItem("User_Name", verifyOtpToPhone.user.username);
+                document.location.reload();
+            } else {
+                setInvalidOTP(true)
+            }
+    
+       }   else {
+          const  verifyOtpToMail =  await verifyOtp({"email" : userData.email, "otp" : OTP});
+            if (verifyOtpToMail ?.success === true) {
+                localStorage.setItem("Auth_Token", verifyOtpToMail.token);
+                localStorage.setItem("User_Email", verifyOtpToMail.user.email);
+                localStorage.setItem("User_Name", verifyOtpToMail.user.username);
+                document.location.reload();
+            } else {
+                setInvalidOTP(true)
+            }
+       }
 
     }
     return (
@@ -57,7 +72,8 @@
         
         
         <div className="otpElements">
-        <div className="py-3"> An OTP has been sent to your entered email <strong>{userData.email}</strong></div>
+       {!signInViaPhone && (<div className="py-3"> An OTP has been sent to your entered email <strong>{userData.email}</strong></div>)}
+       {signInViaPhone && (<div className="py-3"> An OTP has been sent to your entered Phone No. <strong>{userData.phoneNo}</strong></div>)}
         <div className="py-3"> Enter your Code here</div>
             <div className="otp">
             <OTPInput
@@ -79,23 +95,19 @@
                             >
                               Resend
                             </a>
-            {/* <p className="resend">Resend</p> */}
         </div>
         <div className="text-center">
                 <button
                     type="submit"
                     id="kt_sign_up_submit"
                     className="btn btn-lg btn-primary w-100 mb-5"
-                    onClick = {verifyEmailOtp}
-                  
+                    onClick = {verifyEmailOtp}                  
                 >
                     <span className="indicator-label">Verify</span>
                  
-                       
-                 
                 </button>
                 <Link to="/auth/login">
-                    <button type="button" id="kt_login_signup_form_cancel_button" className="btn btn-lg btn-light-primary w-100 mb-5">
+                    <button onClick= {handleCancel} type="button" id="kt_login_signup_form_cancel_button" className="btn btn-lg btn-light-primary w-100 mb-5">
                         Cancel
                     </button>
                 </Link>

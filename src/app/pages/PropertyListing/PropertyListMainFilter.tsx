@@ -15,7 +15,6 @@ type Props = {
 
 
 const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
-  console.log('propssss', props)
   const {className, sendFilterData} = props;
   
     const {mode} = useThemeMode();
@@ -33,10 +32,17 @@ const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
   const [propertyTypeValue, setPropertyTypeValue] =  useState('');
 
   const handleFilterProperty = () => {
-    const data = {
-      "category": sector,
-      "property_type": propertyTypeValue,
-      "bhk": bhkValue
+
+    const data : any = {}
+
+    if (sector !== '' && sector !== 'Select'){
+      data.category = sector;
+    }
+    if (propertyTypeValue !== '' && propertyTypeValue !== 'Select'){
+      data.property_type = propertyTypeValue;
+    }
+    if (bhkValue !== '' && bhkValue !== 'Select'){
+      data.bhk = bhkValue;
     }
     sendFilterData(data)  
   }
@@ -46,7 +52,6 @@ const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
     setBhkValue('')
     setPropertyTypeValue('')
     const data = {}
-    
     sendFilterData(data)  
   }
   
@@ -83,11 +88,11 @@ const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              defaultValue={'1'}
+              defaultValue={'Select'}
               value={sector} 
               onChange={(e) => setSector(e.target.value)} 
             >
-            <option value='1'>Select</option>
+            <option value='Select'>Select</option>
             {sectorList.map( (x) => (
               <option value={x} >{x}</option>
             )
@@ -108,11 +113,11 @@ const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              defaultValue={'1'}
+              defaultValue={'Select'}
               value={propertyTypeValue} 
               onChange={(e) => setPropertyTypeValue(e.target.value)} 
             >
-              <option value='1'>Select</option>
+              <option value='Select'>Select</option>
           
             {propertyType.map(x => (
                <option value={x} >{x}</option>
@@ -133,11 +138,11 @@ const PropertyListMainFilter: React.FC<Props> = (props:any ) => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              defaultValue={'1'}
+              defaultValue={'Select'}
               value={bhkValue} 
               onChange={(e) => setBhkValue(e.target.value)} 
             >
-              <option value='1'>Select</option>
+              <option value='Select'>Select</option>
               {bhk.map(x => (
                <option value={x} >{x}</option>
             ))}

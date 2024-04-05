@@ -48,6 +48,7 @@ export function Login() {
         }
         
     }
+    
 
     const sendOtpToPhoneNo  = async() => {
         console.log(phoneNo)
@@ -55,11 +56,12 @@ export function Login() {
         try {
            if (validatePhoneNo(phoneNo) === true) {
             const sendOtpToMail = await sendOtpToPhone({"phoneNo" : phoneNo});
+            console.log('sendOtpToMail',sendOtpToMail)
    
             if(sendOtpToMail?.success === true) {
                 setLoading(false);
                 setOpenOtpFlag(true);
-                // setUserData(values);
+                setUserData({'phoneNo': phoneNo });
             }else {
                 setErrorFlag(true)
                 setErrorFlagMsg(sendOtpToMail.message)
@@ -103,12 +105,17 @@ export function Login() {
             }
         },
     });
+const backToPage= () => {
+    setOpenOtpFlag(!openOtpFlag)
+    setPhoneNo('')
+}
+   
 
     return (
         <>
         {openOtpFlag && (
             // <OTPApp></OTPApp>
-            <Verify userData={userData}></Verify>
+            <Verify backToSignIn = {backToPage} signInViaPhone={signInViaPhone} userData={userData}></Verify>
         )}
        {!openOtpFlag && ( <form className="form w-100" onSubmit={formik.handleSubmit} noValidate id="kt_login_signin_form">
             {/* begin::Heading */}
@@ -119,13 +126,13 @@ export function Login() {
             {/* begin::Heading */}
 
             {/* begin::Login options */}
-            <div className='row g-3 mb-9'>
+            <div className='row g-3 mb-9' onClick={() => setSignInViaPhone(!signInViaPhone)}>
          <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
           >
            
-            Sign in with Email
+           {signInViaPhone   ?   'Sign in with Email and Password' : 'Sign in Via Phone'}
           </a>
           </div>
             {/* end::Login options */}
@@ -138,7 +145,7 @@ export function Login() {
             )}
             
             {/* end::Separator */}
-            {!signInViaPhone && (
+            {signInViaPhone && (
                   <div className="fv-row mb-8">
                   <label className="form-label fs-6 fw-bolder text-gray-900">Phone Number</label>
                   <input
@@ -174,7 +181,7 @@ export function Login() {
            
             }
 
-           {signInViaPhone && (
+           {!signInViaPhone && (
            <div>
 
             {/* begin::Form group */}

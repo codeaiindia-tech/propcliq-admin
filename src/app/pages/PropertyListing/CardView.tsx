@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router';
 
 
 export default function PropertyCard(props:any) {
-    const {leadListing,refreshData} = props;
+    const {propertyLists,refreshData} = props;
     const [propertyId, setPropertyId] = React.useState();
 
   const [deleteFlagModal, setDeleteFlagModal] = React.useState(false);
@@ -37,7 +37,7 @@ export default function PropertyCard(props:any) {
       <Box style = {{padding:'1%'}} sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
      
-    {leadListing?.map((listItem: any, index: any) => (   
+    {propertyLists?.map((listItem: any, index: any) => (   
  
  
  <Grid item xs={4} key = {index}>

@@ -83,7 +83,7 @@ export function Registration() {
 
     return (
         <> {openOtpFlag && (
-            // <OTPApp></OTPApp>
+
             <Verify userData={userData}></Verify>
         )}
        

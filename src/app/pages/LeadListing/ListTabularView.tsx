@@ -101,7 +101,7 @@ const ListTabularView: FC<Props> = ({className}) => {
               `text-m`
             )}
           >
-            {listItem.name.charAt(0)} 
+            {listItem?.name?.charAt(0)} 
           </div>
                     
                     </div>
@@ -142,24 +142,7 @@ const ListTabularView: FC<Props> = ({className}) => {
             <Button variant="contained" onClick={() => sendMail(listItem.email)} color="primary"  style={{ marginTop: '20px' }}>
                Send Mail
             </Button>
-            
-{/* 
-          {showContact && ( <div>
-            <div style ={{padding:'2%'}}>Phone : <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.phone}</span></div>
-            <div style ={{padding:'2%'}}> Email :    <span className='badge badge-light-primary fs-8 fw-bold'>{listItem.email}</span> 
-            <button
-            type='button'
-            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-            onClick={() => sendMail(listItem.email)}
-          ><KTIcon iconName='send' className='fs-2' />
-          </button></div> 
-
-
-            </div> )} */}
-            
+                       
                 </td>
                
                 </tr>

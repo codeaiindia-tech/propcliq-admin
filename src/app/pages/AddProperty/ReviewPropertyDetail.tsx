@@ -1,11 +1,9 @@
 import React,{useEffect, useState } from 'react';
 import { KTIcon, toAbsoluteUrl } from '../../../_metronic/helpers';
 import { Link } from 'react-router-dom';
-import { Dropdown1 } from '../../../_metronic/partials';
 import clsx from 'clsx';
 import { useLocation } from 'react-router';
-import { Toolbar } from '../../../_metronic/layout/components/toolbar/Toolbar';
-import { Content } from '../../../_metronic/layout/components/Content';
+
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
 import {getPropertyDetailById} from "../../Apis/AddPropertyApiList";

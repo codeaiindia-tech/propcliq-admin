@@ -1,17 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
-import { KTIcon } from '../../../_metronic/helpers';
-import { ErrorMessage, Field } from 'formik';
-import { TextField, Button, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { TextField} from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import {SaveStep2, getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 import {getProjectList} from '../../Apis/ProjectAPIList';
-import { X } from '@mui/icons-material';
 
-const options = ['Option 1', 'Option 2'];
 const Step2: FC<any> = (props:any) => {
     const [city, setCity] = useState<string>('');
     const [building, setBuilding] = useState<string | null>('');
+    const [newProjectVal, setNewProjectVal] = useState<string>('');
     const [locality, setLocality] = useState<string>('');
     const [country, setCountry] = useState<string>('');
     const [stateValue, setStateValue] = useState<string>('');
@@ -23,7 +19,8 @@ const Step2: FC<any> = (props:any) => {
     const [countryError, setCountryError] = useState<string>('');
     const [floorNoError, setFloorNoError] = useState<string>('');
     const [totalFloorsError, setTotalFloorsError] = useState<string>('');
-  
+    const [cityError, setCityErrorr] = useState<string>('');
+    const [newProjectError, setNewProjectError] = useState<string>('');
     const [inputValue, setInputValue] = React.useState('');
     const [projectDetail, setProjectDetail] =  React.useState<any>();
     const [projectOption, setProjectOption] =  React.useState<any>([]);
@@ -62,6 +59,21 @@ const Step2: FC<any> = (props:any) => {
             setCountry('');
         }
 
+        if (!city) {
+            setCityErrorr('Please enter City');
+            isValid = false;
+        } else {
+            setCityErrorr('');
+        }
+
+        if (building === "No Project found, add New Project" && !newProjectVal) {
+            setNewProjectError('Please enter Project');
+            isValid = false;
+        } else {
+            setNewProjectError('');
+        }
+
+
 
         if (totalFloors && isNaN(Number(totalFloors))) {
             setTotalFloorsError('Please enter valid total floors');
@@ -76,11 +88,15 @@ const Step2: FC<any> = (props:any) => {
             const url: URL = new URL(window.location.href);
             const params: URLSearchParams = url.searchParams;
             const propertyId: any = params.get('id');
+            let projectValue = building
+          if(building === "No Project found, add New Project") {
+            projectValue = newProjectVal;
+          }
            const data = {
                 "property_id": propertyId,
                 "address_details": {
                     "area": city,
-                    "project": building,
+                    "project": projectValue,
                     "locality": locality,
                     "flat_no": flatNo,
                     "floor_no":floorNo,
@@ -89,7 +105,7 @@ const Step2: FC<any> = (props:any) => {
             }
                 
 
-         const saveData =  SaveStep2(data);
+          SaveStep2(data);
          props.handleSubmitStep2();
             console.log('Form submitted successfully');
         }
@@ -100,7 +116,6 @@ const Step2: FC<any> = (props:any) => {
         const params: URLSearchParams = url.searchParams;
         const propertyId: any = params.get('id');
         const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
-        console.log('getPropertyList',fetchPropertyDetail)
         if(fetchPropertyDetail?.address_details) {
             const {project, flat_no, floor_no, total_floors} = fetchPropertyDetail?.address_details;
             setInputValue(project)
@@ -113,10 +128,6 @@ const Step2: FC<any> = (props:any) => {
        
       }
   
-      const initalState = () => {
-        console.log('2')
-       
-      }
 
     useEffect(() =>  {
         const url: URL = new URL(window.location.href);
@@ -124,19 +135,15 @@ const Step2: FC<any> = (props:any) => {
         const propertyId: any = params.get('id');
 
         if(propertyId){
-
           getPropertyDetail();
-        }  else {
-
-          initalState();
-        }     
+        }      
        },[])
 
        const getProjectDetailList = async() => {
         const fetchProjectDetail = await getProjectList();
         setProjectDetail(fetchProjectDetail)
         const projectNameList:any[] = [];
-        projectNameList.push("No Project found");
+        projectNameList.push("No Project found, add New Project");
         fetchProjectDetail.map((x:any) => {
             projectNameList.push(x.name);
         })        
@@ -148,8 +155,12 @@ const Step2: FC<any> = (props:any) => {
        },[])
 
        useEffect(() =>  {
-        if(inputValue === 'No Project found'){
-            setIsProjectFlag(false)
+        if(inputValue === 'No Project found, add New Project'){
+            setIsProjectFlag(false);
+            setCity('');
+            setLocality('');
+            setCountry('');
+            setStateValue('');
         } else {
            const projectByName =  projectDetail?.find((x:any) => x.name === inputValue);
            if (projectByName) {
@@ -189,10 +200,23 @@ const Step2: FC<any> = (props:any) => {
         renderInput={(params) => <TextField {...params} label="Search Project" />}
             />
 
-{!isProjectFlag && (      <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '20px' }}>
+{!isProjectFlag && (       <TextField
+            label="Add Your Project"
+            placeholder="Search City"
+                variant="outlined"
+                fullWidth
+                value={newProjectVal}
+                required
+                error={!!newProjectError}
+                helperText={newProjectError}
+                onChange={(e) => setNewProjectVal(e.target.value)}
+                style={{ marginTop: '20px' }}
+            />)}
+
+{/* {!isProjectFlag && (      <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '20px' }}>
               + Add Your Project
-            </Button>)}
-{isProjectFlag && (
+            </Button>)} */}
+
 <div>
             
             <TextField
@@ -201,6 +225,9 @@ const Step2: FC<any> = (props:any) => {
                 variant="outlined"
                 fullWidth
                 value={city}
+                required
+                error={!!cityError}
+                helperText={cityError}
                 onChange={(e) => setCity(e.target.value)}
                 style={{ marginTop: '20px' }}
             />
@@ -303,7 +330,7 @@ const Step2: FC<any> = (props:any) => {
             </button>
           </div>
       
-            </div>)}
+            </div>
         </div>
     );
 };
