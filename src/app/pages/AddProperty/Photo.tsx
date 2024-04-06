@@ -1,18 +1,67 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ImageUploading from 'react-images-uploading';
 import clsx from 'clsx'
 import { Box } from '@mui/material';
+import { getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 
 
-export function PhotoApp() {
-  const [images, setImages] = React.useState([]);
+const PhotoApp: React.FC<any> = () => {
+  const [images, setImages] = React.useState<any>([]);
+  const [property, setProperty] = React.useState<any>({});
   const maxNumber = 69;
-  const [activeIndex, setActiveIndex] = useState(null);
-  const onChange = (imageList :any, addUpdateIndex:any) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const url: URL = new URL(window.location.href);
+  const params: URLSearchParams = url.searchParams;
+  const property_id: any = params.get('id');
+  const onChange = async (imageList :any, addUpdateIndex:any) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
+
+  const getPropertyDetail = async() => {
+    const url: URL = new URL(window.location.href);
+    const params: URLSearchParams = url.searchParams;
+    const propertyId: any = params.get('id');
+    const fetchPropertyDetail = await getPropertyDetailById({id:propertyId});
+    setProperty(fetchPropertyDetail);
+  }
+
+  useEffect(() =>  {
+    const url: URL = new URL(window.location.href);
+    const params: URLSearchParams = url.searchParams;
+    const propertyId: any = params.get('id');
+    if(propertyId){
+      getPropertyDetail();
+    }      
+   },[])
+
+  const onUploadImages = async () => {
+    const formData = new FormData();
+    for (const file of images) {
+      formData.append('files', file.file);
+    }
+    formData.append('default', `${activeIndex}`);
+    try {
+      const response = await fetch(`https://api.propcliq.com/property/step3/images/${property_id}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")))
+        },
+        body: formData
+      });
+      const jsonResponse = await response.json();
+      console.log('reponse' , jsonResponse )
+      return jsonResponse.data;
+    } catch (error) {
+      throw error;
+    }  
+  }
+
+  const onError = (errors:any, files:any) => {
+    console.log(errors, files);
+  };
+
   const handleClick = (index:any) => {
     setActiveIndex(index);
   };
@@ -24,6 +73,7 @@ export function PhotoApp() {
         onChange={onChange}
         maxNumber={maxNumber}
         dataURLKey="data_url"
+        onError={onError}
       >
         {({
           imageList,
@@ -58,8 +108,20 @@ export function PhotoApp() {
 
         </div>
            </div>
+           <button className='btn btn-sm btn-primary' onClick={onUploadImages}>Upload</button>
            {imageList.length > 0 && (<h2 style= {{marginTop:'3%'}}>Preview Photos</h2>)}
            <div style={{ display: 'flex', flexWrap:'wrap' }}>
+
+
+
+           {/* <>
+           {property && property.files.map((item: any,  index:any) => (
+            <Box key={index} position="relative" width="300px" height="200px">
+              <img src={item.path} alt="Background" style={{ width: '100%', height: '100%' }} />
+            </Box>
+           ))}
+           
+      </> */}
            {imageList.map((image: any, index:any) => (
             <>
            <Box key ={index} style = {{border: index === activeIndex ? '5px solid #1b84ff' : '', flex: '0 1 calc(33.333% - 10px)' , margin: '5%'}} position="relative" width="300px" height="200px">
@@ -94,3 +156,5 @@ export function PhotoApp() {
     </div>
   );
 }
+
+export { PhotoApp };
