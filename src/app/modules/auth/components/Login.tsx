@@ -55,7 +55,7 @@ export function Login() {
         setLoading(true);
         try {
            if (validatePhoneNo(phoneNo) === true) {
-            const sendOtpToMail = await sendOtpToPhone({"phoneNo" : phoneNo});
+            const sendOtpToMail = await sendOtpToPhone({"phone" : phoneNo});
             console.log('sendOtpToMail',sendOtpToMail)
    
             if(sendOtpToMail?.success === true) {
@@ -168,9 +168,6 @@ const backToPage= () => {
                      
                    >
                        <span className="indicator-label">Continue</span>
-                    
-                          
-                    
                    </button>
                    </div>
                    </div>

@@ -20,7 +20,7 @@
         setOTP("");
         setInvalidOTP(false)
         if (signInViaPhone) {
-             await sendOtpToPhone({"phoneNo" : userData.phoneNo});  
+             await sendOtpToPhone({"phone" : userData.phoneNo});  
         }else {
             await sendOtp({"email" : userData.email, "password" : userData.password});
         }
