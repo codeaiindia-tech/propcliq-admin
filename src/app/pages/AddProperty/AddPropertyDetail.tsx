@@ -298,7 +298,7 @@
     };
 
     const handleSubmitFirstStep = async () => {
-      const errors = {
+      const errors:any = {
         propertyTypeActive: !propertyTypeActive
           ? "Please select the category"
           : "",
@@ -361,7 +361,7 @@
           return;
         }
       }
-      let data = {
+      let data:any = {
         category: propertyTypeActive,
         service: lookingIntoActive,
         property_type: propertyTypeGroupActive,

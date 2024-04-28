@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { KTIcon } from "../../../../../_metronic/helpers";
+import { KTIcon } from "./../../../_metronic/helpers";
 import { Formik, Form, ErrorMessage } from "formik";
 // import FormControl from "@mui/material/FormControl";
 import {
@@ -10,10 +10,8 @@ import {
   FormControlLabel,
   Box,
 } from "@mui/material";
-import RadioButtonBox from "../RadioBox/RadioBox";
+import RadioButtonBox from "../../modules/wizards/components/RadioBox/RadioBox";
 import TextField from "@mui/material/TextField";
-import DatePickerInput from "./DatePicker";
-import BasicForm from "./BasicForm";
 import { string } from "yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import { IconButton } from "@mui/material";
@@ -305,7 +303,7 @@ const AddProject: FC<any> = (props: any) => {
   };
 
   const handleSubmitFirstStep = () => {
-    const errors = {
+    const errors:any = {
       propertyTypeActive: !propertyTypeActive
         ? "Please select the category"
         : "",

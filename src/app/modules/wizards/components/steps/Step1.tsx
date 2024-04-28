@@ -300,7 +300,7 @@ const Step1: FC<any> = (props: any) => {
   };
 
   const handleSubmitFirstStep = () => {
-    const errors = {
+    const errors:any = {
       propertyTypeActive: !propertyTypeActive
         ? "Please select the category"
         : "",
@@ -358,7 +358,7 @@ const Step1: FC<any> = (props: any) => {
     // setAvailableFromDateError(errors.availableFrom);
     // Check if any error exists
     for (const error in errors) {
-      if (errors[error]) {
+      if (errors?.[error]) {
         return;
       }
     }
