@@ -1,9 +1,9 @@
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 export const SaveStep1  = async (data: any) : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/step1';          
+  const url = `${API_URL}/property/step1`;          
   const reqOpts: RequestInit = {
     method: 'POST',
     headers: {
@@ -25,7 +25,7 @@ export const SaveStep1  = async (data: any) : Promise<any> => {
 
 export const UpdateStep1 = async (data: any) : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/updatestep1';          
+  const url = `${API_URL}/property/updatestep1`;          
   const reqOpts: RequestInit = {
     method: 'POST',
     headers: {
@@ -46,7 +46,7 @@ export const UpdateStep1 = async (data: any) : Promise<any> => {
 
 export const SaveStep2 =   async (data: any) => {
             try {
-             const url = 'https://api.propcliq.com/property/step2';          
+             const url = `${API_URL}/property/step2`;          
               const reqOpts: RequestInit = {
                 method: 'POST',
                 headers: {
@@ -69,7 +69,7 @@ export const SaveStep2 =   async (data: any) => {
 
 export const UpdateStep2 = async (data: any) : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/updatestep2';          
+  const url = `${API_URL}/property/updatestep2`;          
   const reqOpts: RequestInit = {
     method: 'POST',
     headers: {
@@ -90,7 +90,7 @@ export const UpdateStep2 = async (data: any) : Promise<any> => {
 
 export const SaveStep3  = async (data: any, propertyId: any) : Promise<any> => {
   try {
-      const url = `https://api.propcliq.com/property/step3/${propertyId}`; 
+      const url = `${API_URL}/property/step3/${propertyId}`; 
       const formData  = new FormData();
 
       console.log('data',data)
@@ -128,7 +128,7 @@ export const SaveStep3  = async (data: any, propertyId: any) : Promise<any> => {
 
 export const getLeadListingData  = async () : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/lead';  
+  const url = `${API_URL}/lead`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'GET',
@@ -150,7 +150,7 @@ export const getLeadListingData  = async () : Promise<any> => {
 
 export const getPropertyListing  = async () : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/listing';  
+  const url = `${API_URL}/property/listing`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'POST',
@@ -171,7 +171,7 @@ export const getPropertyListing  = async () : Promise<any> => {
 
 export const getPropertyDetailById  = async (data:any) : Promise<any> => {
   try {
-  const url = `https://api.propcliq.com/property/${data.id}`;  
+  const url = `${API_URL}/property/${data.id}`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'GET',
@@ -193,7 +193,7 @@ export const getPropertyDetailById  = async (data:any) : Promise<any> => {
 
 export const deletePropertyDetailById  = async (data:any) : Promise<any> => {
   try { 
-  const url = `https://api.propcliq.com/property/${data.id}`;  
+  const url = `${API_URL}/property/${data.id}`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'DELETE',
@@ -215,7 +215,7 @@ export const deletePropertyDetailById  = async (data:any) : Promise<any> => {
 
 export const filterPropertySearch = async (data: any) : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/search';  
+  const url = `${API_URL}/property/search`;  
      
   const reqOpts: RequestInit = {
     method: 'POST',

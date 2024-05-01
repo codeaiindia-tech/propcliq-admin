@@ -1,8 +1,9 @@
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 export const getProjectList = async () : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/project/getProjects';  
+    const url = `${API_URL}/project/getProjects`;  
     console.log('hi', url)        
     const reqOpts: RequestInit = {
       method: 'POST',

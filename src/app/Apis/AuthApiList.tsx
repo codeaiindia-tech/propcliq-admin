@@ -1,8 +1,9 @@
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
 
 export const sendOtp  = async (data: any) : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/auth/login';          
+    const url = `${API_URL}/auth/login`;          
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {
@@ -23,7 +24,7 @@ export const sendOtp  = async (data: any) : Promise<any> => {
   
   export const verifyOtp  = async (data: any) : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/verify-otp/login';          
+    const url = `${API_URL}/verify-otp/login`;          
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {
@@ -43,7 +44,7 @@ export const sendOtp  = async (data: any) : Promise<any> => {
 
   export const verifyOtpOnPhone  = async (data:any) : Promise<any> => {
     try {
-    const url = '  https://api.propcliq.com/verify-otp/login-with-phone';         
+    const url = `${API_URL}/verify-otp/login-with-phone`;         
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {
@@ -62,7 +63,7 @@ export const sendOtp  = async (data: any) : Promise<any> => {
 
   export const sendOtpToPhone  = async (data: any) : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/auth/login-with-phone';          
+    const url = `${API_URL}/auth/login-with-phone`;          
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {
@@ -83,7 +84,7 @@ export const sendOtp  = async (data: any) : Promise<any> => {
 
   export const verifyToken  = async () : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/auth/profile';         
+    const url = `${API_URL}/auth/profile`;         
     const reqOpts: RequestInit = {
       method: 'GET',
       headers: {
@@ -107,7 +108,7 @@ export const sendOtp  = async (data: any) : Promise<any> => {
 
   export const  userRegister= async (data: any) : Promise<any> => {
     try {
-    const url = 'https://api.propcliq.com/auth/register';          
+    const url = `${API_URL}/auth/register`;          
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {

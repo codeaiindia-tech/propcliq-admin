@@ -3,7 +3,7 @@ import ImageUploading from 'react-images-uploading';
 import clsx from 'clsx'
 import { Box } from '@mui/material';
 import { getPropertyDetailById} from "../../Apis/AddPropertyApiList";
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 const PhotoApp: React.FC<any> = () => {
   const [images, setImages] = React.useState<any>([]);
@@ -43,7 +43,7 @@ const PhotoApp: React.FC<any> = () => {
     }
     formData.append('default', `${activeIndex}`);
     try {
-      const response = await fetch(`https://api.propcliq.com/property/step3/images/${property_id}`, {
+      const response = await fetch(`${API_URL}/property/step3/images/${property_id}`, {
         method: 'POST',
         headers: {
           'Authorization': JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")))
