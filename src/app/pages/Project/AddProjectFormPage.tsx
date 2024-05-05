@@ -70,7 +70,7 @@
             const [powerBackUp, setPowerBackUp] = useState("");
             const [powerBackUpCapacity, setPowerBackUpCapacity] = useState("");
             const [showPriceInWebsite, setShowPriceInWebsite] = useState("");
-            const [silentFeature, setSilentFeature] = useState([]);
+            const [silentFeature, setSilentFeature] = useState<any>([]);
             const [linkedProjectId, setLinkedProjectId] = useState("");
             const [reraSubCategory, setReraSubCategory] = useState("");
             const [reraRegistrationNo, setReraRegistrationNo] = useState("");
@@ -113,7 +113,7 @@
             const [powerBackUpError, setPowerBackUpError] = useState("");
             const [powerBackUpCapacityError, setPowerBackUpCapacityError] = useState("");
             const [showPriceInWebsiteError, setShowPriceInWebsiteError] = useState("");
-            const [silentFeatureError, setSilentFeatureError] = useState("");
+            const [silentFeatureError, setSilentFeatureError] = useState<any>("");
             const [linkedProjectIdError, setLinkedProjectIdError] = useState("");
             const [reraSubCategoryError, setReraSubCategoryError] = useState("");
             const [reraRegistrationNoError, setReraRegistrationNoError] = useState("");
