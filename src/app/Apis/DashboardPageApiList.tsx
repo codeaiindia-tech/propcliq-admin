@@ -1,13 +1,9 @@
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
-
-
-
-
-
 
 export const getLeadListingData  = async () : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/lead';  
+  const url = `${API_URL}/lead`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'GET',
@@ -28,7 +24,7 @@ export const getLeadListingData  = async () : Promise<any> => {
 
 export const getPackageDetails  = async () : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/auth/profile';  
+  const url = `${API_URL}/auth/profile`;  
   console.log('hiiiiiii', url)        
   const reqOpts: RequestInit = {
     method: 'GET',
@@ -50,7 +46,7 @@ export const getPackageDetails  = async () : Promise<any> => {
 
 export const getPropertyListing  = async () : Promise<any> => {
   try {
-  const url = 'https://api.propcliq.com/property/listing';  
+  const url = `${API_URL}/property/listing`;  
   console.log('hi', url)        
   const reqOpts: RequestInit = {
     method: 'POST',
