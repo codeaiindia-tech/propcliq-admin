@@ -20,6 +20,28 @@ export const getProjectList = async () : Promise<any> => {
     throw error;
   }
   };
+
+
+
+  export const addProjects  = async (data: any) : Promise<any> => {
+    try {
+    const url = 'https://api.propcliq.com/project';          
+    const reqOpts: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+  
+    const response = await fetch(url, reqOpts);
+    const jsonResponse = await response.json();
+    console.log('reponse' , jsonResponse )
+    return jsonResponse
+  } catch (error) {
+    throw error;
+  }
+  };
  
 
  
