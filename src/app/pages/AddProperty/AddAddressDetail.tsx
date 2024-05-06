@@ -37,12 +37,12 @@ const Step2: FC<any> = (props:any) => {
             setLocalityError('');
         }
 
-        if (!floorNo) {
-            setFloorNoError('Please enter the floor no.');
-            isValid = false;
-        } else {
-            setFloorNoError('');
-        }
+        // if (!floorNo) {
+        //     setFloorNoError('Please enter the floor no.111111');
+        //     isValid = false;
+        // } else {
+        //     setFloorNoError('');
+        // }
 
         
         if (!stateValue) {
@@ -281,11 +281,9 @@ const Step2: FC<any> = (props:any) => {
                 placeholder="Floor No."
                 variant="outlined"
                 fullWidth
-                required
                 error={!!floorNoError}
                 helperText={floorNoError}
                 value={floorNo}
-                onChange={(e) => setFloorNo(e.target.value)}
                 style={{ marginTop: '20px' }}
             />
             <TextField

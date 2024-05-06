@@ -8,10 +8,17 @@ export function ImagesGallery (props:any) {
 
   if(props.images.length){
   images = props.images.map((item:any) => {
+    if(item.default){
     return {
-      original: item,
-      thumbnail: item
+      original: item.path,
+      thumbnail: item.path
     }
+  } else {
+    return {
+      original: item.path,
+      thumbnail: item.path
+    }
+  }
   })
 } else {
   images = [{

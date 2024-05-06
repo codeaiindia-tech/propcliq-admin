@@ -26,7 +26,7 @@ const Step2: FC = () => {
         }
 
         if (!floorNo) {
-            setFloorNoError('Please enter the floor no.');
+            setFloorNoError('Please enter the floor no.2222');
             isValid = false;
         } else {
             setFloorNoError('');

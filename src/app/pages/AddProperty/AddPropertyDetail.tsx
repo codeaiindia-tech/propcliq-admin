@@ -318,18 +318,18 @@
         openParkingMenuActive: !openParkingMenuActive
           ? "Please select the open parking"
           : "",
-        tenantTypeActive: (tenantTypeActiveValues.length === 0)
+        tenantTypeActive: lookingIntoActive === "Rent" ?  (tenantTypeActiveValues.length === 0)
           ? "Please select the select tenant type"
-          : "",
-        mainTenanceActive: !mainTenanceActive
+          : "" : "",
+        mainTenanceActive: lookingIntoActive === "Rent" ? !mainTenanceActive
           ? "Please select the maintenance"
-          : "",
-        securityDepositActive: !securityDepositActive
+          : "" : "",
+        securityDepositActive: lookingIntoActive === "Rent" ? !securityDepositActive
           ? "Please select the security deposit"
-          : "",
-        lockInPeriodActive: !lockInPeriodActive
+          : "" : "",
+        lockInPeriodActive: lookingIntoActive === "Rent" ? !lockInPeriodActive
           ? "Please select the lock-in period"
-          : "",
+          : "" : "",
         broKerageActive: !broKerageActive ? "Please select the brokerage" : "",
         builtUpArea: !builtUpArea
           ? "Saleable area should be between 150 and 1500"
@@ -347,14 +347,19 @@
       setFurnishTypeError(errors.furnishTypeActive);
       setCoveredParkingeError(errors.coveredParkingActive);
       setOpenParkingError(errors.openParkingMenuActive);
-      setTenantTypeError(errors.tenantTypeActive);
-      setMainTenanceError(errors.mainTenanceActive);
-      setSecurityDepositError(errors.securityDepositActive);
-      setLockInPeriodError(errors.lockInPeriodActive);
+      if(lookingIntoActive === "Rent"){
+        setTenantTypeError(errors.tenantTypeActive);
+        setMainTenanceError(errors.mainTenanceActive);
+        setSecurityDepositError(errors.securityDepositActive);
+        setLockInPeriodError(errors.lockInPeriodActive);
+      }
       setBroKerageError(errors.broKerageActive);
       setBuiltUpError(errors.builtUpArea);
       setAvailableFromDateError(errors.availableFrom);
       // Check if any error exists
+
+
+      console.log("errors::::", errors);
 
       for (const error in errors) {
         if (errors[error]) {
@@ -844,33 +849,21 @@
                   )}
                 </div>
                 <div className="add_property-group" style={{ marginTop: "30px" }}>
+                  {lookingIntoActive === "Rent" ? (<>
                   <div className="label_for_label">
-                    Preferred Tenant Type
-                    <span className="mandatoryMarker">*</span>
-                  </div>
-                  
-                  <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
-                    {/* {tenantTypeMenuItems.map((val, index) => {
-                      return (
-                        <RadioButtonBox
-                          key={index}
-                          label={val}
-                          active={val === tenantTypeActive}
-                          handleClick={() => {
-                            settenantTypeActive(val);
-                            setTenantTypeError("");
-                          }}
-                        />
-                      );
-                    })} */}
+                  Preferred Tenant Type
+                  <span className="mandatoryMarker">*</span>
+                </div> <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
                     <div className='d-flex' style = {{marginTop:'4%'}}>
             {tenantTypeMenuItems.map((val:any, index:any) => {
                   return ( <label className='form-check form-check-sm form-check-custom form-check-solid me-5'>
-                <input onChange = { handleTenantChange} className='form-check-input' checked= {tenantTypeActiveValues.includes(val)} type='checkbox' key = {index} value={val} />
-                <span className='form-check-label'>{val}</span>
-              </label>)})}
-            </div>
-                  </div>
+                        <input onChange = { handleTenantChange} className='form-check-input' checked= {tenantTypeActiveValues.includes(val)} type='checkbox' key = {index} value={val} />
+                        <span className='form-check-label'>{val}</span>
+                      </label>)})}
+                    </div>
+                  </div></>) : null }
+
+
                   {tenantTypeError && (
                     <div style={{ color: "#e02727", padding: "10px 0px" }}>
                       {tenantTypeError}
@@ -927,7 +920,7 @@
                     />
                   </div>
                 )}
-                <div className="add_property-group" style={{ marginTop: "30px" }}>
+                {lookingIntoActive === "Rent" ? <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Maintenance Charges<span className="mandatoryMarker">*</span>
                   </div>
@@ -952,8 +945,10 @@
                       {mainTenanceError}
                     </div>
                   )}
-                </div>
-                {mainTenanceActive === "Separate" && (
+                </div> : null }
+
+
+                {mainTenanceActive === "Separate" && lookingIntoActive === "Rent" && (
                   <div
                     className="add_property-group"
                     style={{ marginTop: "30px" }}
@@ -971,7 +966,7 @@
                     />
                   </div>
                 )}
-                <div className="add_property-group" style={{ marginTop: "30px" }}>
+                {lookingIntoActive === "Rent" ? <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Security Deposit<span className="mandatoryMarker">*</span>
                   </div>
@@ -994,8 +989,8 @@
                       {securityDepositError}
                     </div>
                   )}
-                </div>
-                {securityDepositActive === "Custom" && (
+                </div> : null }
+                {securityDepositActive === "Custom" && lookingIntoActive === "Rent" && (
                   <div
                     className="add_property-group"
                     style={{ marginTop: "30px" }}
@@ -1013,7 +1008,7 @@
                     />
                   </div>
                 )}
-                <div className="add_property-group" style={{ marginTop: "30px" }}>
+                {lookingIntoActive === "Rent" ? <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Lock-in Period<span className="mandatoryMarker">*</span>
                   </div>
@@ -1036,8 +1031,8 @@
                       {lockInPeriodError}
                     </div>
                   )}
-                </div>
-                {lockInPeriodActive === "Custom" && (
+                </div> : null}
+                {lockInPeriodActive === "Custom" && lookingIntoActive === "Rent" && (
                   <div
                     className="add_property-group"
                     style={{ marginTop: "30px" }}
@@ -1055,12 +1050,14 @@
                     />
                   </div>
                 )}
+
+
                 <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Do you charge brokerage?
                     <span className="mandatoryMarker">*</span>
                   </div>
-                  <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
+                  {lookingIntoActive === "Rent" ? <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
                     {broKerage.map((val, index) => {
                       return (
                         <RadioButtonBox
@@ -1073,7 +1070,20 @@
                         />
                       );
                     })}
-                  </div>
+                  </div> : <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
+                    {['Yes', 'No'].map((val, index) => {
+                      return (
+                        <RadioButtonBox
+                          key={index}
+                          label={val}
+                          active={val === broKerageActive}
+                          handleClick={() => {
+                            setBroKerageActive(val);
+                          }}
+                        />
+                      );
+                    })}
+                  </div>}
                   {broKerageError && (
                     <div style={{ color: "#e02727", padding: "10px 0px" }}>
                       {broKerageError}

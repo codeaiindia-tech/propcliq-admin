@@ -61,7 +61,7 @@ const AuthLayout = () => {
                 {/* begin::Content */}
                 <div className="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
                     {/* begin::Logo */}
-                    <Link to="/" className="mb-12">
+                    <Link to="https://ui.propcliq.com" className="mb-12">
                         <img alt="Logo" src={toAbsoluteUrl('media/logos/propCliq.png')} className="h-75px" />
                     </Link>
                     {/* end::Logo */}

@@ -13,7 +13,7 @@
     margin-bottom: 0px;
   }
   .inputStyle {
-    width: 50% !important;
+    width: 3rem !important;
     height: 45px;
     border-radius: 7px;
     border: 0px;
@@ -62,4 +62,7 @@
     border-radius: 32px;
     cursor: pointer;
   }
-  
+  .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    height: 60px !important;
+    width: 60px !important;
+  }

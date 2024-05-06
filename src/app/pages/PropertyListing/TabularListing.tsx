@@ -119,24 +119,23 @@ useEffect(() =>  {
             </div> */}
 
             <div className=" row " style={{paddingTop:'1%'}}>
-            <div className="col-xl-6">
-             <h3 > <strong> Property Listing </strong></h3>
-            </div>
+              <div className="col-xl-9">
+                <h3 > <strong> Property Listing </strong></h3>
+              </div>
+
+              <div className="col-xl-3">
+                <Button onClick={() => navigate('/addproperty')} variant="contained" color="primary"  style={{ float: 'right' }}>
+                        Add New Property
+                </Button>
+              </div>
           
           
               </div>
 
             <div className=" row " style={{paddingTop:'1%'}}>
-            <div className="col-xl-10">
+            <div className="col-xl-9">
               <strong>Showing {propertyLists?.length} properties</strong>
             </div>
-            <div className="col-xl-2">
-            <Button onClick={() => navigate('/addproperty')} variant="contained" color="primary"  style={{ marginTop: '20px' }}>
-                      Add New Property
-            </Button>
-            </div>
-          
-          
               </div>
           </div>
       
