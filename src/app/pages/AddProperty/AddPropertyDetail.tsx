@@ -894,7 +894,7 @@
                   )}
                 </div>
 
-                {lookingIntoActive === "Rent" && (
+                {/* {lookingIntoActive === "Rent" && ( */}
                   <div
                     className="add_property-group"
                     style={{ marginTop: "30px" }}
@@ -902,12 +902,12 @@
                     <TextField
                       required
                       id="standard-basic"
-                      label="Monthly Rent"
+                      label={lookingIntoActive === "Rent" ? "Monthly Rent" : "Cost"}
                       variant="standard"
                       className="age_property"
                       value={monthlyRent}
                       onChange={(e) => setMonthlyRent(e.target.value)}
-                      inputProps={{ maxLength: 6 }}
+                      inputProps={{ maxLength: lookingIntoActive === "Rent" ? 6 : 9 }}
                       InputLabelProps={{
                         style: {
                           width: "100%",
@@ -919,7 +919,7 @@
                       }}
                     />
                   </div>
-                )}
+                {/* )} */}
                 {lookingIntoActive === "Rent" ? <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Maintenance Charges<span className="mandatoryMarker">*</span>
