@@ -284,6 +284,7 @@ const Step2: FC<any> = (props:any) => {
                 error={!!floorNoError}
                 helperText={floorNoError}
                 value={floorNo}
+                onChange={(e) => setFloorNo(e.target.value)}
                 style={{ marginTop: '20px' }}
             />
             <TextField
