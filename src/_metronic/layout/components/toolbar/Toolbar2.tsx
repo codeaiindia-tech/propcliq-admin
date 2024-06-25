@@ -13,7 +13,7 @@ const Toolbar2: FC = () => {
                     {/* <DefaultTitle /> */}
                     <div className="user_profile-container">
                         <div className="symbol symbol-45px me-5">
-                            <img src={toAbsoluteUrl('media/avatars/300-23.jpg')} alt="" />
+                            <i className="fa fa-user text-warning fs-1"></i>
                         </div>
                         <div>
                             <h3>Hi {userName}</h3>

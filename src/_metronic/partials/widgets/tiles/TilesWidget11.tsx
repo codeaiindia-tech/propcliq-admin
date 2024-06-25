@@ -19,7 +19,7 @@ const TilesWidget11 = (props: Props) => {
                     <div className="col-xl-4 self_verify-card">
                         <div className="d-flex align-items-center">
                             <KTIcon iconName="check-circle" className="fs-3x text-primary" />
-                            <h2 className="pl-2">Self-verify</h2>
+                            <h2 className="pl-2">Verify and get Boost</h2>
                         </div>
 
                         <p>

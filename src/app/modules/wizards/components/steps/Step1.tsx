@@ -57,8 +57,8 @@ const Step1: FC<any> = (props: any) => {
     { value: "Sofa", label: "Sofa" },
     { value: "Fridge", label: "Fridge" },
   ];
-  const coveredParkingMenuItems = ["1", "2", "3", "3+"];
-  const openParkingMenuItems = ["1", "2", "3", "3+"];
+  const coveredParkingMenuItems = ["0", "1", "2", "3", "3+"];
+  const openParkingMenuItems = ["0", "1", "2", "3", "3+"];
   const tenantTypeMenuItems = ["Family", "Bachelors", "Company"];
   const mainTenance = ["Include in rent", "Separate"];
   const securityDeposit = ["None", "1 month", "2 month", "Custom"];

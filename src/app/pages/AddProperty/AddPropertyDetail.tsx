@@ -26,6 +26,7 @@
   import KitchenIcon from '@mui/icons-material/Kitchen';
   import WeekendIcon from '@mui/icons-material/Weekend';
   import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+  import {Shield, Pool, FitnessCenter,LocalLibrary,ElectricalServices,VideoCameraFront,Park} from '@mui/icons-material';
   import Button from '@mui/material/Button';
 import { validate } from "webpack";
 
@@ -45,10 +46,17 @@ import { validate } from "webpack";
       onClose(amentiesData);
     };
 
-
+   
 
     const amenitieseMenuItems = [
       { value: "Dining", label: "Dining Table" , icon: <TableRestaurantIcon/> },
+      // { value: "security", label: "Security" , icon: <Shield/> },
+      // { value: "powerbackup", label: "Powerbackup" , icon: <ElectricalServices/> },
+      // { value: "park", label: "Park" , icon: <Park/> },
+      // { value: "swimingpool", label: "SwimingPool" , icon: <Pool/> },
+      // { value: "gym", label: "Gym" , icon: <FitnessCenter/> },
+      // { value: "library", label: "Library" , icon: <LocalLibrary/> },
+      // { value: "cctv", label: "cctv" , icon: <VideoCameraFront/> },
       { value: "Sofa", label: "Sofa", icon: <WeekendIcon/>  },
       { value: "Fridge", label: "Fridge", icon: <KitchenIcon/>  },
     ];
@@ -142,8 +150,8 @@ import { validate } from "webpack";
         { value: "Sofa", label: "Sofa" },
         { value: "Fridge", label: "Fridge" },
       ];
-      const coveredParkingMenuItems = ["1", "2", "3", "3+"];
-      const openParkingMenuItems = ["1", "2", "3", "3+"];
+      const coveredParkingMenuItems = ["0", "1", "2", "3", "3+"];
+      const openParkingMenuItems = ["0", "1", "2", "3", "3+"];
       const tenantTypeMenuItems = ["Family", "Bachelors", "Company"];
       const mainTenance = ["Include in rent", "Separate"];
       const securityDeposit = ["None", "1 month", "2 month", "Custom"];
@@ -626,7 +634,7 @@ import { validate } from "webpack";
 
           const handleClose = (value: any) => {
             setOpen(false);
-            const result = value.map(({icon,...rest}) => ({...rest}));
+            const result = value.map(({...rest}) => ({...rest}));
             setSelectedAmenties(result);
           };
 

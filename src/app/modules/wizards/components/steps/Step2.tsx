@@ -99,6 +99,7 @@ const Step2: FC = () => {
                 variant="outlined"
                 fullWidth
                 required
+                type="number"
                 error={!!floorNoError}
                 helperText={floorNoError}
                 value={floorNo}
@@ -109,6 +110,7 @@ const Step2: FC = () => {
                 label="Total Floors"
                 placeholder="Total Floors"
                 variant="outlined"
+                required
                 fullWidth
                 type="number"
                 error={!!totalFloorsError}

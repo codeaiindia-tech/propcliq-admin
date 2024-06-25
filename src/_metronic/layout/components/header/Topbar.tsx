@@ -26,7 +26,7 @@ const Topbar: FC = () => {
                         data-kt-menu-placement="bottom-end"
                         data-kt-menu-flip="bottom"
                     >
-                        <img className="h-30px w-30px rounded" src={toAbsoluteUrl('media/avatars/300-2.jpg')} alt="metronic" />
+                        <i className="fa fa-user text-warning fs-1"></i>
                     </div>
                     <HeaderUserMenu />
                     {/* end::Toggle */}
