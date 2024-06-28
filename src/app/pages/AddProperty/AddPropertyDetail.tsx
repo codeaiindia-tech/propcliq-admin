@@ -634,8 +634,16 @@ import { validate } from "webpack";
 
           const handleClose = (value: any) => {
             setOpen(false);
-            const result = value.map(({...rest}) => ({...rest}));
-            setSelectedAmenties(result);
+            const resultData:any[] = []; 
+            value?.map((data:any) => {
+              resultData.push({
+                value:data.value,
+                label: data.label
+              })
+            })
+        
+
+            setSelectedAmenties(resultData);
           };
 
       return (
