@@ -19,6 +19,7 @@ export const SaveStep1  = async (data: any) : Promise<any> => {
   console.log('reponse' , jsonResponse )
   return jsonResponse.data;
 } catch (error) {
+  window.history.replaceState(null, '', `/auth`);
   throw error;
 }
 };
