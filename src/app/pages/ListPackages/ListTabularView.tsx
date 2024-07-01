@@ -53,7 +53,7 @@ const ListTabularView: FC<Props> = ({className}) => {
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Housing Expert Pro
+                      Cliq Boost Pro
                       </a>
                       
                     </div>
@@ -103,7 +103,7 @@ const ListTabularView: FC<Props> = ({className}) => {
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Housing Expert Pro
+                      Cliq Boost
                       </a>
                       
                     </div>
@@ -155,7 +155,7 @@ const ListTabularView: FC<Props> = ({className}) => {
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Housing Expert Pro
+                      Cliq Plus
                       </a>
                       
                     </div>
@@ -207,7 +207,7 @@ const ListTabularView: FC<Props> = ({className}) => {
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-gray-900 fw-bold text-hover-primary fs-6'>
-                        Housing Expert Pro
+                        Rent Cliq
                       </a>
                       
                     </div>
