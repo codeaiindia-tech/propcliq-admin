@@ -17,6 +17,7 @@
         import FormControl from '@mui/material/FormControl';
         import FormLabel from '@mui/material/FormLabel';
         import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+        import Autocomplete from "react-google-autocomplete";
 
         type Props = {
         className: string
@@ -470,6 +471,27 @@
                         }}
                     />
              </div>
+             <div className="add_property-group" style={{ marginTop: "30px" }}>
+             <Autocomplete
+                apiKey={'AIzaSyD7nu_aasPa38BmWHLIipw2KdY7oCaN2-A'}
+                onPlaceSelected={(place) => {
+                console.log(place);
+                }}
+                options={{
+                  types: [["geocode"]],
+                  componentRestrictions: { country: "in" },
+                }}
+                style= {{
+                  width: "100%",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  padding: '16.5px 14px',
+                  border: "1px solid rgb(191, 192, 198)",
+                  borderRadius: '4px'
+              }}
+              />
+              </div>
              <div className='row'>
              <div className="col-xl-4">
              <div className="add_property-group" style={{ marginTop: "30px" }}>
@@ -626,7 +648,7 @@
                   
              </div>
             
-            
+         
           
              <div className="add_property-group" style={{ marginTop: "30px" }}>
                 
