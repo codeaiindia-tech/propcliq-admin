@@ -18,6 +18,7 @@
         import FormLabel from '@mui/material/FormLabel';
         import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
         import Autocomplete from "react-google-autocomplete";
+        import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
         type Props = {
         className: string
@@ -34,6 +35,7 @@
             const projectStatus = ['Delivered', 'InProgress', 'InActive'];
             const [showSnackBar, setShowSnackBar] = useState(false);  
             const [snackBarMessgae, setSnackBarMessage] = useState(""); 
+            const [place, setPlace] = useState<any>(''); 
               
             
               const handleClose = () => {
@@ -189,8 +191,8 @@
                 "project_comments":projectComments,
                 "source_of_information":sourceOfInfo,
                 "property_type":propertyTypeValue,
-                "latitude":"28.4303672",
-                "longitude":"77.4236336",
+                "latitude": latitude,
+                "longitude": longitude,
                 "project_status":projectStatusValue,
                 "pre_launch_date":preLauncedDate,
                 "launch_date":launcedDate,
@@ -332,6 +334,19 @@
               close
             </Button>
           );
+          useEffect(() => {
+            console.log(place)
+            geocodeByAddress(place)
+            .then((results:any) => getLatLng(results[0]))
+            .then(({ lat, lng } :any) =>{
+              console.log('Successfully got latitude and longitude', { lat, lng });
+              setProjectAddress(place);
+              setLatitude(lat);
+              setLongitude(lng);
+            }
+          );
+          },[place])
+          
         
         
         
@@ -475,10 +490,11 @@
              <Autocomplete
                 apiKey={'AIzaSyD7nu_aasPa38BmWHLIipw2KdY7oCaN2-A'}
                 onPlaceSelected={(place) => {
+                  setPlace(place?.formatted_address)
                 console.log(place);
                 }}
                 options={{
-                  types: [["geocode"]],
+                  types: ["geocode"],
                   componentRestrictions: { country: "in" },
                 }}
                 style= {{
