@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { getPropertyDetailById} from "../../Apis/AddPropertyApiList";
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
-const PhotoApp: React.FC<any> = () => {
+const PhotoApp: React.FC<any> = ({ sendDataToParent, sendDataToParentCountFiles }) => {
   const [images, setImages] = React.useState<any>([]);
   const [property, setProperty] = React.useState<any>({});
   const maxNumber = 69;
@@ -17,6 +17,7 @@ const PhotoApp: React.FC<any> = () => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
+    sendDataToParentCountFiles(imageList.length)
   };
 
   const getPropertyDetail = async() => {
@@ -43,16 +44,19 @@ const PhotoApp: React.FC<any> = () => {
     }
     formData.append('default', `${activeIndex}`);
     try {
-      const response = await fetch(`${API_URL}/property/step3/images/${property_id}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")))
-        },
-        body: formData
-      });
-      const jsonResponse = await response.json();
-      console.log('reponse' , jsonResponse )
-      return jsonResponse.data;
+      if(images.length) {
+        sendDataToParent(true);
+        const response = await fetch(`${API_URL}/property/step3/images/${property_id}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")))
+          },
+          body: formData
+        });
+        const jsonResponse = await response.json();
+        console.log('reponse' , jsonResponse )
+        return jsonResponse.data;
+      }
     } catch (error) {
       throw error;
     }  

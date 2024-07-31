@@ -131,15 +131,15 @@
                 projectName: !projectName
                   ? "Please Add the Project Name"
                   : "",
-                  projectDisplayName: !projectDisplayName
-                  ? "Please Add the Project Display Name"
-                  : "",
-                  builderName: !builderName
-                  ? "Please Add the builder Name"
-                  : "",
-                  builderDisplayName: !builderDisplayName
-                  ? "Please Add the builder Display Name"
-                  : "",
+                //   projectDisplayName: !projectDisplayName
+                //   ? "Please Add the Project Display Name"
+                //   : "",
+                //   builderName: !builderName
+                //   ? "Please Add the builder Name"
+                //   : "",
+                //   builderDisplayName: !builderDisplayName
+                //   ? "Please Add the builder Display Name"
+                //   : "",
                   stateName: !stateName
                   ? "Please Add the State Name"
                   : "",
@@ -159,9 +159,9 @@
             }
 
             setProjectNameError(errors.projectName);
-            setProjectDisplayNameError(errors.projectDisplayName);
-            setBuilderDisplayNameError(errors.builderDisplayName);
-            setBuilderNameError(errors.builderName);
+            // setProjectDisplayNameError(errors.projectDisplayName);
+            // setBuilderDisplayNameError(errors.builderDisplayName);
+            // setBuilderNameError(errors.builderName);
             setCityNameError(errors.cityName);
             setCountryNameError(errors.countryName);
             setSuburbsError(errors.suburbs);
@@ -335,6 +335,7 @@
             </Button>
           );
           useEffect(() => {
+            if(place){
             console.log(place)
             geocodeByAddress(place)
             .then((results:any) => getLatLng(results[0]))
@@ -345,11 +346,13 @@
               setLongitude(lng);
             }
           );
+        }
           },[place])
           
         
         
         
+        const geocodeType: any = [['geocode']]
         return (
             <>
             <Snackbar
@@ -407,7 +410,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Project Display Name"
                         variant="outlined"
@@ -434,7 +436,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Builder Name"
                         variant="outlined"
@@ -462,7 +463,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Builder Display Name"
                         variant="outlined"
@@ -489,12 +489,47 @@
              <div className="add_property-group" style={{ marginTop: "30px" }}>
              <Autocomplete
                 apiKey={'AIzaSyD7nu_aasPa38BmWHLIipw2KdY7oCaN2-A'}
-                onPlaceSelected={(place) => {
+                onPlaceSelected={(place:any) => {
                   setPlace(place?.formatted_address)
+
+                  let city_project, state_project, country_project, locality_project, suburb_project, postal_code_project;
+                  if(place){
+                    for (let component of (place && place?.address_components)){
+                      if(component.types.includes('locality')){
+                        city_project = component.long_name
+                      } else if(component.types.includes('administrative_area_level_3')){
+                        state_project = component.long_name
+                      } else if(component.types.includes('country')){
+                        country_project = component.long_name
+                      } else if(component.types.includes('sublocality')){
+                        locality_project = component.long_name
+                      } else if(component.types.includes('sublocality')){
+                        suburb_project = component.long_name
+                      } else if(component.types.includes('postal_code')){
+                        postal_code_project = component.long_name
+                      }
+                    }
+                  }
+
+                  setStateName(state_project);
+                  setCountryName(country_project);
+                  setCityName(city_project);
+                  setLocality(locality_project);
+                  setSuburbs(locality_project);
+
+                  setCityNameError("");
+                  setCountryNameError("");
+                  setSuburbsError("");
+                  setLocalityError("");
+                  setStateNameError("");
+
+
+
+
                 console.log(place);
                 }}
                 options={{
-                  types: ["geocode"],
+                  types: geocodeType,
                   componentRestrictions: { country: "in" },
                 }}
                 style= {{
@@ -698,7 +733,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Project Description"
                         variant="outlined"
@@ -727,7 +761,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Commercial Description"
                         variant="outlined"
@@ -754,7 +787,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Project comments"
                         variant="outlined"
@@ -781,7 +813,7 @@
              <div className="add_property-group" style={{ marginTop: "30px" }}>
                   <div className="label_for_label">
                     Silent Feature
-                    <span className="mandatoryMarker">*</span>
+                    {/* <span className="mandatoryMarker">*</span> */}
                   </div>
                   
                   <div className="d-flex flex-wrap" style={{ gap: "16px" }}>
@@ -930,7 +962,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Source of Informatiom"
                         variant="outlined"
@@ -983,7 +1014,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Bank Lists"
                         variant="outlined"
@@ -1028,7 +1058,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Application Form link"
                         variant="outlined"
@@ -1056,7 +1085,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Approval"
                         variant="outlined"
@@ -1084,7 +1112,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Project Size"
                         variant="outlined"
@@ -1116,7 +1143,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Open Space"
                         variant="outlined"
@@ -1148,7 +1174,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="No of Towers"
                         variant="outlined"
@@ -1176,7 +1201,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Power Backup"
                         variant="outlined"
@@ -1208,7 +1232,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Power Backup Capitity"
                         variant="outlined"
@@ -1240,7 +1263,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Show Price on Webiste"
                         variant="outlined"
@@ -1273,7 +1295,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="RERA Sub Category"
                         variant="outlined"
@@ -1302,7 +1323,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="Linked Project ID"
                         variant="outlined"
@@ -1333,7 +1353,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="RERA Registration Number"
                         variant="outlined"
@@ -1416,7 +1435,6 @@
                 
 
                 <TextField
-                        required
                         id="outlined-required"
                         label="RERA Project Link"
                         variant="outlined"

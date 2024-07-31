@@ -11,6 +11,8 @@ const Step3: FC<any> = (props: any) => {
 
   const [files, setFiles] = useState([]);
   const [propertyId, setPropertyId] = useState('');
+  const [uploadClick, setUploadClick] = useState(false);
+  const [countFiles, setCountFiles] = useState(0);
 
   const updateFiles = (incommingFiles:any) => {
     setFiles(incommingFiles);
@@ -20,10 +22,27 @@ const Step3: FC<any> = (props: any) => {
     setPropertyId(property_id);
   };
 
- const  onUpload = async () => {
-  props.handleSubmitStep3();
+const onUpload = async () => {
+  if(countFiles === 0){
+    props.handleSubmitStep3();
+  } else {
+    if(uploadClick){
+      props.handleSubmitStep3();
+    } else {
+      alert("please click on upload button first")
+    }
+  }
+}
 
- }
+const handleDataFromChild = (childData:any) => {
+  setUploadClick(childData)
+  setCountFiles(0)
+};
+
+const sendDataToParentCountFiles = (childData:any) => {
+  setCountFiles(childData)
+};
+
   console.log('setFiles', files)
   return (
     <>
@@ -33,7 +52,7 @@ const Step3: FC<any> = (props: any) => {
             </h2>
            <div>
 
-           <PhotoApp></PhotoApp>
+          <PhotoApp sendDataToParent={handleDataFromChild} sendDataToParentCountFiles={sendDataToParentCountFiles}></PhotoApp>
     {/* <Dropzone onChange={updateFiles} value={files} uploadConfig={{
       url: `https://api.propcliq.com/property/step3/image/${propertyId}`,
       method: "POST",
