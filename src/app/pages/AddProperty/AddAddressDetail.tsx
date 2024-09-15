@@ -182,7 +182,7 @@ const Step2: FC<any> = (props:any) => {
     return (
         <div className="w-100">
             <h2 className="fw-bolder d-flex align-items-center text-gray-900">
-                {isEdit ? 'Edit Address Details' : 'Add Address Details'} 
+                {isEdit ? 'Edit Address Details' : 'Add Address Details  1  1  1'} 
             </h2>
             <Autocomplete
         value={building}

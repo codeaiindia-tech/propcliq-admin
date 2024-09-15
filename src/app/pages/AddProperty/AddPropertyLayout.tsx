@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { KTIcon } from '../../../_metronic/helpers';
 import { Step1 } from './AddPropertyDetail';
 import { Step2 } from './AddAddressDetail';
+import { Step2Commerical} from './Step2Commerical';
 import {Step3} from './AddPhoto';
 import {Step4} from   './ReviewPropertyDetail';
 import { StepperComponent } from '../../../_metronic/assets/ts/components';
@@ -25,7 +26,9 @@ const AddPropertyLayout = () => {
     
       }
 
-    const handleCommSubmitStep1 = (val: string): any => {
+    const handleCommSubmitStep1 = (val: string, commericalType: string): any => {
+        console.log("=============", val);
+        console.log("============= commericalType", commericalType);
         setPropertyType(val);
     };
 
@@ -60,15 +63,20 @@ const AddPropertyLayout = () => {
 
 
     const RenderComponent = (stepNum:any) => {
+        console.log("==========", stepNum)
         if(stepNum === '1'){
             return (
                 <Step1 handleSubmitStep1={handleSubmitStep1} handleCommSubmitStep1={handleCommSubmitStep1} />
             )
-        } else if (stepNum === '2') {
+        } else if (stepNum === '2' && propertyType === "Commercial") {
             return (
-            <Step2  handleSubmitStep2 = {handleSubmitStep2} />
+                <Step2Commerical  handleSubmitStep2 = {handleSubmitStep2} />
             )
-        }  else if (stepNum === '3'){
+        }  else if (stepNum === '2') {
+            return (
+                <Step2  handleSubmitStep2 = {handleSubmitStep2} />
+            )
+        } else if (stepNum === '3'){
             return (
                 <Step3 handleSubmitStep3 = {handleSubmitStep3} sendDataToReview = {sendDataToReview} />
                 )

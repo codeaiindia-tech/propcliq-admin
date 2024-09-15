@@ -425,43 +425,45 @@ var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','
           propertyTypeGroupActive: (!propertyTypeGroupActive && propertyTypeActive != 'Commercial')
             ? "Please select the property type"
             : "",
-          bhkActive: !bhkActive ? "Please select the BHK" : "",
-          bathRoomActive: !bathRoomActive ? "Please select the bathroom count" : "",
-          balconyActive: !balconyActive ? "Please select the balcony count" : "",
-          furnishTypeActive: !furnishTypeActive
+          bhkActive: propertyTypeActive !== "Commercial" ? !bhkActive ? "Please select the BHK" : "" : "",
+          bathRoomActive: propertyTypeActive !== "Commercial" ? !bathRoomActive ? "Please select the bathroom count" : "" :"",
+          balconyActive: propertyTypeActive !== "Commercial" ? !balconyActive ? "Please select the balcony count" : "": "",
+          furnishTypeActive: propertyTypeActive !== "Commercial" ? !furnishTypeActive
             ? "Please select the furnish type"
-            : "",
-          coveredParkingActive: !coveredParkingActive
+            : "" :"",
+          coveredParkingActive: propertyTypeActive !== "Commercial" ? !coveredParkingActive
             ? "Please select the covered parking"
-            : "",
-          openParkingMenuActive: !openParkingMenuActive
+            : "" : "",
+          openParkingMenuActive: propertyTypeActive !== "Commercial" ? !openParkingMenuActive
             ? "Please select the open parking"
-            : "",
-          tenantTypeActive: lookingIntoActive === "Rent" ?  (tenantTypeActiveValues.length === 0)
+            : "" :"",
+          tenantTypeActive: propertyTypeActive !== "Commercial" ? lookingIntoActive === "Rent" ?  (tenantTypeActiveValues.length === 0)
             ? "Please select the select tenant type"
-            : "" : "",
-          mainTenanceActive: lookingIntoActive === "Rent" ? !mainTenanceActive
+            : "" : "" :"",
+          mainTenanceActive: propertyTypeActive !== "Commercial" ? lookingIntoActive === "Rent" ? !mainTenanceActive
             ? "Please select the maintenance"
-            : "" : "",
-          securityDepositActive: lookingIntoActive === "Rent" ? !securityDepositActive
+            : "" : "" :"",
+          securityDepositActive: propertyTypeActive !== "Commercial" ? lookingIntoActive === "Rent" ? !securityDepositActive
             ? "Please select the security deposit"
-            : "" : "",
-          lockInPeriodActive: lookingIntoActive === "Rent" ? !lockInPeriodActive
+            : "" : "" : "",
+          lockInPeriodActive: propertyTypeActive !== "Commercial" ? lookingIntoActive === "Rent" ? !lockInPeriodActive
             ? "Please select the lock-in period"
-            : "" : "",
-          broKerageActive: !broKerageActive ? "Please select the brokerage" : "",
-          builtUpArea: !builtUpArea
+            : "" : "" :"",
+          broKerageActive: propertyTypeActive !== "Commercial" ? !broKerageActive ? "Please select the brokerage" : "" :"",
+          builtUpArea: propertyTypeActive !== "Commercial" ? !builtUpArea
             ? "Saleable area should be between 150 and 1500"
-            : "",
-          availableFrom: !availableFrom ? 'Please enter valid date' : '',
+            : "" :"",
+          availableFrom: propertyTypeActive !== "Commercial" ? !availableFrom ? 'Please enter valid date' : '' : '',
         };
 
         // Update state with errors
         setPropertyTypeError(errors.propertyTypeActive);
         setLookingIntoError(errors.lookingIntoActive);
         setPropertyTypeGroupError(errors.propertyTypeGroupActive);
-        setBhkError(errors.bhkActive);
-        setBathRoomError(errors.bathRoomActive);
+        if(propertyTypeActive !== "Commercial"){
+          setBhkError(errors.bhkActive);
+          setBathRoomError(errors.bathRoomActive);
+        }
         setBalconyError(errors.balconyActive);
         setFurnishTypeError(errors.furnishTypeActive);
         setCoveredParkingeError(errors.coveredParkingActive);
@@ -537,7 +539,12 @@ var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','
           window.history.replaceState(null, '', `?id=${savedPropertyData._id}`);
         }
       
-        props.handleSubmitStep1();
+        if(propertyTypeActive === "Commercial"){
+          props.handleCommSubmitStep1(propertyTypeActive,commPropertyTypeGroupActive);
+          props.handleSubmitStep1();
+        } else {
+          props.handleSubmitStep1();
+        }
         // Proceed with form submission or other actions
       };
 
