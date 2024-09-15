@@ -14,7 +14,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 
 const Step2Commerical: FC<any> = (props: any) => {
-  const propertyCategory = ["showroom"]; //office, showroom, plot, warehouse  -> property_category
+  const propertyCategory = ["showroom"]; //office, showroom, plot, warehouse, retail  -> property_category
   console.log("props::::::;", props);
 
   const [city, setCity] = useState<string>("");
