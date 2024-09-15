@@ -14,7 +14,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 
 const Step2Commerical: FC<any> = (props: any) => {
-  const propertyCategory = ["showroom"]; //office, showroom, plot, warehouse, retail  -> property_category
+  // const propertyCategory = ["retail"]; //office, showroom, plot, warehouse, retail  -> property_category
   console.log("props::::::;", props);
 
   const [city, setCity] = useState<string>("");
@@ -38,6 +38,7 @@ const Step2Commerical: FC<any> = (props: any) => {
   const [projectOption, setProjectOption] = React.useState<any>([]);
   const [isProjectFlag, setIsProjectFlag] = React.useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [propertyCategory, setPropertyCategory] = useState(["retail"]); //office, showroom, plot, warehouse, retail  -> property_category
 
   const handleSubmit = () => {
     // Validate form fields
@@ -124,6 +125,9 @@ const Step2Commerical: FC<any> = (props: any) => {
     const params: URLSearchParams = url.searchParams;
     const propertyId: any = params.get("id");
     const fetchPropertyDetail = await getPropertyDetailById({ id: propertyId });
+    if(fetchPropertyDetail?.fetchPropertyCategory){
+      setPropertyCategory(fetchPropertyDetail?.propertyCategory)
+    }
     if (fetchPropertyDetail?.address_details) {
       const { project, flat_no, floor_no, total_floors } =
         fetchPropertyDetail?.address_details;
@@ -133,6 +137,7 @@ const Step2Commerical: FC<any> = (props: any) => {
       setFloorNo(floor_no);
       setFlatNo(flat_no);
       setIsEdit(true);
+      
     }
   };
 
@@ -300,7 +305,7 @@ const Step2Commerical: FC<any> = (props: any) => {
               <div className="label_for_label">
                 Zone Type <span className="mandatoryMarker">*</span>
               </div>
-              <div className="d-flex" style={{ gap: "16px" }}>
+              <div className="d-flex" style={{ gap: "16px", flexWrap:'wrap' }}>
                 {[
                   "Industrial",
                   "Commerical",
@@ -327,7 +332,7 @@ const Step2Commerical: FC<any> = (props: any) => {
             Suitable for <span className="mandatoryMarker">*</span>
           </div>
 
-          <div className="d-flex" style={{ gap: "16px" }}>
+          <div className="d-flex" style={{ gap: "16px" , flexWrap:'wrap'}}>
             {[
               "Jewellery",
               "Gym",
@@ -357,7 +362,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                 Location Hub <span className="mandatoryMarker">*</span>
               </div>
 
-              <div className="d-flex" style={{ gap: "16px" }}>
+              <div className="d-flex" style={{ gap: "16px" , flexWrap:'wrap'}}>
                 {[
                   "Mall",
                   "Commercial Project",
@@ -603,9 +608,6 @@ const Step2Commerical: FC<any> = (props: any) => {
               value={stateValue}
               onChange={(e) => setStateValue(e.target.value)}
             />
-          </div>
-
-          <div className="d-flex" style={{ gap: "16px" }}>
             <TextField
               label="Security Deposit"
               placeholder="Security Deposit"
@@ -618,6 +620,8 @@ const Step2Commerical: FC<any> = (props: any) => {
               onChange={(e) => setStateValue(e.target.value)}
             />
           </div>
+
+        
 
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label">
@@ -718,8 +722,8 @@ const Step2Commerical: FC<any> = (props: any) => {
               })}
             </div>
           </div>
-
-          <div style={{ marginTop: "30px" }}>
+          
+          <div className="d-flex" style={{ marginTop: "30px" , gap: "16px"}}>
             <TextField
               label="Lock in Period"
               placeholder="Lock in Period"
@@ -750,7 +754,7 @@ const Step2Commerical: FC<any> = (props: any) => {
               <div className="label_for_label">
                 Floors Available <span className="mandatoryMarker">*</span>
               </div>
-
+              <div className="d-flex" style={{ gap: "16px" }}>
               <TextField
                 label="Total Floor"
                 placeholder="Total Floor"
@@ -774,6 +778,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                 value={stateValue}
                 onChange={(e) => setStateValue(e.target.value)}
               />
+              </div>
             </div>
           ) : null}
 
@@ -783,7 +788,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                 <div className="label_for_label">
                   Fifts and Starcases <span className="mandatoryMarker">*</span>
                 </div>
-
+                <div className="d-flex" style={{gap: "16px"}}>
                 <TextField
                   label="Number of Staircases"
                   placeholder="Number of Staircases"
@@ -819,6 +824,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                   value={stateValue}
                   onChange={(e) => setStateValue(e.target.value)}
                 />
+                </div>
               </div>
             </>
           ) : null}
@@ -829,7 +835,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                 <div className="label_for_label">
                   Facilities <span className="mandatoryMarker">*</span>
                 </div>
-
+                <div className="d-flex" style={{gap: "16px"}}>
                 <TextField
                   label="Private Washrooms"
                   placeholder="Private Washrooms"
@@ -853,6 +859,8 @@ const Step2Commerical: FC<any> = (props: any) => {
                   value={stateValue}
                   onChange={(e) => setStateValue(e.target.value)}
                 />
+
+              </div>
               </div>
             </>
           ) : null}
@@ -863,7 +871,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                 <div className="label_for_label">
                   Parking <span className="mandatoryMarker">*</span>
                 </div>
-
+                <div className="d-flex" style={{gap: "16px"}}>
                 <TextField
                   label="Private Parking"
                   placeholder="Private Parking"
@@ -887,6 +895,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                   value={stateValue}
                   onChange={(e) => setStateValue(e.target.value)}
                 />
+                </div>
               </div>
             </>
           ) : null}
