@@ -14,7 +14,7 @@ const MyComponent = () => {
             }}
         >
             {({ values, setValues }) => (
-                <Form placeholder={'Basic Form'}>
+                <form>
                     {/* Use a <div> element as an input field */}
                     <div
                         contentEditable
@@ -27,7 +27,7 @@ const MyComponent = () => {
                         {values.myDivField}
                     </div>
                     <button type="submit">Submit</button>
-                </Form>
+                </form>
             )}
         </Formik>
     );

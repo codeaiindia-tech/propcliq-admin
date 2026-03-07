@@ -7,7 +7,8 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "pm2start": "pm2 start ecosystem.config.cjs"
     },
     "dependencies": {
         "@dropzone-ui/react": "^7.0.4",
@@ -39,6 +40,7 @@
         "material-ui-dropzone": "^3.5.0",
         "mui-file-dropzone": "^4.0.2",
         "nouislider": "15.5.1",
+        "pm2": "^6.0.5",
         "prism-react-renderer": "2.0.5",
         "prism-themes": "1.9.0",
         "prismjs": "1.28.0",

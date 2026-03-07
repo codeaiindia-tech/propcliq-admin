@@ -14,7 +14,9 @@ const MyComponent = () => {
             }}
         >
             {({ values, setValues }) => (
-                <Form placeholder={'Basic Form'}>
+                <form className="py-20 w-100 w-xl-700px px-9" 
+                    noValidate 
+                    id="kt_create_account_form">
                     {/* Use a <div> element as an input field */}
                     <div
                         contentEditable
@@ -27,7 +29,7 @@ const MyComponent = () => {
                         {values.myDivField}
                     </div>
                     <button type="submit">Submit</button>
-                </Form>
+                </form>
             )}
         </Formik>
     );

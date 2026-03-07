@@ -37,7 +37,7 @@ class ScrollTopComponent {
     }
 
     private _handlers = () => {
-        let timer: number;
+        let timer: number = 10;
         window.addEventListener('scroll', () => {
             throttle(timer, () => {
                 this._scroll();
