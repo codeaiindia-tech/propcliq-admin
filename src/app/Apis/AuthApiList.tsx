@@ -83,24 +83,25 @@ export const sendOtpToPhone = async (data: any): Promise<any> => {
 
 
 export const verifyToken = async (): Promise<any> => {
-  try {
-    const token = localStorage.getItem('Auth_Token');
+  const token = localStorage.getItem('Auth_Token');
 
-    const url = `${API_URL}/auth/profile`;
-    const reqOpts: RequestInit = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token ? `Bearer ${token}` : '',
-      },
-    };
-
-    const response = await fetch(url, reqOpts);
-    const jsonResponse = await response.json();
-    return jsonResponse;
-  } catch (error) {
-    throw error;
+  if (!token) {
+    return { success: false };
   }
+
+  const response = await fetch(`${API_URL}/auth/profile`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    return { success: false };
+  }
+
+  return await response.json();
 };
 
 
