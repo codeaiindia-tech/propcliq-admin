@@ -13,60 +13,61 @@ import { Logout, AuthPage, useAuth } from '../modules/auth';
 import { App } from '../App';
 import { verifyToken } from '../Apis/AuthApiList';
 
-/**
- * Base URL of the website.
- *
- * @see https://facebook.github.io/create-react-app/docs/using-the-public-folder
- */
 const { BASE_URL } = import.meta.env;
 
 const AppRoutes: FC = () => {
-    const { currentUser } = useAuth();
-    const [propertyDetail, setPropertyDetail] = useState([]);
+  const { currentUser } = useAuth();
+  const [tokenData, setTokenData] = useState<any>(undefined);
+  const [loading, setLoading] = useState(true);
 
-    const [tokenData, setTokenData ] =  useState();
-    console.log('hi', currentUser);
+  console.log('hi', currentUser);
 
-    const getVerifyToken = async() => {
-        const tokenData = await verifyToken();
-        if(tokenData.success === true){
-            setTokenData(tokenData)
-        } else {
-            tokenData('') 
-        }
+  const getVerifyToken = async () => {
+    try {
+      const response = await verifyToken();
 
+      if (response?.success === true) {
+        setTokenData(response);
+      } else {
+        setTokenData(undefined);
       }
-      
-      
-        useEffect(() =>  {
-          getVerifyToken();
-         },[])
-    
-    
+    } catch (error) {
+      console.error('Token verification failed:', error);
+      setTokenData(undefined);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // const token = localStorage.getItem("Auth_Token");
-    // console.log("tken", token)
-    return (
-        <BrowserRouter basename={BASE_URL}>
-            <Routes>
-                <Route element={<App />}>
-                    <Route path="error/*" element={<ErrorsPage />} />
-                    <Route path="logout" element={<Logout />} />
-                    {tokenData ? (
-                        <>
-                            <Route path="/*" element={<PrivateRoutes />} />
-                            <Route index element={<Navigate to="/dashboard" />} />
-                        </>
-                    ) : (
-                        <>
-                            <Route path="auth/*" element={<AuthPage />} />
-                            <Route path="*" element={<Navigate to="/auth" />} />
-                        </>
-                    )}
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
+  useEffect(() => {
+    getVerifyToken();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <BrowserRouter basename={BASE_URL}>
+      <Routes>
+        <Route element={<App />}>
+          <Route path="error/*" element={<ErrorsPage />} />
+          <Route path="logout" element={<Logout />} />
+          {tokenData ? (
+            <>
+              <Route path="/*" element={<PrivateRoutes />} />
+              <Route index element={<Navigate to="/dashboard" />} />
+            </>
+          ) : (
+            <>
+              <Route path="auth/*" element={<AuthPage />} />
+              <Route path="*" element={<Navigate to="/auth" />} />
+            </>
+          )}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export { AppRoutes };

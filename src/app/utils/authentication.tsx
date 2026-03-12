@@ -1,8 +1,13 @@
 import axios from 'axios';
+
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
-axios.defaults.headers.common['Authorization'] =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWRkZjUyOGE1ZGYwMzVmMGQxYWY1MTEiLCJpYXQiOjE3MDkyOTQ1NTIsImV4cCI6MTcwOTI5ODE1Mn0.64ZxS6LQr3yznBf4sKgNOGDGcHRnZGMmOY7YT6sSgCc';
+const token = localStorage.getItem('Auth_Token');
+
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const SaveStep1 = async (data: any) => {
@@ -14,5 +19,4 @@ const SaveStep1 = async (data: any) => {
   }
 };
 
- 
 export default SaveStep1;
