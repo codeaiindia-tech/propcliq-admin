@@ -2,7 +2,7 @@ import OTPInput from 'react-otp-input';
 import React, { useState } from 'react';
 import '../Style/OtpStyle.css';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userRegister } from '../../../Apis/AuthApiList';
 
 declare global {
@@ -22,6 +22,8 @@ declare global {
 
 function Verify(props: any) {
   const { userData, signInViaPhone, backToSignIn } = props;
+  const navigate = useNavigate();
+
   const [OTP, setOTP] = useState('');
   const [invalidOTP, setInvalidOTP] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -69,6 +71,8 @@ function Verify(props: any) {
   const handleCancel = () => {
     if (backToSignIn) {
       backToSignIn();
+    } else {
+      navigate('/auth/login');
     }
   };
 
@@ -107,6 +111,8 @@ function Verify(props: any) {
         phone: userData.phoneNo,
       });
 
+      console.log('registerUser response:', registerUser);
+
       if (registerUser?.success === true) {
         if (registerUser.token) {
           localStorage.setItem('Auth_Token', registerUser.token);
@@ -124,7 +130,7 @@ function Verify(props: any) {
           localStorage.setItem('User_Name', userData.firstname);
         }
 
-        document.location.reload();
+        navigate('/dashboard');
       } else {
         setInvalidOTP(true);
         setErrorMsg(registerUser?.message || 'Registration failed');
