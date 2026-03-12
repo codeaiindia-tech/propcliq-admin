@@ -1,10 +1,3 @@
-/**
- * High level router.
- *
- * Note: It's recommended to compose related routes in internal router
- * components (e.g: `src/app/modules/Auth/pages/AuthPage`, `src/app/BasePage`).
- */
-
 import { FC, useEffect, useState } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { PrivateRoutes } from './PrivateRoutes';
@@ -24,6 +17,14 @@ const AppRoutes: FC = () => {
 
   const getVerifyToken = async () => {
     try {
+      const token = localStorage.getItem('Auth_Token');
+
+      if (!token) {
+        setTokenData(undefined);
+        setLoading(false);
+        return;
+      }
+
       const response = await verifyToken();
 
       if (response?.success === true) {
