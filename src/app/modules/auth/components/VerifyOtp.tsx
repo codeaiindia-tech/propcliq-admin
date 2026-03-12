@@ -7,8 +7,16 @@ import { userRegister } from '../../../Apis/AuthApiList';
 
 declare global {
   interface Window {
-    verifyOtp?: (payload?: any) => Promise<any>;
-    retryOtp?: (payload?: any) => Promise<any>;
+    verifyOtp?: (
+      otp: string | number,
+      onSuccess?: (data: any) => void,
+      onFailure?: (error: any) => void
+    ) => void;
+    retryOtp?: (
+      channel: string | null,
+      onSuccess?: (data: any) => void,
+      onFailure?: (error: any) => void
+    ) => void;
   }
 }
 
@@ -37,8 +45,18 @@ function Verify(props: any) {
           throw new Error('MSG91 retryOtp method is not available');
         }
 
-        await window.retryOtp({
-          identifier: `91${userData.phoneNo}`,
+        await new Promise<void>((resolve, reject) => {
+          window.retryOtp!(
+            null,
+            (data: any) => {
+              console.log('OTP resent successfully:', data);
+              resolve();
+            },
+            (error: any) => {
+              console.error('Resend OTP failed:', error);
+              reject(error);
+            }
+          );
         });
       }
     } catch (error: any) {
@@ -65,16 +83,19 @@ function Verify(props: any) {
           throw new Error('MSG91 verifyOtp method is not available');
         }
 
-        const otpResponse = await window.verifyOtp({
-          otp: OTP,
+        await new Promise<void>((resolve, reject) => {
+          window.verifyOtp!(
+            OTP,
+            (data: any) => {
+              console.log('OTP verified successfully:', data);
+              resolve();
+            },
+            (error: any) => {
+              console.error('OTP verification failed:', error);
+              reject(error);
+            }
+          );
         });
-
-        if (!otpResponse) {
-          setInvalidOTP(true);
-          setErrorMsg('Enter valid OTP');
-          setLoading(false);
-          return;
-        }
       }
 
       const registerUser = await userRegister({
