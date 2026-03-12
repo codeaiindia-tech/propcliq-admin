@@ -9,66 +9,55 @@ import { verifyToken } from '../Apis/AuthApiList';
 const { BASE_URL } = import.meta.env;
 
 const AppRoutes: FC = () => {
-  const { currentUser } = useAuth();
-  const [tokenData, setTokenData] = useState<any>(undefined);
-  const [loading, setLoading] = useState(true);
+    const { currentUser } = useAuth();
+    const [tokenData, setTokenData] = useState<any>(undefined);
+    const [loading, setLoading] = useState(true);
 
-  console.log('hi', currentUser);
+    console.log('hi', currentUser);
 
-  const getVerifyToken = async () => {
-    try {
-      const token = localStorage.getItem('Auth_Token');
+    const verifyToken = async () => {
+        const token = localStorage.getItem("Auth_Token");
 
-      if (!token) {
-        setTokenData(undefined);
-        setLoading(false);
-        return;
-      }
+        if (!token) return false;
 
-      const response = await verifyToken();
+        const res = await fetch(`https://api.propcliq.com/auth/profile`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
 
-      if (response?.success === true) {
-        setTokenData(response);
-      } else {
-        setTokenData(undefined);
-      }
-    } catch (error) {
-      console.error('Token verification failed:', error);
-      setTokenData(undefined);
-    } finally {
-      setLoading(false);
+        return res.status === 200;
+    };
+
+    useEffect(() => {
+        verifyToken();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
     }
-  };
 
-  useEffect(() => {
-    getVerifyToken();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <BrowserRouter basename={BASE_URL}>
-      <Routes>
-        <Route element={<App />}>
-          <Route path="error/*" element={<ErrorsPage />} />
-          <Route path="logout" element={<Logout />} />
-          {tokenData ? (
-            <>
-              <Route path="/*" element={<PrivateRoutes />} />
-              <Route index element={<Navigate to="/dashboard" />} />
-            </>
-          ) : (
-            <>
-              <Route path="auth/*" element={<AuthPage />} />
-              <Route path="*" element={<Navigate to="/auth" />} />
-            </>
-          )}
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter basename={BASE_URL}>
+            <Routes>
+                <Route element={<App />}>
+                    <Route path="error/*" element={<ErrorsPage />} />
+                    <Route path="logout" element={<Logout />} />
+                    {tokenData ? (
+                        <>
+                            <Route path="/*" element={<PrivateRoutes />} />
+                            <Route index element={<Navigate to="/auth/login" />} />
+                        </>
+                    ) : (
+                        <>
+                            <Route path="auth/*" element={<AuthPage />} />
+                            <Route path="*" element={<Navigate to="/auth" />} />
+                        </>
+                    )}
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export { AppRoutes };
