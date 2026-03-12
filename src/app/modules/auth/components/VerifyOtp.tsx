@@ -58,7 +58,9 @@ function Verify(props: any) {
       localStorage.setItem('User_Name', userData.phoneNo);
     }
 
-    navigate('/dashboard');
+    // navigate('/dashboard');
+    window.location.href = '/dashboard';
+    return
   };
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
