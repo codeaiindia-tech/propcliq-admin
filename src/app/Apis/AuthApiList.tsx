@@ -104,10 +104,23 @@ export const verifyToken = async (): Promise<any> => {
   return await response.json();
 };
 
+export const loginWithVerifiedPhone = async (data: any): Promise<any> => {
+  try {
+    const url = `${API_URL}/auth/login-with-phone-complete`;
+    const reqOpts: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
 
-
-
-
+    const response = await fetch(url, reqOpts);
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const userRegister = async (data: any): Promise<any> => {
   try {

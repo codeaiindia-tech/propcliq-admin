@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import '../Style/OtpStyle.css';
 import clsx from 'clsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { userRegister } from '../../../Apis/AuthApiList';
+import {
+  userRegister,
+  verifyOtp,
+  loginWithVerifiedPhone,
+} from '../../../Apis/AuthApiList';
 
 declare global {
   interface Window {
@@ -34,6 +38,28 @@ function Verify(props: any) {
     setInvalidOTP(false);
     setErrorMsg('');
   }
+
+  const saveLoginDataAndRedirect = (response: any) => {
+    if (response?.token) {
+      localStorage.setItem('Auth_Token', response.token);
+    }
+
+    if (response?.user?.email) {
+      localStorage.setItem('User_Email', response.user.email);
+    } else if (userData?.email) {
+      localStorage.setItem('User_Email', userData.email);
+    }
+
+    if (response?.user?.username) {
+      localStorage.setItem('User_Name', response.user.username);
+    } else if (userData?.firstname) {
+      localStorage.setItem('User_Name', userData.firstname);
+    } else if (userData?.phoneNo) {
+      localStorage.setItem('User_Name', userData.phoneNo);
+    }
+
+    navigate('/dashboard');
+  };
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -76,7 +102,7 @@ function Verify(props: any) {
     }
   };
 
-  const verifyAndRegister = async () => {
+  const verifyAndProceed = async () => {
     setLoading(true);
     setInvalidOTP(false);
     setErrorMsg('');
@@ -100,43 +126,54 @@ function Verify(props: any) {
             }
           );
         });
+
+        if (userData?.loginMode === 'phone') {
+          const loginResponse = await loginWithVerifiedPhone({
+            phone: userData.phoneNo,
+          });
+
+          if (loginResponse?.success === true) {
+            saveLoginDataAndRedirect(loginResponse);
+            return;
+          } else {
+            setInvalidOTP(true);
+            setErrorMsg(loginResponse?.message || 'Phone login failed');
+            return;
+          }
+        }
+
+        const registerUser = await userRegister({
+          email: userData.email,
+          name: userData.firstname,
+          lname: userData.lastname,
+          password: userData.password,
+          role: userData.role,
+          phone: userData.phoneNo,
+        });
+
+        if (registerUser?.success === true) {
+          saveLoginDataAndRedirect(registerUser);
+        } else {
+          setInvalidOTP(true);
+          setErrorMsg(registerUser?.message || 'Registration failed');
+        }
+
+        return;
       }
 
-      const registerUser = await userRegister({
+      const verifyOtpToMail = await verifyOtp({
         email: userData.email,
-        name: userData.firstname,
-        lname: userData.lastname,
-        password: userData.password,
-        role: userData.role,
-        phone: userData.phoneNo,
+        otp: OTP,
       });
 
-      console.log('registerUser response:', registerUser);
-
-      if (registerUser?.success === true) {
-        if (registerUser.token) {
-          localStorage.setItem('Auth_Token', registerUser.token);
-        }
-
-        if (registerUser.user?.email) {
-          localStorage.setItem('User_Email', registerUser.user.email);
-        } else {
-          localStorage.setItem('User_Email', userData.email);
-        }
-
-        if (registerUser.user?.username) {
-          localStorage.setItem('User_Name', registerUser.user.username);
-        } else {
-          localStorage.setItem('User_Name', userData.firstname);
-        }
-
-        navigate('/dashboard');
+      if (verifyOtpToMail?.success === true) {
+        saveLoginDataAndRedirect(verifyOtpToMail);
       } else {
         setInvalidOTP(true);
-        setErrorMsg(registerUser?.message || 'Registration failed');
+        setErrorMsg(verifyOtpToMail?.message || 'Email OTP verification failed');
       }
     } catch (error: any) {
-      console.error('Verify/Register failed:', error);
+      console.error('Verify/Proceed failed:', error);
       setInvalidOTP(true);
       setErrorMsg(error?.message || 'Verification failed');
     } finally {
@@ -200,10 +237,10 @@ function Verify(props: any) {
                   type="button"
                   id="kt_sign_up_submit"
                   className="btn btn-lg btn-primary w-100 mb-5"
-                  onClick={verifyAndRegister}
+                  onClick={verifyAndProceed}
                   disabled={loading || OTP.length !== 6}
                 >
-                  {!loading && <span className="indicator-label">Verify & Register</span>}
+                  {!loading && <span className="indicator-label">Verify</span>}
                   {loading && (
                     <span className="indicator-progress" style={{ display: 'block' }}>
                       Please wait...
