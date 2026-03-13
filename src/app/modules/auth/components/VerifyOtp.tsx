@@ -76,8 +76,7 @@ function Verify(props: any) {
 
     localStorage.setItem('User_Name', fullName);
 
-    // navigate('/dashboard', { replace: true });
-    window.location.href = '/dashboard';
+    window.location.replace('/dashboard');
   };
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -95,19 +94,12 @@ function Verify(props: any) {
         await new Promise<void>((resolve, reject) => {
           window.retryOtp!(
             null,
-            (data: any) => {
-              console.log('OTP resent successfully:', data);
-              resolve();
-            },
-            (error: any) => {
-              console.error('Resend OTP failed:', error);
-              reject(error);
-            }
+            () => resolve(),
+            (error: any) => reject(error)
           );
         });
       }
     } catch (error: any) {
-      console.error('Resend OTP failed:', error);
       setInvalidOTP(true);
       setErrorMsg(error?.message || 'Failed to resend OTP');
     }
@@ -135,14 +127,8 @@ function Verify(props: any) {
         await new Promise<void>((resolve, reject) => {
           window.verifyOtp!(
             OTP,
-            (data: any) => {
-              console.log('OTP verified successfully:', data);
-              resolve();
-            },
-            (error: any) => {
-              console.error('OTP verification failed:', error);
-              reject(error);
-            }
+            () => resolve(),
+            (error: any) => reject(error)
           );
         });
 
@@ -153,27 +139,20 @@ function Verify(props: any) {
         }
 
         if (userData?.loginMode === 'phone') {
-          console.log('loginWithVerifiedPhone payload:', {
-            phone: phoneNumber,
-            userData,
-          });
-
           const loginResponse = await loginWithVerifiedPhone({
             phone: phoneNumber,
           });
-
-          console.log('loginWithVerifiedPhone response:', loginResponse);
 
           const finalLoginResponse = loginResponse?.data || loginResponse;
 
           if (finalLoginResponse?.success === true && finalLoginResponse?.token) {
             saveLoginDataAndRedirect(finalLoginResponse);
             return;
-          } else {
-            setInvalidOTP(true);
-            setErrorMsg(finalLoginResponse?.message || 'Phone login failed');
-            return;
           }
+
+          setInvalidOTP(true);
+          setErrorMsg(finalLoginResponse?.message || 'Phone login failed');
+          return;
         }
 
         const registerUserResponse = await userRegister({
@@ -190,12 +169,24 @@ function Verify(props: any) {
         const finalRegisterResponse = registerUserResponse?.data || registerUserResponse;
 
         if (finalRegisterResponse?.success === true) {
-          saveLoginDataAndRedirect(finalRegisterResponse);
-        } else {
+          const loginResponse = await loginWithVerifiedPhone({
+            phone: phoneNumber,
+          });
+
+          const finalLoginResponse = loginResponse?.data || loginResponse;
+
+          if (finalLoginResponse?.success === true && finalLoginResponse?.token) {
+            saveLoginDataAndRedirect(finalLoginResponse);
+            return;
+          }
+
           setInvalidOTP(true);
-          setErrorMsg(finalRegisterResponse?.message || 'Registration failed');
+          setErrorMsg(finalLoginResponse?.message || 'Registration successful, but auto-login failed');
+          return;
         }
 
+        setInvalidOTP(true);
+        setErrorMsg(finalRegisterResponse?.message || 'Registration failed');
         return;
       }
 
@@ -204,16 +195,15 @@ function Verify(props: any) {
         otp: OTP,
       });
 
-      console.log('verifyOtp mail response:', verifyOtpToMail);
-
       const finalMailResponse = verifyOtpToMail?.data || verifyOtpToMail;
 
       if (finalMailResponse?.success === true) {
         saveLoginDataAndRedirect(finalMailResponse);
-      } else {
-        setInvalidOTP(true);
-        setErrorMsg(finalMailResponse?.message || 'Email OTP verification failed');
+        return;
       }
+
+      setInvalidOTP(true);
+      setErrorMsg(finalMailResponse?.message || 'Email OTP verification failed');
     } catch (error: any) {
       console.error('Verify/Proceed failed:', error);
       setInvalidOTP(true);
