@@ -106,7 +106,7 @@ export const verifyToken = async (): Promise<any> => {
 
 export const loginWithVerifiedPhone = async (data: any): Promise<any> => {
   try {
-    const url = `${API_URL}/auth/login-with-phone-complete`;
+    const url = `https://api.propcliq.com/auth/login-with-phone-complete`;
     const reqOpts: RequestInit = {
       method: 'POST',
       headers: {

@@ -131,7 +131,7 @@ function Verify(props: any) {
 
         if (userData?.loginMode === 'phone') {
           const loginResponse = await loginWithVerifiedPhone({
-            phone: userData.phoneNo,
+            phone: userData.phone,
           });
 
           if (loginResponse?.success === true) {
@@ -150,7 +150,7 @@ function Verify(props: any) {
           lname: userData.lastname,
           password: userData.password,
           role: userData.role,
-          phone: userData.phoneNo,
+          phone: userData.phone,
         });
 
         if (registerUser?.success === true) {
