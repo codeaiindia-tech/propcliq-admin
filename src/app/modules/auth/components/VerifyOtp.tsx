@@ -2,7 +2,7 @@ import OTPInput from 'react-otp-input';
 import React, { useState } from 'react';
 import '../Style/OtpStyle.css';
 import clsx from 'clsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   userRegister,
   verifyOtp,
@@ -58,9 +58,7 @@ function Verify(props: any) {
       localStorage.setItem('User_Name', userData.phoneNo);
     }
 
-    // navigate('/dashboard');
-    window.location.href = '/dashboard';
-    return
+    navigate('/dashboard', { replace: true });
   };
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -251,16 +249,14 @@ function Verify(props: any) {
                   )}
                 </button>
 
-                <Link to="/auth/login">
-                  <button
-                    onClick={handleCancel}
-                    type="button"
-                    id="kt_login_signup_form_cancel_button"
-                    className="btn btn-lg btn-light-primary w-100 mb-5"
-                  >
-                    Cancel
-                  </button>
-                </Link>
+                <button
+                  onClick={handleCancel}
+                  type="button"
+                  id="kt_login_signup_form_cancel_button"
+                  className="btn btn-lg btn-light-primary w-100 mb-5"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
