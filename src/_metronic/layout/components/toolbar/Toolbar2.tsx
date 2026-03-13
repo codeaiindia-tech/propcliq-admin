@@ -16,7 +16,7 @@ const Toolbar2: FC = () => {
                             <i className="fa fa-user text-warning fs-1"></i>
                         </div>
                         <div>
-                            <h3>Hi {userName}</h3>
+                            <h3>Hi, <span className='uppercase' >{userName}</span></h3>
                             <span>Hope you're having a great day !</span>
                         </div>
                     </div>
