@@ -44,21 +44,30 @@ function Verify(props: any) {
   };
 
   const saveLoginDataAndRedirect = (response: any) => {
-    if (response?.token) {
-      localStorage.setItem('Auth_Token', response.token);
-      localStorage.setItem('token', response.token);
+    const finalResponse = response?.data || response;
+
+    if (finalResponse?.token) {
+      localStorage.setItem('Auth_Token', finalResponse.token);
+      localStorage.setItem('token', finalResponse.token);
     }
 
-    const email = response?.user?.email || userData?.email || '';
+    const email =
+      finalResponse?.user?.email ||
+      finalResponse?.email ||
+      userData?.email ||
+      '';
 
     if (email) {
       localStorage.setItem('User_Email', email);
     }
 
     const fullName =
-      response?.user?.username ||
-      response?.user?.name ||
-      `${response?.user?.fname || ''} ${response?.user?.lname || ''}`.trim() ||
+      finalResponse?.user?.username ||
+      finalResponse?.user?.name ||
+      finalResponse?.username ||
+      finalResponse?.name ||
+      `${finalResponse?.user?.fname || ''} ${finalResponse?.user?.lname || ''}`.trim() ||
+      `${finalResponse?.fname || ''} ${finalResponse?.lname || ''}`.trim() ||
       `${userData?.firstname || ''} ${userData?.lastname || ''}`.trim() ||
       userData?.firstname ||
       getPhoneNumber() ||
@@ -152,12 +161,16 @@ function Verify(props: any) {
             phone: phoneNumber,
           });
 
-          if (loginResponse?.success === true) {
-            saveLoginDataAndRedirect(loginResponse);
+          console.log('loginWithVerifiedPhone response:', loginResponse);
+
+          const finalLoginResponse = loginResponse?.data || loginResponse;
+
+          if (finalLoginResponse?.success === true && finalLoginResponse?.token) {
+            saveLoginDataAndRedirect(finalLoginResponse);
             return;
           } else {
             setInvalidOTP(true);
-            setErrorMsg(loginResponse?.message || 'Phone login failed');
+            setErrorMsg(finalLoginResponse?.message || 'Phone login failed');
             return;
           }
         }
@@ -171,11 +184,15 @@ function Verify(props: any) {
           phone: phoneNumber,
         });
 
-        if (registerUserResponse?.success === true) {
-          saveLoginDataAndRedirect(registerUserResponse);
+        console.log('userRegister response:', registerUserResponse);
+
+        const finalRegisterResponse = registerUserResponse?.data || registerUserResponse;
+
+        if (finalRegisterResponse?.success === true) {
+          saveLoginDataAndRedirect(finalRegisterResponse);
         } else {
           setInvalidOTP(true);
-          setErrorMsg(registerUserResponse?.message || 'Registration failed');
+          setErrorMsg(finalRegisterResponse?.message || 'Registration failed');
         }
 
         return;
@@ -186,11 +203,15 @@ function Verify(props: any) {
         otp: OTP,
       });
 
-      if (verifyOtpToMail?.success === true) {
-        saveLoginDataAndRedirect(verifyOtpToMail);
+      console.log('verifyOtp mail response:', verifyOtpToMail);
+
+      const finalMailResponse = verifyOtpToMail?.data || verifyOtpToMail;
+
+      if (finalMailResponse?.success === true) {
+        saveLoginDataAndRedirect(finalMailResponse);
       } else {
         setInvalidOTP(true);
-        setErrorMsg(verifyOtpToMail?.message || 'Email OTP verification failed');
+        setErrorMsg(finalMailResponse?.message || 'Email OTP verification failed');
       }
     } catch (error: any) {
       console.error('Verify/Proceed failed:', error);
@@ -286,4 +307,4 @@ function Verify(props: any) {
   );
 }
 
-export default Verify
+export default Verify;
