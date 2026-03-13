@@ -166,27 +166,23 @@ function Verify(props: any) {
 
         console.log('userRegister response:', registerUserResponse);
 
-        const finalRegisterResponse = registerUserResponse?.data || registerUserResponse;
-
-        if (finalRegisterResponse?.success === true) {
+        if (registerUserResponse?.success === true) {
           const loginResponse = await loginWithVerifiedPhone({
             phone: phoneNumber,
           });
 
-          const finalLoginResponse = loginResponse?.data || loginResponse;
-
-          if (finalLoginResponse?.success === true && finalLoginResponse?.token) {
-            saveLoginDataAndRedirect(finalLoginResponse);
+          if (loginResponse?.success === true && loginResponse?.token) {
+            saveLoginDataAndRedirect(loginResponse);
             return;
           }
 
           setInvalidOTP(true);
-          setErrorMsg(finalLoginResponse?.message || 'Registration successful, but auto-login failed');
+          setErrorMsg(loginResponse?.message || 'Registration successful, but auto-login failed');
           return;
         }
 
         setInvalidOTP(true);
-        setErrorMsg(finalRegisterResponse?.message || 'Registration failed');
+        setErrorMsg(registerUserResponse?.message || 'Registration failed');
         return;
       }
 
