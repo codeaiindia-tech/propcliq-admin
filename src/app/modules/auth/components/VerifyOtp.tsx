@@ -39,34 +39,36 @@ function Verify(props: any) {
     setErrorMsg('');
   }
 
+  const getPhoneNumber = () => {
+    return userData?.phoneNo || userData?.phone || '';
+  };
+
   const saveLoginDataAndRedirect = (response: any) => {
-  if (response?.token) {
-    localStorage.setItem('Auth_Token', response.token);
-    localStorage.setItem('token', response.token);
-  }
+    if (response?.token) {
+      localStorage.setItem('Auth_Token', response.token);
+      localStorage.setItem('token', response.token);
+    }
 
-  const email =
-    response?.user?.email ||
-    userData?.email ||
-    '';
+    const email = response?.user?.email || userData?.email || '';
 
-  if (email) {
-    localStorage.setItem('User_Email', email);
-  }
+    if (email) {
+      localStorage.setItem('User_Email', email);
+    }
 
-  const fullName =
-    response?.user?.username ||
-    response?.user?.name ||
-    `${response?.user?.fname || ''} ${response?.user?.lname || ''}`.trim() ||
-    `${userData?.firstname || ''} ${userData?.lastname || ''}`.trim() ||
-    userData?.firstname ||
-    userData?.phoneNo ||
-    email;
+    const fullName =
+      response?.user?.username ||
+      response?.user?.name ||
+      `${response?.user?.fname || ''} ${response?.user?.lname || ''}`.trim() ||
+      `${userData?.firstname || ''} ${userData?.lastname || ''}`.trim() ||
+      userData?.firstname ||
+      getPhoneNumber() ||
+      email ||
+      'User';
 
-  localStorage.setItem('User_Name', fullName);
+    localStorage.setItem('User_Name', fullName);
 
-  navigate('/dashboard', { replace: true });
-};
+    navigate('/dashboard', { replace: true });
+  };
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -134,9 +136,20 @@ function Verify(props: any) {
           );
         });
 
+        const phoneNumber = getPhoneNumber();
+
+        if (!phoneNumber) {
+          throw new Error('Phone number is required');
+        }
+
         if (userData?.loginMode === 'phone') {
+          console.log('loginWithVerifiedPhone payload:', {
+            phone: phoneNumber,
+            userData,
+          });
+
           const loginResponse = await loginWithVerifiedPhone({
-            phone: userData.phone,
+            phone: phoneNumber,
           });
 
           if (loginResponse?.success === true) {
@@ -149,27 +162,27 @@ function Verify(props: any) {
           }
         }
 
-        const registerUser = await userRegister({
-          email: userData.email,
-          name: userData.firstname,
-          lname: userData.lastname,
-          password: userData.password,
-          role: userData.role,
-          phone: userData.phone,
+        const registerUserResponse = await userRegister({
+          email: userData?.email,
+          name: userData?.firstname,
+          lname: userData?.lastname,
+          password: userData?.password,
+          role: userData?.role,
+          phone: phoneNumber,
         });
 
-        if (registerUser?.success === true) {
-          saveLoginDataAndRedirect(registerUser);
+        if (registerUserResponse?.success === true) {
+          saveLoginDataAndRedirect(registerUserResponse);
         } else {
           setInvalidOTP(true);
-          setErrorMsg(registerUser?.message || 'Registration failed');
+          setErrorMsg(registerUserResponse?.message || 'Registration failed');
         }
 
         return;
       }
 
       const verifyOtpToMail = await verifyOtp({
-        email: userData.email,
+        email: userData?.email,
         otp: OTP,
       });
 
@@ -199,13 +212,13 @@ function Verify(props: any) {
               <div className="otpElements">
                 {!signInViaPhone && (
                   <div className="py-3">
-                    An OTP has been sent to your entered email <strong>{userData.email}</strong>
+                    An OTP has been sent to your entered email <strong>{userData?.email}</strong>
                   </div>
                 )}
 
                 {signInViaPhone && (
                   <div className="py-3">
-                    An OTP has been sent to your entered Phone No. <strong>{userData.phoneNo}</strong>
+                    An OTP has been sent to your entered Phone No. <strong>{getPhoneNumber()}</strong>
                   </div>
                 )}
 
@@ -273,4 +286,4 @@ function Verify(props: any) {
   );
 }
 
-export default Verify;
+export default Verify
