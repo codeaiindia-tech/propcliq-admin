@@ -115,6 +115,7 @@ export function Registration() {
             setLoading(true);
             setErrorFlag(false);
             setErrorFlagMsg('');
+            console.log("Form value:", values)
 
             try {
                 if (!msg91Ready || !window.sendOtp) {
