@@ -40,26 +40,33 @@ function Verify(props: any) {
   }
 
   const saveLoginDataAndRedirect = (response: any) => {
-    if (response?.token) {
-      localStorage.setItem('Auth_Token', response.token);
-    }
+  if (response?.token) {
+    localStorage.setItem('Auth_Token', response.token);
+    localStorage.setItem('token', response.token);
+  }
 
-    if (response?.user?.email) {
-      localStorage.setItem('User_Email', response.user.email);
-    } else if (userData?.email) {
-      localStorage.setItem('User_Email', userData.email);
-    }
+  const email =
+    response?.user?.email ||
+    userData?.email ||
+    '';
 
-    if (response?.user?.username) {
-      localStorage.setItem('User_Name', response.user.username);
-    } else if (userData?.firstname) {
-      localStorage.setItem('User_Name', userData.firstname);
-    } else if (userData?.phoneNo) {
-      localStorage.setItem('User_Name', userData.phoneNo);
-    }
+  if (email) {
+    localStorage.setItem('User_Email', email);
+  }
 
-    navigate('/dashboard', { replace: true });
-  };
+  const fullName =
+    response?.user?.username ||
+    response?.user?.name ||
+    `${response?.user?.fname || ''} ${response?.user?.lname || ''}`.trim() ||
+    `${userData?.firstname || ''} ${userData?.lastname || ''}`.trim() ||
+    userData?.firstname ||
+    userData?.phoneNo ||
+    email;
+
+  localStorage.setItem('User_Name', fullName);
+
+  navigate('/dashboard', { replace: true });
+};
 
   const reSendOtp = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
