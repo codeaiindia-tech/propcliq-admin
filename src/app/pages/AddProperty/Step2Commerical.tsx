@@ -14,7 +14,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 
 const Step2Commerical: FC<any> = (props: any) => {
-  // const propertyCategory = ["retail"]; //office, showroom, plot, warehouse, retail  -> property_category
   console.log("props::::::;", props);
 
   const [city, setCity] = useState<string>("");
@@ -26,6 +25,43 @@ const Step2Commerical: FC<any> = (props: any) => {
   const [flatNo, setFlatNo] = useState<string>("");
   const [floorNo, setFloorNo] = useState<string>("");
   const [totalFloors, setTotalFloors] = useState<string>("");
+
+  const [possessionStatus, setPossessionStatus] = useState<string>("");
+  const [availableFrom, setAvailableFrom] = useState<Dayjs | null>(null);
+  const [ageOfProperty, setAgeOfProperty] = useState<string>("");
+  const [zoneType, setZoneType] = useState<string>("");
+  const [suitableFor, setSuitableFor] = useState<string>("");
+  const [locationHub, setLocationHub] = useState<string>("");
+  const [buildUpArea, setBuildUpArea] = useState<string>("");
+  const [carpetArea, setCarpetArea] = useState<string>("");
+  const [entranceWidth, setEntranceWidth] = useState<string>("");
+  const [ceilingHeight, setCeilingHeight] = useState<string>("");
+  const [propertyCondition, setPropertyCondition] = useState<string>("");
+  const [locatedNear, setLocatedNear] = useState<string>("");
+  const [ownership, setOwnership] = useState<string>("");
+  const [expectedRent, setExpectedRent] = useState<string>("");
+  const [securityDeposit, setSecurityDeposit] = useState<string>("");
+  const [negotiable, setNegotiable] = useState<string>("");
+  const [dgUpsChargeIncluded, setDgUpsChargeIncluded] = useState<string>("");
+  const [waterChargesIncluded, setWaterChargesIncluded] = useState<string>("");
+  const [taxGovtChargesIncluded, setTaxGovtChargesIncluded] =
+    useState<string>("");
+  const [electricityChargesIncluded, setElectricityChargesIncluded] =
+    useState<string>("");
+  const [lockInPeriod, setLockInPeriod] = useState<string>("");
+  const [expectedRentIncrease, setExpectedRentIncrease] =
+    useState<string>("");
+  const [floorsAvailableTotal, setFloorsAvailableTotal] =
+    useState<string>("");
+  const [floorsAvailableYour, setFloorsAvailableYour] = useState<string>("");
+  const [numberOfStaircases, setNumberOfStaircases] = useState<string>("");
+  const [passengersLifts, setPassengersLifts] = useState<string>("");
+  const [serviceLifts, setServiceLifts] = useState<string>("");
+  const [privateWashrooms, setPrivateWashrooms] = useState<string>("");
+  const [publicWashrooms, setPublicWashrooms] = useState<string>("");
+  const [privateParking, setPrivateParking] = useState<string>("");
+  const [publicParking, setPublicParking] = useState<string>("");
+
   const [localityError, setLocalityError] = useState<string>("");
   const [stateError, setStateError] = useState<string>("");
   const [countryError, setCountryError] = useState<string>("");
@@ -33,29 +69,23 @@ const Step2Commerical: FC<any> = (props: any) => {
   const [totalFloorsError, setTotalFloorsError] = useState<string>("");
   const [cityError, setCityErrorr] = useState<string>("");
   const [newProjectError, setNewProjectError] = useState<string>("");
+
   const [inputValue, setInputValue] = React.useState("");
   const [projectDetail, setProjectDetail] = React.useState<any>();
   const [projectOption, setProjectOption] = React.useState<any>([]);
   const [isProjectFlag, setIsProjectFlag] = React.useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [propertyCategory, setPropertyCategory] = useState(["retail"]); //office, showroom, plot, warehouse, retail  -> property_category
+  const [propertyCategory, setPropertyCategory] = useState(["retail"]);
 
   const handleSubmit = () => {
-    // Validate form fields
     let isValid = true;
+
     if (!locality) {
       setLocalityError("Please select a valid locality");
       isValid = false;
     } else {
       setLocalityError("");
     }
-
-    // if (!floorNo) {
-    //     setFloorNoError('Please enter the floor no.111111');
-    //     isValid = false;
-    // } else {
-    //     setFloorNoError('');
-    // }
 
     if (!stateValue) {
       setStateError("Please enter State");
@@ -65,10 +95,10 @@ const Step2Commerical: FC<any> = (props: any) => {
     }
 
     if (!country) {
-      setCountry("Please enter Country");
+      setCountryError("Please enter Country");
       isValid = false;
     } else {
-      setCountry("");
+      setCountryError("");
     }
 
     if (!city) {
@@ -85,6 +115,16 @@ const Step2Commerical: FC<any> = (props: any) => {
       setNewProjectError("");
     }
 
+    if (!floorNo) {
+      setFloorNoError("Please enter the floor no.");
+      isValid = false;
+    } else if (isNaN(Number(floorNo))) {
+      setFloorNoError("Please enter valid floor no.");
+      isValid = false;
+    } else {
+      setFloorNoError("");
+    }
+
     if (totalFloors && isNaN(Number(totalFloors))) {
       setTotalFloorsError("Please enter valid total floors");
       isValid = false;
@@ -92,16 +132,16 @@ const Step2Commerical: FC<any> = (props: any) => {
       setTotalFloorsError("");
     }
 
-    // Proceed with form submission if valid
     if (isValid) {
-      // Perform form submission logic here
       const url: URL = new URL(window.location.href);
       const params: URLSearchParams = url.searchParams;
       const propertyId: any = params.get("id");
+
       let projectValue = building;
       if (building === "No Project found, add New Project") {
         projectValue = newProjectVal;
       }
+
       const data = {
         property_id: propertyId,
         address_details: {
@@ -125,19 +165,29 @@ const Step2Commerical: FC<any> = (props: any) => {
     const params: URLSearchParams = url.searchParams;
     const propertyId: any = params.get("id");
     const fetchPropertyDetail = await getPropertyDetailById({ id: propertyId });
-    if(fetchPropertyDetail?.fetchPropertyCategory){
-      setPropertyCategory(fetchPropertyDetail?.propertyCategory)
+
+    if (fetchPropertyDetail?.fetchPropertyCategory) {
+      setPropertyCategory(fetchPropertyDetail?.propertyCategory);
     }
+
     if (fetchPropertyDetail?.address_details) {
-      const { project, flat_no, floor_no, total_floors } =
-        fetchPropertyDetail?.address_details;
-      setInputValue(project);
-      setBuilding(project);
-      setTotalFloors(total_floors);
-      setFloorNo(floor_no);
-      setFlatNo(flat_no);
+      const {
+        project,
+        flat_no,
+        floor_no,
+        total_floors,
+        locality: fetchedLocality,
+        area,
+      } = fetchPropertyDetail?.address_details;
+
+      setInputValue(project || "");
+      setBuilding(project || "");
+      setTotalFloors(total_floors || "");
+      setFloorNo(floor_no || "");
+      setFlatNo(flat_no || "");
+      setLocality(fetchedLocality || "");
+      setCity(area || "");
       setIsEdit(true);
-      
     }
   };
 
@@ -180,13 +230,14 @@ const Step2Commerical: FC<any> = (props: any) => {
       if (projectByName) {
         const { city, country, locality, state }: any = projectByName;
         setIsProjectFlag(true);
-        setCity(city);
-        setLocality(locality);
-        setCountry(country);
-        setStateValue(state);
+        setCity(city || "");
+        setLocality(locality || "");
+        setCountry(country || "");
+        setStateValue(state || "");
+        setBuilding(inputValue || "");
       }
     }
-  }, [inputValue]);
+  }, [inputValue, projectDetail]);
 
   return (
     <div className="w-100">
@@ -206,10 +257,10 @@ const Step2Commerical: FC<any> = (props: any) => {
             variant="outlined"
             fullWidth
             required
-            error={!!stateError}
-            helperText={stateError}
-            value={stateValue}
-            onChange={(e) => setStateValue(e.target.value)}
+            error={!!newProjectError}
+            helperText={newProjectError}
+            value={building || ""}
+            onChange={(e) => setBuilding(e.target.value)}
           />
         </div>
       </div>
@@ -226,10 +277,10 @@ const Step2Commerical: FC<any> = (props: any) => {
             variant="outlined"
             fullWidth
             required
-            error={!!stateError}
-            helperText={stateError}
-            value={stateValue}
-            onChange={(e) => setStateValue(e.target.value)}
+            error={!!localityError}
+            helperText={localityError}
+            value={locality}
+            onChange={(e) => setLocality(e.target.value)}
           />
         </div>
       </div>
@@ -251,7 +302,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                   <RadioButtonBox
                     key={index}
                     label={val}
-                    handleClick={() => {}}
+                    handleClick={() => setPossessionStatus(val)}
                   />
                 );
               })}
@@ -265,7 +316,8 @@ const Step2Commerical: FC<any> = (props: any) => {
               <DatePicker
                 label="Available From"
                 className="data_container-component"
-                onChange={() => {}}
+                value={availableFrom}
+                onChange={(newValue) => setAvailableFrom(newValue)}
                 slotProps={{
                   textField: {
                     error: false,
@@ -284,10 +336,10 @@ const Step2Commerical: FC<any> = (props: any) => {
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={ageOfProperty}
+              onChange={(e) => setAgeOfProperty(e.target.value)}
             />
           </>
         ) : null}
@@ -305,7 +357,7 @@ const Step2Commerical: FC<any> = (props: any) => {
               <div className="label_for_label">
                 Zone Type <span className="mandatoryMarker">*</span>
               </div>
-              <div className="d-flex" style={{ gap: "16px", flexWrap:'wrap' }}>
+              <div className="d-flex" style={{ gap: "16px", flexWrap: "wrap" }}>
                 {[
                   "Industrial",
                   "Commerical",
@@ -319,50 +371,54 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setZoneType(val)}
                     />
                   );
                 })}
               </div>
             </div>
           </>
-        ) : <>
-        <div style={{ marginTop: "30px" }}>
-          <div className="label_for_label">
-            Suitable for <span className="mandatoryMarker">*</span>
-          </div>
+        ) : (
+          <>
+            <div style={{ marginTop: "30px" }}>
+              <div className="label_for_label">
+                Suitable for <span className="mandatoryMarker">*</span>
+              </div>
 
-          <div className="d-flex" style={{ gap: "16px" , flexWrap:'wrap'}}>
-            {[
-              "Jewellery",
-              "Gym",
-              "Grocery",
-              "Clinic",
-              "Footwear",
-              "Electronics",
-              "Clothing",
-              "Others",
-            ].map((val, index) => {
-              return (
-                <RadioButtonBox
-                  key={index}
-                  label={val}
-                  handleClick={() => {}}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </>}
+              <div className="d-flex" style={{ gap: "16px", flexWrap: "wrap" }}>
+                {[
+                  "Jewellery",
+                  "Gym",
+                  "Grocery",
+                  "Clinic",
+                  "Footwear",
+                  "Electronics",
+                  "Clothing",
+                  "Others",
+                ].map((val, index) => {
+                  return (
+                    <RadioButtonBox
+                      key={index}
+                      label={val}
+                      handleClick={() => setSuitableFor(val)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
 
-        {propertyCategory.includes("warehouse") || propertyCategory.includes("retail") || propertyCategory.includes("showroom") ? (
+        {propertyCategory.includes("warehouse") ||
+        propertyCategory.includes("retail") ||
+        propertyCategory.includes("showroom") ? (
           <>
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Location Hub <span className="mandatoryMarker">*</span>
               </div>
 
-              <div className="d-flex" style={{ gap: "16px" , flexWrap:'wrap'}}>
+              <div className="d-flex" style={{ gap: "16px", flexWrap: "wrap" }}>
                 {[
                   "Mall",
                   "Commercial Project",
@@ -375,7 +431,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setLocationHub(val)}
                     />
                   );
                 })}
@@ -383,38 +439,8 @@ const Step2Commerical: FC<any> = (props: any) => {
             </div>
           </>
         ) : null}
-        
+
         {propertyCategory.includes("office") ? (
-          <>
-        <div style={{ marginTop: "30px" }}>
-          <div className="label_for_label">
-            Location Hub <span className="mandatoryMarker">*</span>
-          </div>
-
-          <div className="d-flex" style={{ gap: "16px" }}>
-            {["IT Park", "Business Park", "Others"].map((val, index) => {
-              return (
-                <RadioButtonBox
-                  key={index}
-                  label={val}
-                  handleClick={() => {}}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </>
-        ) : null}
-
-        {/* {propertyCategory.includes("warehouse") ||
-        propertyCategory.includes("warehouse") ||
-        !propertyCategory.includes("plot") ? (
-          
-        ) : null} */}
-
-        {/* {propertyCategory.includes("warehouse") ||
-        propertyCategory.includes("warehouse") ||
-        !propertyCategory.includes("plot") ? (
           <>
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
@@ -427,14 +453,14 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setLocationHub(val)}
                     />
                   );
                 })}
               </div>
             </div>
           </>
-        ) : null} */}
+        ) : null}
 
         <div style={{ marginTop: "30px" }}>
           <div className="label_for_label" style={{ gap: "16px" }}>
@@ -448,15 +474,17 @@ const Step2Commerical: FC<any> = (props: any) => {
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={buildUpArea}
+              onChange={(e) => setBuildUpArea(e.target.value)}
             />
           </div>
         </div>
 
-        {propertyCategory.includes("warehouse") || propertyCategory.includes("retail") || propertyCategory.includes("showroom") ? (
+        {propertyCategory.includes("warehouse") ||
+        propertyCategory.includes("retail") ||
+        propertyCategory.includes("showroom") ? (
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label" style={{ gap: "16px" }}>
               Carpet Area <span className="mandatoryMarker">*</span>
@@ -469,16 +497,17 @@ const Step2Commerical: FC<any> = (props: any) => {
                 variant="outlined"
                 fullWidth
                 required
-                error={!!stateError}
-                helperText={stateError}
-                value={stateValue}
-                onChange={(e) => setStateValue(e.target.value)}
+                error={false}
+                helperText=""
+                value={carpetArea}
+                onChange={(e) => setCarpetArea(e.target.value)}
               />
             </div>
           </div>
         ) : null}
 
-        {propertyCategory.includes("retail") || propertyCategory.includes("showroom") ? (
+        {propertyCategory.includes("retail") ||
+        propertyCategory.includes("showroom") ? (
           <>
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label" style={{ gap: "16px" }}>
@@ -493,10 +522,10 @@ const Step2Commerical: FC<any> = (props: any) => {
                   variant="outlined"
                   fullWidth
                   required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
+                  error={false}
+                  helperText=""
+                  value={entranceWidth}
+                  onChange={(e) => setEntranceWidth(e.target.value)}
                 />
               </div>
             </div>
@@ -514,10 +543,10 @@ const Step2Commerical: FC<any> = (props: any) => {
                   variant="outlined"
                   fullWidth
                   required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
+                  error={false}
+                  helperText=""
+                  value={ceilingHeight}
+                  onChange={(e) => setCeilingHeight(e.target.value)}
                 />
               </div>
             </div>
@@ -536,7 +565,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                   <RadioButtonBox
                     key={index}
                     label={val}
-                    handleClick={() => {}}
+                    handleClick={() => setPropertyCondition(val)}
                   />
                 );
               })}
@@ -544,7 +573,8 @@ const Step2Commerical: FC<any> = (props: any) => {
           </div>
         ) : null}
 
-        {propertyCategory.includes("retail") || propertyCategory.includes("showroom") ? (
+        {propertyCategory.includes("retail") ||
+        propertyCategory.includes("showroom") ? (
           <>
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
@@ -557,7 +587,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setLocatedNear(val)}
                     />
                   );
                 })}
@@ -582,14 +612,12 @@ const Step2Commerical: FC<any> = (props: any) => {
                 <RadioButtonBox
                   key={index}
                   label={val}
-                  handleClick={() => {}}
+                  handleClick={() => setOwnership(val)}
                 />
               );
             })}
           </div>
         </div>
-
-        {/* --- */}
 
         <div style={{ marginTop: "30px" }}>
           <div className="label_for_label">
@@ -603,10 +631,10 @@ const Step2Commerical: FC<any> = (props: any) => {
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={expectedRent}
+              onChange={(e) => setExpectedRent(e.target.value)}
             />
             <TextField
               label="Security Deposit"
@@ -614,14 +642,12 @@ const Step2Commerical: FC<any> = (props: any) => {
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={securityDeposit}
+              onChange={(e) => setSecurityDeposit(e.target.value)}
             />
           </div>
-
-        
 
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label">
@@ -634,7 +660,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                   <RadioButtonBox
                     key={index}
                     label={val}
-                    handleClick={() => {}}
+                    handleClick={() => setNegotiable(val)}
                   />
                 );
               })}
@@ -654,7 +680,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setDgUpsChargeIncluded(val)}
                     />
                   );
                 })}
@@ -675,7 +701,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setWaterChargesIncluded(val)}
                     />
                   );
                 })}
@@ -683,7 +709,8 @@ const Step2Commerical: FC<any> = (props: any) => {
             </div>
           ) : null}
 
-          {propertyCategory.includes("retail")  || propertyCategory.includes("showroom")? (
+          {propertyCategory.includes("retail") ||
+          propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Tax & Govt. Charge included?{" "}
@@ -696,7 +723,7 @@ const Step2Commerical: FC<any> = (props: any) => {
                     <RadioButtonBox
                       key={index}
                       label={val}
-                      handleClick={() => {}}
+                      handleClick={() => setTaxGovtChargesIncluded(val)}
                     />
                   );
                 })}
@@ -716,24 +743,24 @@ const Step2Commerical: FC<any> = (props: any) => {
                   <RadioButtonBox
                     key={index}
                     label={val}
-                    handleClick={() => {}}
+                    handleClick={() => setElectricityChargesIncluded(val)}
                   />
                 );
               })}
             </div>
           </div>
-          
-          <div className="d-flex" style={{ marginTop: "30px" , gap: "16px"}}>
+
+          <div className="d-flex" style={{ marginTop: "30px", gap: "16px" }}>
             <TextField
               label="Lock in Period"
               placeholder="Lock in Period"
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={lockInPeriod}
+              onChange={(e) => setLockInPeriod(e.target.value)}
             />
 
             <TextField
@@ -742,42 +769,45 @@ const Step2Commerical: FC<any> = (props: any) => {
               variant="outlined"
               fullWidth
               required
-              error={!!stateError}
-              helperText={stateError}
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}
+              error={false}
+              helperText=""
+              value={expectedRentIncrease}
+              onChange={(e) => setExpectedRentIncrease(e.target.value)}
             />
           </div>
 
-          {propertyCategory.includes("office") || propertyCategory.includes("retail") || propertyCategory.includes("warehouse")  || propertyCategory.includes("showroom") ? (
+          {propertyCategory.includes("office") ||
+          propertyCategory.includes("retail") ||
+          propertyCategory.includes("warehouse") ||
+          propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Floors Available <span className="mandatoryMarker">*</span>
               </div>
               <div className="d-flex" style={{ gap: "16px" }}>
-              <TextField
-                label="Total Floor"
-                placeholder="Total Floor"
-                variant="outlined"
-                fullWidth
-                required
-                error={!!stateError}
-                helperText={stateError}
-                value={stateValue}
-                onChange={(e) => setStateValue(e.target.value)}
-              />
+                <TextField
+                  label="Total Floor"
+                  placeholder="Total Floor"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={!!totalFloorsError}
+                  helperText={totalFloorsError}
+                  value={floorsAvailableTotal}
+                  onChange={(e) => setFloorsAvailableTotal(e.target.value)}
+                />
 
-              <TextField
-                label="Your Floor"
-                placeholder="Your Floor"
-                variant="outlined"
-                fullWidth
-                required
-                error={!!stateError}
-                helperText={stateError}
-                value={stateValue}
-                onChange={(e) => setStateValue(e.target.value)}
-              />
+                <TextField
+                  label="Your Floor"
+                  placeholder="Your Floor"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={!!floorNoError}
+                  helperText={floorNoError}
+                  value={floorsAvailableYour}
+                  onChange={(e) => setFloorsAvailableYour(e.target.value)}
+                />
               </div>
             </div>
           ) : null}
@@ -788,113 +818,116 @@ const Step2Commerical: FC<any> = (props: any) => {
                 <div className="label_for_label">
                   Fifts and Starcases <span className="mandatoryMarker">*</span>
                 </div>
-                <div className="d-flex" style={{gap: "16px"}}>
-                <TextField
-                  label="Number of Staircases"
-                  placeholder="Number of Staircases"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                <div className="d-flex" style={{ gap: "16px" }}>
+                  <TextField
+                    label="Number of Staircases"
+                    placeholder="Number of Staircases"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={numberOfStaircases}
+                    onChange={(e) => setNumberOfStaircases(e.target.value)}
+                  />
 
-                <TextField
-                  label="Passengers Lifts"
-                  placeholder="Passengers Lifts"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                  <TextField
+                    label="Passengers Lifts"
+                    placeholder="Passengers Lifts"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={passengersLifts}
+                    onChange={(e) => setPassengersLifts(e.target.value)}
+                  />
 
-                <TextField
-                  label="Service Lifts"
-                  placeholder="Service Lifts"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                  <TextField
+                    label="Service Lifts"
+                    placeholder="Service Lifts"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={serviceLifts}
+                    onChange={(e) => setServiceLifts(e.target.value)}
+                  />
                 </div>
               </div>
             </>
           ) : null}
 
-          {propertyCategory.includes("retail") || propertyCategory.includes("warehouse") || propertyCategory.includes("showroom") ? (
+          {propertyCategory.includes("retail") ||
+          propertyCategory.includes("warehouse") ||
+          propertyCategory.includes("showroom") ? (
             <>
               <div style={{ marginTop: "30px" }}>
                 <div className="label_for_label">
                   Facilities <span className="mandatoryMarker">*</span>
                 </div>
-                <div className="d-flex" style={{gap: "16px"}}>
-                <TextField
-                  label="Private Washrooms"
-                  placeholder="Private Washrooms"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                <div className="d-flex" style={{ gap: "16px" }}>
+                  <TextField
+                    label="Private Washrooms"
+                    placeholder="Private Washrooms"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={privateWashrooms}
+                    onChange={(e) => setPrivateWashrooms(e.target.value)}
+                  />
 
-                <TextField
-                  label="Public Washrooms"
-                  placeholder="Public Washrooms"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
-
-              </div>
+                  <TextField
+                    label="Public Washrooms"
+                    placeholder="Public Washrooms"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={publicWashrooms}
+                    onChange={(e) => setPublicWashrooms(e.target.value)}
+                  />
+                </div>
               </div>
             </>
           ) : null}
 
-          {propertyCategory.includes("office") || propertyCategory.includes("retail") || propertyCategory.includes("showroom") ? (
+          {propertyCategory.includes("office") ||
+          propertyCategory.includes("retail") ||
+          propertyCategory.includes("showroom") ? (
             <>
               <div style={{ marginTop: "30px" }}>
                 <div className="label_for_label">
                   Parking <span className="mandatoryMarker">*</span>
                 </div>
-                <div className="d-flex" style={{gap: "16px"}}>
-                <TextField
-                  label="Private Parking"
-                  placeholder="Private Parking"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                <div className="d-flex" style={{ gap: "16px" }}>
+                  <TextField
+                    label="Private Parking"
+                    placeholder="Private Parking"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={privateParking}
+                    onChange={(e) => setPrivateParking(e.target.value)}
+                  />
 
-                <TextField
-                  label="Public Parking"
-                  placeholder="Public Parking"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!stateError}
-                  helperText={stateError}
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                />
+                  <TextField
+                    label="Public Parking"
+                    placeholder="Public Parking"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={false}
+                    helperText=""
+                    value={publicParking}
+                    onChange={(e) => setPublicParking(e.target.value)}
+                  />
                 </div>
               </div>
             </>
