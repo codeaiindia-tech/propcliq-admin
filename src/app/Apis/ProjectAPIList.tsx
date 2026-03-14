@@ -32,6 +32,7 @@ export const getProjectList = async () : Promise<any> => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Brearer ${Auth_Token}`
       },
       body: JSON.stringify(data),
     };

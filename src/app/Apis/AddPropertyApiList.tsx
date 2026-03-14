@@ -8,7 +8,7 @@ export const SaveStep1  = async (data: any) : Promise<any> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
     body: JSON.stringify(data),
   };
@@ -31,7 +31,7 @@ export const UpdateStep1 = async (data: any) : Promise<any> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
     body: JSON.stringify(data),
   };
@@ -52,7 +52,7 @@ export const SaveStep2 =   async (data: any) => {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': Auth_Token
+                  'Authorization': `Brearer ${Auth_Token}`
                 },
                 body: JSON.stringify(data),
               };
@@ -75,7 +75,7 @@ export const UpdateStep2 = async (data: any) : Promise<any> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
     body: JSON.stringify(data),
   };
@@ -109,7 +109,7 @@ export const SaveStep3  = async (data: any, propertyId: any) : Promise<any> => {
       const reqOpts: RequestInit = {
         method: 'POST',
         headers: {
-          'Authorization': Auth_Token
+          'Authorization': `Brearer ${Auth_Token}`
         },
         body: formData,
       };
@@ -135,7 +135,7 @@ export const getLeadListingData  = async () : Promise<any> => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
   };
 
@@ -157,7 +157,7 @@ export const getPropertyListing  = async () : Promise<any> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
   };
 
@@ -178,7 +178,7 @@ export const getPropertyDetailById  = async (data:any) : Promise<any> => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
   };
 
@@ -200,7 +200,7 @@ export const deletePropertyDetailById  = async (data:any) : Promise<any> => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
   };
 
@@ -222,7 +222,7 @@ export const filterPropertySearch = async (data: any) : Promise<any> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': Auth_Token
+      'Authorization': `Brearer ${Auth_Token}`
     },
     body: JSON.stringify(data),
   };
