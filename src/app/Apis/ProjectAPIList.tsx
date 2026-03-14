@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_APP_API_URL;
-const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
+// const Auth_Token = JSON.parse(JSON.stringify(localStorage.getItem("Auth_Token")));
+const Auth_Token = localStorage.getItem("Auth_Token") || 'NO TOKEN IS SAVED IN LOCAL STORAGE';
 
 export const getProjectList = async () : Promise<any> => {
     try {
@@ -9,7 +10,7 @@ export const getProjectList = async () : Promise<any> => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': Auth_Token
+        'Authorization': `Brearer ${Auth_Token}`,
       },
     };
   
