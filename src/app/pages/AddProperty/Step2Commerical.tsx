@@ -113,17 +113,20 @@ const Step2Commerical: FC<any> = (props: any) => {
       setNewProjectError("");
     }
 
-    if (!floorNo) {
+    if (!floorsAvailableYour) {
       setFloorNoError("Please enter the floor no.");
       isValid = false;
-    } else if (isNaN(Number(floorNo))) {
+    } else if (isNaN(Number(floorsAvailableYour))) {
       setFloorNoError("Please enter valid floor no.");
       isValid = false;
     } else {
       setFloorNoError("");
     }
 
-    if (totalFloors && isNaN(Number(totalFloors))) {
+    if (!floorsAvailableTotal) {
+      setTotalFloorsError("Please enter total floors");
+      isValid = false;
+    } else if (isNaN(Number(floorsAvailableTotal))) {
       setTotalFloorsError("Please enter valid total floors");
       isValid = false;
     } else {
@@ -148,8 +151,8 @@ const Step2Commerical: FC<any> = (props: any) => {
         project: projectValue,
         locality: locality,
         flat_no: flatNo,
-        floor_no: floorNo,
-        total_floors: totalFloors,
+        floor_no: floorsAvailableYour,
+        total_floors: floorsAvailableTotal,
       },
       commercial_details: {
         possession_status: possessionStatus,
@@ -421,8 +424,8 @@ const Step2Commerical: FC<any> = (props: any) => {
         </div>
 
         {propertyCategory.includes("warehouse") ||
-        propertyCategory.includes("plot") ||
-        propertyCategory.includes("office") ? (
+          propertyCategory.includes("plot") ||
+          propertyCategory.includes("office") ? (
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label">
               Zone Type <span className="mandatoryMarker">*</span>
@@ -487,8 +490,8 @@ const Step2Commerical: FC<any> = (props: any) => {
         )}
 
         {propertyCategory.includes("warehouse") ||
-        propertyCategory.includes("retail") ||
-        propertyCategory.includes("showroom") ? (
+          propertyCategory.includes("retail") ||
+          propertyCategory.includes("showroom") ? (
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label">
               Location Hub <span className="mandatoryMarker">*</span>
@@ -565,8 +568,8 @@ const Step2Commerical: FC<any> = (props: any) => {
         </div>
 
         {propertyCategory.includes("warehouse") ||
-        propertyCategory.includes("retail") ||
-        propertyCategory.includes("showroom") ? (
+          propertyCategory.includes("retail") ||
+          propertyCategory.includes("showroom") ? (
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label" style={{ gap: "16px" }}>
               Carpet Area <span className="mandatoryMarker">*</span>
@@ -586,7 +589,7 @@ const Step2Commerical: FC<any> = (props: any) => {
         ) : null}
 
         {propertyCategory.includes("retail") ||
-        propertyCategory.includes("showroom") ? (
+          propertyCategory.includes("showroom") ? (
           <>
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label" style={{ gap: "16px" }}>
@@ -651,7 +654,7 @@ const Step2Commerical: FC<any> = (props: any) => {
         ) : null}
 
         {propertyCategory.includes("retail") ||
-        propertyCategory.includes("showroom") ? (
+          propertyCategory.includes("showroom") ? (
           <div style={{ marginTop: "30px" }}>
             <div className="label_for_label">
               Located Near <span className="mandatoryMarker">*</span>
@@ -809,7 +812,7 @@ const Step2Commerical: FC<any> = (props: any) => {
           ) : null}
 
           {propertyCategory.includes("retail") ||
-          propertyCategory.includes("showroom") ? (
+            propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Tax & Govt. Charge included? <span className="mandatoryMarker">*</span>
@@ -881,9 +884,9 @@ const Step2Commerical: FC<any> = (props: any) => {
           </div>
 
           {propertyCategory.includes("office") ||
-          propertyCategory.includes("retail") ||
-          propertyCategory.includes("warehouse") ||
-          propertyCategory.includes("showroom") ? (
+            propertyCategory.includes("retail") ||
+            propertyCategory.includes("warehouse") ||
+            propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Floors Available <span className="mandatoryMarker">*</span>
@@ -953,8 +956,8 @@ const Step2Commerical: FC<any> = (props: any) => {
           ) : null}
 
           {propertyCategory.includes("retail") ||
-          propertyCategory.includes("warehouse") ||
-          propertyCategory.includes("showroom") ? (
+            propertyCategory.includes("warehouse") ||
+            propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Facilities <span className="mandatoryMarker">*</span>
@@ -983,8 +986,8 @@ const Step2Commerical: FC<any> = (props: any) => {
           ) : null}
 
           {propertyCategory.includes("office") ||
-          propertyCategory.includes("retail") ||
-          propertyCategory.includes("showroom") ? (
+            propertyCategory.includes("retail") ||
+            propertyCategory.includes("showroom") ? (
             <div style={{ marginTop: "30px" }}>
               <div className="label_for_label">
                 Parking <span className="mandatoryMarker">*</span>
